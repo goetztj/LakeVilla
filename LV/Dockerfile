@@ -27,6 +27,7 @@ RUN ./setup_ubuntu.sh
 COPY lvconfig.conf .
 COPY binaries/ycsbc-lv .
 COPY binaries/cab-lv .
+COPY binaries/LakeVilla .
 
 RUN mkdir additional_workloads
 COPY additional_workloads/workloadbanking.spec ./additional_workloads/
@@ -52,6 +53,17 @@ COPY ./CAB/streams/query_stream_12.json ./CAB/streams/
 COPY ./CAB/streams/query_stream_13.json ./CAB/streams/
 COPY ./CAB/streams/query_stream_14.json ./CAB/streams/
 COPY ./CAB/streams/query_stream_15.json ./CAB/streams/
+
+RUN mkdir CAB/sample
+COPY ./CAB/sample/customer.parquet ./CAB/sample/
+COPY ./CAB/sample/lineitem.parquet ./CAB/sample/
+COPY ./CAB/sample/nation.parquet ./CAB/sample/
+COPY ./CAB/sample/orders.parquet ./CAB/sample/
+COPY ./CAB/sample/part.parquet ./CAB/sample/
+COPY ./CAB/sample/partsupp.parquet ./CAB/sample/
+COPY ./CAB/sample/region.parquet ./CAB/sample/
+COPY ./CAB/sample/supplier.parquet ./CAB/sample/
+
 
 
 ENTRYPOINT ["/bin/bash"]

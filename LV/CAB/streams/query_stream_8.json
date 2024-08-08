@@ -1,0 +1,1865 @@
+{
+  "database_id": 8,
+  "scale_factor": 1,
+  "database_byte_count": 1000000000,
+  "size_bucket": 9,
+  "pattern_id": 1,
+  "cpu_time": 244764412,
+  "cpu_time_h":"0.0679901h",
+  "query_count": 463,
+  "queries": [
+    {
+      "query_id": 22,
+      "start": 3112,
+      "arguments": [27,19,33,24,23,26,22]
+    },{
+      "query_id": 1,
+      "start": 13936,
+      "arguments": [100]
+    },{
+      "query_id": 14,
+      "start": 23414,
+      "arguments": ["1993-02-01"]
+    },{
+      "query_id": 4,
+      "start": 26852,
+      "arguments": ["1993-02-01"]
+    },{
+      "query_id": 8,
+      "start": 35332,
+      "arguments": ["INDONESIA","ASIA","STANDARD ANODIZED STEEL"]
+    },{
+      "query_id": 7,
+      "start": 38218,
+      "arguments": ["JAPAN","RUSSIA"]
+    },{
+      "query_id": 6,
+      "start": 70088,
+      "arguments": ["1994-01-01",7,25]
+    },{
+      "query_id": 8,
+      "start": 71050,
+      "arguments": ["PERU","AMERICA","STANDARD BURNISHED NICKEL"]
+    },{
+      "query_id": 17,
+      "start": 82369,
+      "arguments": ["Brand#11","JUMBO CASE"]
+    },{
+      "query_id": 19,
+      "start": 86139,
+      "arguments": ["Brand#54","Brand#42","Brand#55",3,15,23]
+    },{
+      "query_id": 3,
+      "start": 91679,
+      "arguments": ["HOUSEHOLD","1995-03-10"]
+    },{
+      "query_id": 19,
+      "start": 102656,
+      "arguments": ["Brand#31","Brand#33","Brand#25",6,19,29]
+    },{
+      "query_id": 13,
+      "start": 134633,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 13,
+      "start": 142734,
+      "arguments": ["express","accounts"]
+    },{
+      "query_id": 14,
+      "start": 148646,
+      "arguments": ["1997-05-01"]
+    },{
+      "query_id": 14,
+      "start": 150917,
+      "arguments": ["1996-09-01"]
+    },{
+      "query_id": 8,
+      "start": 164995,
+      "arguments": ["VIETNAM","ASIA","STANDARD PLATED COPPER"]
+    },{
+      "query_id": 8,
+      "start": 170136,
+      "arguments": ["KENYA","AFRICA","SMALL ANODIZED COPPER"]
+    },{
+      "query_id": 13,
+      "start": 172417,
+      "arguments": ["unusual","packages"]
+    },{
+      "query_id": 7,
+      "start": 186196,
+      "arguments": ["IRAN","ETHIOPIA"]
+    },{
+      "query_id": 6,
+      "start": 189767,
+      "arguments": ["1994-01-01",4,25]
+    },{
+      "query_id": 10,
+      "start": 192471,
+      "arguments": ["1993-06-01"]
+    },{
+      "query_id": 18,
+      "start": 195802,
+      "arguments": [312]
+    },{
+      "query_id": 4,
+      "start": 197563,
+      "arguments": ["1996-06-01"]
+    },{
+      "query_id": 8,
+      "start": 202981,
+      "arguments": ["ETHIOPIA","AFRICA","MEDIUM ANODIZED BRASS"]
+    },{
+      "query_id": 2,
+      "start": 214132,
+      "arguments": [8,"STEEL","ASIA"]
+    },{
+      "query_id": 10,
+      "start": 227433,
+      "arguments": ["1994-06-01"]
+    },{
+      "query_id": 13,
+      "start": 228440,
+      "arguments": ["unusual","requests"]
+    },{
+      "query_id": 19,
+      "start": 241237,
+      "arguments": ["Brand#11","Brand#14","Brand#11",2,18,29]
+    },{
+      "query_id": 8,
+      "start": 242433,
+      "arguments": ["MOZAMBIQUE","AFRICA","MEDIUM ANODIZED STEEL"]
+    },{
+      "query_id": 9,
+      "start": 249268,
+      "arguments": ["snow"]
+    },{
+      "query_id": 11,
+      "start": 252046,
+      "arguments": ["GERMANY",1]
+    },{
+      "query_id": 17,
+      "start": 263263,
+      "arguments": ["Brand#41","LG DRUM"]
+    },{
+      "query_id": 19,
+      "start": 272790,
+      "arguments": ["Brand#45","Brand#35","Brand#35",8,13,20]
+    },{
+      "query_id": 20,
+      "start": 277071,
+      "arguments": ["blue","1994-01-01","INDIA"]
+    },{
+      "query_id": 9,
+      "start": 277094,
+      "arguments": ["dim"]
+    },{
+      "query_id": 7,
+      "start": 277945,
+      "arguments": ["EGYPT","KENYA"]
+    },{
+      "query_id": 14,
+      "start": 286764,
+      "arguments": ["1997-05-01"]
+    },{
+      "query_id": 12,
+      "start": 289748,
+      "arguments": ["RAIL","TRUCK","1993-01-01"]
+    },{
+      "query_id": 7,
+      "start": 289801,
+      "arguments": ["JAPAN","UNITED KINGDOM"]
+    },{
+      "query_id": 15,
+      "start": 290468,
+      "arguments": ["1995-07-01"]
+    },{
+      "query_id": 7,
+      "start": 293716,
+      "arguments": ["EGYPT","ROMANIA"]
+    },{
+      "query_id": 3,
+      "start": 303265,
+      "arguments": ["AUTOMOBILE","1995-03-17"]
+    },{
+      "query_id": 13,
+      "start": 314971,
+      "arguments": ["express","packages"]
+    },{
+      "query_id": 13,
+      "start": 333555,
+      "arguments": ["express","packages"]
+    },{
+      "query_id": 4,
+      "start": 334312,
+      "arguments": ["1994-06-01"]
+    },{
+      "query_id": 9,
+      "start": 336023,
+      "arguments": ["blanched"]
+    },{
+      "query_id": 22,
+      "start": 342835,
+      "arguments": [15,33,32,25,24,21,20]
+    },{
+      "query_id": 19,
+      "start": 363684,
+      "arguments": ["Brand#14","Brand#12","Brand#31",2,15,28]
+    },{
+      "query_id": 16,
+      "start": 363747,
+      "arguments": ["Brand#23","PROMO ANODIZED",20,32,16,10,42,49,35,4]
+    },{
+      "query_id": 14,
+      "start": 372996,
+      "arguments": ["1994-11-01"]
+    },{
+      "query_id": 11,
+      "start": 396997,
+      "arguments": ["INDONESIA",1]
+    },{
+      "query_id": 5,
+      "start": 422331,
+      "arguments": ["ASIA","1995-01-01"]
+    },{
+      "query_id": 10,
+      "start": 424465,
+      "arguments": ["1993-06-01"]
+    },{
+      "query_id": 1,
+      "start": 446397,
+      "arguments": [91]
+    },{
+      "query_id": 5,
+      "start": 448810,
+      "arguments": ["AFRICA","1994-01-01"]
+    },{
+      "query_id": 18,
+      "start": 449336,
+      "arguments": [314]
+    },{
+      "query_id": 3,
+      "start": 469413,
+      "arguments": ["BUILDING","1995-03-07"]
+    },{
+      "query_id": 9,
+      "start": 477367,
+      "arguments": ["seashell"]
+    },{
+      "query_id": 13,
+      "start": 483291,
+      "arguments": ["special","requests"]
+    },{
+      "query_id": 11,
+      "start": 501111,
+      "arguments": ["ROMANIA",1]
+    },{
+      "query_id": 16,
+      "start": 505208,
+      "arguments": ["Brand#31","STANDARD ANODIZED",25,21,30,26,40,5,16,13]
+    },{
+      "query_id": 5,
+      "start": 524456,
+      "arguments": ["EUROPE","1995-01-01"]
+    },{
+      "query_id": 23,
+      "start": 526327,
+      "arguments": [5994016,6000032,0,7]
+    },{
+      "query_id": 17,
+      "start": 529160,
+      "arguments": ["Brand#32","JUMBO PKG"]
+    },{
+      "query_id": 16,
+      "start": 534269,
+      "arguments": ["Brand#12","SMALL ANODIZED",22,41,6,48,43,39,9,17]
+    },{
+      "query_id": 12,
+      "start": 543100,
+      "arguments": ["RAIL","AIR","1996-01-01"]
+    },{
+      "query_id": 18,
+      "start": 544010,
+      "arguments": [314]
+    },{
+      "query_id": 7,
+      "start": 561041,
+      "arguments": ["IRAN","INDIA"]
+    },{
+      "query_id": 11,
+      "start": 584769,
+      "arguments": ["RUSSIA",1]
+    },{
+      "query_id": 12,
+      "start": 590406,
+      "arguments": ["MAIL","TRUCK","1994-01-01"]
+    },{
+      "query_id": 18,
+      "start": 597866,
+      "arguments": [312]
+    },{
+      "query_id": 22,
+      "start": 599621,
+      "arguments": [32,13,23,29,19,25,12]
+    },{
+      "query_id": 7,
+      "start": 606566,
+      "arguments": ["MOZAMBIQUE","INDONESIA"]
+    },{
+      "query_id": 19,
+      "start": 615697,
+      "arguments": ["Brand#42","Brand#23","Brand#43",4,17,22]
+    },{
+      "query_id": 16,
+      "start": 624624,
+      "arguments": ["Brand#53","STANDARD BRUSHED",19,33,21,5,41,18,12,17]
+    },{
+      "query_id": 12,
+      "start": 625312,
+      "arguments": ["REG AIR","MAIL","1995-01-01"]
+    },{
+      "query_id": 18,
+      "start": 629308,
+      "arguments": [315]
+    },{
+      "query_id": 8,
+      "start": 650016,
+      "arguments": ["IRAQ","MIDDLE EAST","SMALL PLATED TIN"]
+    },{
+      "query_id": 17,
+      "start": 650668,
+      "arguments": ["Brand#55","MED BAG"]
+    },{
+      "query_id": 1,
+      "start": 654677,
+      "arguments": [87]
+    },{
+      "query_id": 3,
+      "start": 657015,
+      "arguments": ["FURNITURE","1995-03-17"]
+    },{
+      "query_id": 22,
+      "start": 686408,
+      "arguments": [29,26,33,17,14,27,15]
+    },{
+      "query_id": 7,
+      "start": 694278,
+      "arguments": ["SAUDI ARABIA","SAUDI ARABIA"]
+    },{
+      "query_id": 12,
+      "start": 699189,
+      "arguments": ["FOB","TRUCK","1996-01-01"]
+    },{
+      "query_id": 9,
+      "start": 710173,
+      "arguments": ["lavender"]
+    },{
+      "query_id": 6,
+      "start": 710974,
+      "arguments": ["1997-01-01",8,25]
+    },{
+      "query_id": 22,
+      "start": 720541,
+      "arguments": [14,11,23,26,19,24,20]
+    },{
+      "query_id": 4,
+      "start": 724000,
+      "arguments": ["1994-08-01"]
+    },{
+      "query_id": 21,
+      "start": 730055,
+      "arguments": ["ALGERIA"]
+    },{
+      "query_id": 1,
+      "start": 734264,
+      "arguments": [83]
+    },{
+      "query_id": 21,
+      "start": 738181,
+      "arguments": ["BRAZIL"]
+    },{
+      "query_id": 18,
+      "start": 738755,
+      "arguments": [315]
+    },{
+      "query_id": 22,
+      "start": 761414,
+      "arguments": [31,32,21,25,13,30,28]
+    },{
+      "query_id": 13,
+      "start": 762993,
+      "arguments": ["unusual","requests"]
+    },{
+      "query_id": 3,
+      "start": 765977,
+      "arguments": ["FURNITURE","1995-03-15"]
+    },{
+      "query_id": 13,
+      "start": 783877,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 22,
+      "start": 797027,
+      "arguments": [19,12,25,14,24,30,33]
+    },{
+      "query_id": 23,
+      "start": 797683,
+      "arguments": [5988000,5994016,0,7]
+    },{
+      "query_id": 8,
+      "start": 798427,
+      "arguments": ["CHINA","ASIA","MEDIUM PLATED TIN"]
+    },{
+      "query_id": 7,
+      "start": 799163,
+      "arguments": ["GERMANY","ALGERIA"]
+    },{
+      "query_id": 20,
+      "start": 832457,
+      "arguments": ["snow","1994-01-01","ARGENTINA"]
+    },{
+      "query_id": 10,
+      "start": 833376,
+      "arguments": ["1993-09-01"]
+    },{
+      "query_id": 18,
+      "start": 846751,
+      "arguments": [312]
+    },{
+      "query_id": 5,
+      "start": 848810,
+      "arguments": ["EUROPE","1995-01-01"]
+    },{
+      "query_id": 20,
+      "start": 850446,
+      "arguments": ["azure","1993-01-01","JAPAN"]
+    },{
+      "query_id": 20,
+      "start": 857055,
+      "arguments": ["dark","1993-01-01","INDONESIA"]
+    },{
+      "query_id": 11,
+      "start": 865627,
+      "arguments": ["RUSSIA",1]
+    },{
+      "query_id": 20,
+      "start": 866660,
+      "arguments": ["chocolate","1993-01-01","IRAN"]
+    },{
+      "query_id": 8,
+      "start": 874592,
+      "arguments": ["MOROCCO","AFRICA","MEDIUM POLISHED STEEL"]
+    },{
+      "query_id": 9,
+      "start": 882182,
+      "arguments": ["dodger"]
+    },{
+      "query_id": 8,
+      "start": 882707,
+      "arguments": ["JAPAN","ASIA","MEDIUM PLATED TIN"]
+    },{
+      "query_id": 8,
+      "start": 883738,
+      "arguments": ["SAUDI ARABIA","MIDDLE EAST","ECONOMY BRUSHED TIN"]
+    },{
+      "query_id": 14,
+      "start": 886129,
+      "arguments": ["1996-02-01"]
+    },{
+      "query_id": 13,
+      "start": 929037,
+      "arguments": ["unusual","requests"]
+    },{
+      "query_id": 23,
+      "start": 929092,
+      "arguments": [5982016,5988000,0,7]
+    },{
+      "query_id": 4,
+      "start": 936898,
+      "arguments": ["1997-06-01"]
+    },{
+      "query_id": 23,
+      "start": 942551,
+      "arguments": [5976000,5982016,0,7]
+    },{
+      "query_id": 17,
+      "start": 972035,
+      "arguments": ["Brand#11","MED PKG"]
+    },{
+      "query_id": 16,
+      "start": 975015,
+      "arguments": ["Brand#34","ECONOMY PLATED",45,3,5,2,20,30,37,49]
+    },{
+      "query_id": 13,
+      "start": 981873,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 21,
+      "start": 983076,
+      "arguments": ["INDONESIA"]
+    },{
+      "query_id": 7,
+      "start": 983816,
+      "arguments": ["GERMANY","IRAQ"]
+    },{
+      "query_id": 3,
+      "start": 996701,
+      "arguments": ["BUILDING","1995-03-31"]
+    },{
+      "query_id": 13,
+      "start": 1014130,
+      "arguments": ["pending","packages"]
+    },{
+      "query_id": 10,
+      "start": 1018145,
+      "arguments": ["1994-07-01"]
+    },{
+      "query_id": 8,
+      "start": 1038746,
+      "arguments": ["EGYPT","MIDDLE EAST","PROMO ANODIZED COPPER"]
+    },{
+      "query_id": 17,
+      "start": 1039492,
+      "arguments": ["Brand#53","WRAP JAR"]
+    },{
+      "query_id": 18,
+      "start": 1045362,
+      "arguments": [314]
+    },{
+      "query_id": 21,
+      "start": 1050079,
+      "arguments": ["CHINA"]
+    },{
+      "query_id": 14,
+      "start": 1060068,
+      "arguments": ["1994-09-01"]
+    },{
+      "query_id": 6,
+      "start": 1064782,
+      "arguments": ["1997-01-01",3,25]
+    },{
+      "query_id": 4,
+      "start": 1064872,
+      "arguments": ["1994-02-01"]
+    },{
+      "query_id": 8,
+      "start": 1067344,
+      "arguments": ["SAUDI ARABIA","MIDDLE EAST","MEDIUM BURNISHED BRASS"]
+    },{
+      "query_id": 23,
+      "start": 1081185,
+      "arguments": [5970016,5976000,0,7]
+    },{
+      "query_id": 6,
+      "start": 1086736,
+      "arguments": ["1994-01-01",4,25]
+    },{
+      "query_id": 23,
+      "start": 1090085,
+      "arguments": [5964000,5970016,0,7]
+    },{
+      "query_id": 12,
+      "start": 1098331,
+      "arguments": ["FOB","SHIP","1993-01-01"]
+    },{
+      "query_id": 22,
+      "start": 1098479,
+      "arguments": [28,22,12,15,33,31,26]
+    },{
+      "query_id": 16,
+      "start": 1103321,
+      "arguments": ["Brand#42","PROMO PLATED",40,14,27,46,43,29,18,36]
+    },{
+      "query_id": 20,
+      "start": 1107133,
+      "arguments": ["dodger","1993-01-01","INDONESIA"]
+    },{
+      "query_id": 9,
+      "start": 1123184,
+      "arguments": ["rose"]
+    },{
+      "query_id": 21,
+      "start": 1134552,
+      "arguments": ["UNITED KINGDOM"]
+    },{
+      "query_id": 5,
+      "start": 1138593,
+      "arguments": ["AMERICA","1993-01-01"]
+    },{
+      "query_id": 12,
+      "start": 1139199,
+      "arguments": ["REG AIR","TRUCK","1997-01-01"]
+    },{
+      "query_id": 4,
+      "start": 1142646,
+      "arguments": ["1997-06-01"]
+    },{
+      "query_id": 11,
+      "start": 1149104,
+      "arguments": ["CANADA",1]
+    },{
+      "query_id": 18,
+      "start": 1151621,
+      "arguments": [314]
+    },{
+      "query_id": 23,
+      "start": 1155893,
+      "arguments": [5958016,5964000,0,7]
+    },{
+      "query_id": 18,
+      "start": 1167928,
+      "arguments": [315]
+    },{
+      "query_id": 12,
+      "start": 1180584,
+      "arguments": ["MAIL","FOB","1994-01-01"]
+    },{
+      "query_id": 14,
+      "start": 1182110,
+      "arguments": ["1995-03-01"]
+    },{
+      "query_id": 13,
+      "start": 1199370,
+      "arguments": ["pending","packages"]
+    },{
+      "query_id": 9,
+      "start": 1203551,
+      "arguments": ["lime"]
+    },{
+      "query_id": 19,
+      "start": 1213009,
+      "arguments": ["Brand#43","Brand#34","Brand#44",3,20,29]
+    },{
+      "query_id": 12,
+      "start": 1215044,
+      "arguments": ["TRUCK","MAIL","1995-01-01"]
+    },{
+      "query_id": 2,
+      "start": 1221098,
+      "arguments": [2,"NICKEL","AFRICA"]
+    },{
+      "query_id": 20,
+      "start": 1224521,
+      "arguments": ["indian","1996-01-01","PERU"]
+    },{
+      "query_id": 11,
+      "start": 1230939,
+      "arguments": ["KENYA",1]
+    },{
+      "query_id": 6,
+      "start": 1232743,
+      "arguments": ["1996-01-01",9,25]
+    },{
+      "query_id": 9,
+      "start": 1233834,
+      "arguments": ["linen"]
+    },{
+      "query_id": 19,
+      "start": 1239219,
+      "arguments": ["Brand#55","Brand#22","Brand#21",6,15,21]
+    },{
+      "query_id": 11,
+      "start": 1249207,
+      "arguments": ["JAPAN",1]
+    },{
+      "query_id": 7,
+      "start": 1253368,
+      "arguments": ["VIETNAM","MOZAMBIQUE"]
+    },{
+      "query_id": 8,
+      "start": 1260972,
+      "arguments": ["IRAQ","MIDDLE EAST","ECONOMY POLISHED NICKEL"]
+    },{
+      "query_id": 18,
+      "start": 1262874,
+      "arguments": [312]
+    },{
+      "query_id": 12,
+      "start": 1264055,
+      "arguments": ["TRUCK","MAIL","1995-01-01"]
+    },{
+      "query_id": 4,
+      "start": 1266250,
+      "arguments": ["1993-03-01"]
+    },{
+      "query_id": 12,
+      "start": 1271577,
+      "arguments": ["SHIP","TRUCK","1995-01-01"]
+    },{
+      "query_id": 6,
+      "start": 1288134,
+      "arguments": ["1996-01-01",8,25]
+    },{
+      "query_id": 17,
+      "start": 1299569,
+      "arguments": ["Brand#43","SM CAN"]
+    },{
+      "query_id": 1,
+      "start": 1323795,
+      "arguments": [92]
+    },{
+      "query_id": 19,
+      "start": 1326585,
+      "arguments": ["Brand#55","Brand#44","Brand#21",8,17,28]
+    },{
+      "query_id": 11,
+      "start": 1346903,
+      "arguments": ["ETHIOPIA",1]
+    },{
+      "query_id": 15,
+      "start": 1353946,
+      "arguments": ["1996-04-01"]
+    },{
+      "query_id": 4,
+      "start": 1363914,
+      "arguments": ["1996-10-01"]
+    },{
+      "query_id": 4,
+      "start": 1388352,
+      "arguments": ["1995-09-01"]
+    },{
+      "query_id": 19,
+      "start": 1390724,
+      "arguments": ["Brand#54","Brand#55","Brand#54",4,20,29]
+    },{
+      "query_id": 23,
+      "start": 1419702,
+      "arguments": [5952000,5958016,0,7]
+    },{
+      "query_id": 12,
+      "start": 1426565,
+      "arguments": ["RAIL","FOB","1996-01-01"]
+    },{
+      "query_id": 12,
+      "start": 1437906,
+      "arguments": ["SHIP","RAIL","1993-01-01"]
+    },{
+      "query_id": 15,
+      "start": 1446743,
+      "arguments": ["1995-07-01"]
+    },{
+      "query_id": 16,
+      "start": 1450321,
+      "arguments": ["Brand#15","LARGE PLATED",29,1,23,12,5,6,18,28]
+    },{
+      "query_id": 21,
+      "start": 1470280,
+      "arguments": ["SAUDI ARABIA"]
+    },{
+      "query_id": 7,
+      "start": 1485147,
+      "arguments": ["BRAZIL","INDIA"]
+    },{
+      "query_id": 10,
+      "start": 1490593,
+      "arguments": ["1994-09-01"]
+    },{
+      "query_id": 22,
+      "start": 1493957,
+      "arguments": [16,24,32,12,31,21,33]
+    },{
+      "query_id": 5,
+      "start": 1495002,
+      "arguments": ["AMERICA","1995-01-01"]
+    },{
+      "query_id": 6,
+      "start": 1513073,
+      "arguments": ["1993-01-01",8,25]
+    },{
+      "query_id": 10,
+      "start": 1518438,
+      "arguments": ["1994-04-01"]
+    },{
+      "query_id": 21,
+      "start": 1522966,
+      "arguments": ["MOROCCO"]
+    },{
+      "query_id": 9,
+      "start": 1524482,
+      "arguments": ["orchid"]
+    },{
+      "query_id": 3,
+      "start": 1529219,
+      "arguments": ["BUILDING","1995-03-29"]
+    },{
+      "query_id": 21,
+      "start": 1565841,
+      "arguments": ["GERMANY"]
+    },{
+      "query_id": 19,
+      "start": 1566480,
+      "arguments": ["Brand#14","Brand#13","Brand#11",8,16,24]
+    },{
+      "query_id": 17,
+      "start": 1570467,
+      "arguments": ["Brand#14","LG BAG"]
+    },{
+      "query_id": 6,
+      "start": 1579394,
+      "arguments": ["1994-01-01",2,24]
+    },{
+      "query_id": 10,
+      "start": 1580884,
+      "arguments": ["1993-11-01"]
+    },{
+      "query_id": 3,
+      "start": 1587033,
+      "arguments": ["AUTOMOBILE","1995-03-25"]
+    },{
+      "query_id": 3,
+      "start": 1587827,
+      "arguments": ["BUILDING","1995-03-21"]
+    },{
+      "query_id": 13,
+      "start": 1595480,
+      "arguments": ["unusual","packages"]
+    },{
+      "query_id": 2,
+      "start": 1618048,
+      "arguments": [13,"BRASS","MIDDLE EAST"]
+    },{
+      "query_id": 1,
+      "start": 1625420,
+      "arguments": [116]
+    },{
+      "query_id": 6,
+      "start": 1626869,
+      "arguments": ["1996-01-01",5,24]
+    },{
+      "query_id": 4,
+      "start": 1627459,
+      "arguments": ["1996-02-01"]
+    },{
+      "query_id": 3,
+      "start": 1630692,
+      "arguments": ["BUILDING","1995-03-14"]
+    },{
+      "query_id": 20,
+      "start": 1644660,
+      "arguments": ["hot","1996-01-01","IRAQ"]
+    },{
+      "query_id": 19,
+      "start": 1657656,
+      "arguments": ["Brand#35","Brand#25","Brand#24",1,11,24]
+    },{
+      "query_id": 17,
+      "start": 1660701,
+      "arguments": ["Brand#24","JUMBO PACK"]
+    },{
+      "query_id": 14,
+      "start": 1672338,
+      "arguments": ["1996-03-01"]
+    },{
+      "query_id": 13,
+      "start": 1691492,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 16,
+      "start": 1699304,
+      "arguments": ["Brand#22","ECONOMY BRUSHED",31,3,30,32,33,2,26,42]
+    },{
+      "query_id": 14,
+      "start": 1707667,
+      "arguments": ["1995-01-01"]
+    },{
+      "query_id": 5,
+      "start": 1710654,
+      "arguments": ["AFRICA","1995-01-01"]
+    },{
+      "query_id": 1,
+      "start": 1715241,
+      "arguments": [95]
+    },{
+      "query_id": 18,
+      "start": 1717130,
+      "arguments": [315]
+    },{
+      "query_id": 5,
+      "start": 1736139,
+      "arguments": ["AMERICA","1994-01-01"]
+    },{
+      "query_id": 10,
+      "start": 1739227,
+      "arguments": ["1993-08-01"]
+    },{
+      "query_id": 20,
+      "start": 1743425,
+      "arguments": ["chiffon","1997-01-01","ROMANIA"]
+    },{
+      "query_id": 19,
+      "start": 1751296,
+      "arguments": ["Brand#15","Brand#34","Brand#34",6,14,27]
+    },{
+      "query_id": 3,
+      "start": 1767570,
+      "arguments": ["AUTOMOBILE","1995-03-01"]
+    },{
+      "query_id": 3,
+      "start": 1781441,
+      "arguments": ["AUTOMOBILE","1995-03-07"]
+    },{
+      "query_id": 2,
+      "start": 1787783,
+      "arguments": [6,"TIN","MIDDLE EAST"]
+    },{
+      "query_id": 11,
+      "start": 1807081,
+      "arguments": ["FRANCE",1]
+    },{
+      "query_id": 6,
+      "start": 1808955,
+      "arguments": ["1997-01-01",3,24]
+    },{
+      "query_id": 19,
+      "start": 1815532,
+      "arguments": ["Brand#54","Brand#54","Brand#24",3,15,25]
+    },{
+      "query_id": 5,
+      "start": 1817471,
+      "arguments": ["EUROPE","1995-01-01"]
+    },{
+      "query_id": 17,
+      "start": 1822558,
+      "arguments": ["Brand#51","MED PKG"]
+    },{
+      "query_id": 18,
+      "start": 1823149,
+      "arguments": [315]
+    },{
+      "query_id": 11,
+      "start": 1826070,
+      "arguments": ["INDIA",1]
+    },{
+      "query_id": 11,
+      "start": 1835901,
+      "arguments": ["ROMANIA",1]
+    },{
+      "query_id": 14,
+      "start": 1838780,
+      "arguments": ["1997-04-01"]
+    },{
+      "query_id": 8,
+      "start": 1840120,
+      "arguments": ["GERMANY","EUROPE","MEDIUM ANODIZED COPPER"]
+    },{
+      "query_id": 21,
+      "start": 1841689,
+      "arguments": ["IRAN"]
+    },{
+      "query_id": 17,
+      "start": 1847475,
+      "arguments": ["Brand#51","WRAP DRUM"]
+    },{
+      "query_id": 21,
+      "start": 1858462,
+      "arguments": ["EGYPT"]
+    },{
+      "query_id": 13,
+      "start": 1889449,
+      "arguments": ["pending","requests"]
+    },{
+      "query_id": 17,
+      "start": 1909318,
+      "arguments": ["Brand#42","MED CAN"]
+    },{
+      "query_id": 8,
+      "start": 1915644,
+      "arguments": ["IRAN","MIDDLE EAST","PROMO BURNISHED STEEL"]
+    },{
+      "query_id": 13,
+      "start": 1933788,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 10,
+      "start": 1940110,
+      "arguments": ["1993-06-01"]
+    },{
+      "query_id": 13,
+      "start": 1948786,
+      "arguments": ["unusual","accounts"]
+    },{
+      "query_id": 14,
+      "start": 1984674,
+      "arguments": ["1993-10-01"]
+    },{
+      "query_id": 21,
+      "start": 1987908,
+      "arguments": ["UNITED KINGDOM"]
+    },{
+      "query_id": 6,
+      "start": 1989503,
+      "arguments": ["1994-01-01",6,25]
+    },{
+      "query_id": 17,
+      "start": 1993108,
+      "arguments": ["Brand#31","LG JAR"]
+    },{
+      "query_id": 6,
+      "start": 1995244,
+      "arguments": ["1997-01-01",7,25]
+    },{
+      "query_id": 22,
+      "start": 1995706,
+      "arguments": [34,17,20,28,12,32,24]
+    },{
+      "query_id": 3,
+      "start": 1997636,
+      "arguments": ["HOUSEHOLD","1995-03-28"]
+    },{
+      "query_id": 21,
+      "start": 2005529,
+      "arguments": ["EGYPT"]
+    },{
+      "query_id": 10,
+      "start": 2016835,
+      "arguments": ["1994-02-01"]
+    },{
+      "query_id": 9,
+      "start": 2028162,
+      "arguments": ["brown"]
+    },{
+      "query_id": 1,
+      "start": 2066341,
+      "arguments": [91]
+    },{
+      "query_id": 5,
+      "start": 2091331,
+      "arguments": ["AFRICA","1995-01-01"]
+    },{
+      "query_id": 18,
+      "start": 2091431,
+      "arguments": [314]
+    },{
+      "query_id": 22,
+      "start": 2092991,
+      "arguments": [26,32,23,11,24,20,19]
+    },{
+      "query_id": 14,
+      "start": 2106594,
+      "arguments": ["1995-06-01"]
+    },{
+      "query_id": 11,
+      "start": 2116255,
+      "arguments": ["VIETNAM",1]
+    },{
+      "query_id": 17,
+      "start": 2118722,
+      "arguments": ["Brand#34","SM CASE"]
+    },{
+      "query_id": 13,
+      "start": 2130605,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 16,
+      "start": 2164748,
+      "arguments": ["Brand#22","SMALL POLISHED",1,27,4,9,20,42,26,28]
+    },{
+      "query_id": 17,
+      "start": 2171816,
+      "arguments": ["Brand#35","JUMBO DRUM"]
+    },{
+      "query_id": 21,
+      "start": 2181688,
+      "arguments": ["MOROCCO"]
+    },{
+      "query_id": 16,
+      "start": 2182510,
+      "arguments": ["Brand#44","PROMO BURNISHED",44,1,19,18,38,46,36,40]
+    },{
+      "query_id": 23,
+      "start": 2185784,
+      "arguments": [5946016,5952000,0,7]
+    },{
+      "query_id": 6,
+      "start": 2188176,
+      "arguments": ["1993-01-01",2,25]
+    },{
+      "query_id": 1,
+      "start": 2211495,
+      "arguments": [66]
+    },{
+      "query_id": 7,
+      "start": 2218252,
+      "arguments": ["RUSSIA","JORDAN"]
+    },{
+      "query_id": 1,
+      "start": 2229200,
+      "arguments": [115]
+    },{
+      "query_id": 19,
+      "start": 2249326,
+      "arguments": ["Brand#32","Brand#33","Brand#44",1,12,22]
+    },{
+      "query_id": 9,
+      "start": 2256618,
+      "arguments": ["pale"]
+    },{
+      "query_id": 14,
+      "start": 2260666,
+      "arguments": ["1996-05-01"]
+    },{
+      "query_id": 23,
+      "start": 2261934,
+      "arguments": [5940000,5946016,0,7]
+    },{
+      "query_id": 11,
+      "start": 2266711,
+      "arguments": ["KENYA",1]
+    },{
+      "query_id": 6,
+      "start": 2281764,
+      "arguments": ["1994-01-01",3,24]
+    },{
+      "query_id": 1,
+      "start": 2282517,
+      "arguments": [61]
+    },{
+      "query_id": 12,
+      "start": 2306396,
+      "arguments": ["FOB","REG AIR","1996-01-01"]
+    },{
+      "query_id": 2,
+      "start": 2316371,
+      "arguments": [28,"BRASS","AFRICA"]
+    },{
+      "query_id": 18,
+      "start": 2318111,
+      "arguments": [314]
+    },{
+      "query_id": 12,
+      "start": 2329214,
+      "arguments": ["SHIP","MAIL","1997-01-01"]
+    },{
+      "query_id": 13,
+      "start": 2329942,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 10,
+      "start": 2348198,
+      "arguments": ["1994-09-01"]
+    },{
+      "query_id": 9,
+      "start": 2349371,
+      "arguments": ["lemon"]
+    },{
+      "query_id": 1,
+      "start": 2378669,
+      "arguments": [108]
+    },{
+      "query_id": 4,
+      "start": 2389399,
+      "arguments": ["1995-05-01"]
+    },{
+      "query_id": 13,
+      "start": 2396744,
+      "arguments": ["express","accounts"]
+    },{
+      "query_id": 22,
+      "start": 2415879,
+      "arguments": [27,11,18,32,15,24,20]
+    },{
+      "query_id": 19,
+      "start": 2416186,
+      "arguments": ["Brand#12","Brand#22","Brand#24",8,16,22]
+    },{
+      "query_id": 6,
+      "start": 2419371,
+      "arguments": ["1995-01-01",5,24]
+    },{
+      "query_id": 7,
+      "start": 2419951,
+      "arguments": ["BRAZIL","MOROCCO"]
+    },{
+      "query_id": 5,
+      "start": 2423257,
+      "arguments": ["AMERICA","1994-01-01"]
+    },{
+      "query_id": 14,
+      "start": 2426240,
+      "arguments": ["1993-10-01"]
+    },{
+      "query_id": 5,
+      "start": 2429519,
+      "arguments": ["MIDDLE EAST","1996-01-01"]
+    },{
+      "query_id": 20,
+      "start": 2436565,
+      "arguments": ["ivory","1994-01-01","INDONESIA"]
+    },{
+      "query_id": 1,
+      "start": 2453073,
+      "arguments": [88]
+    },{
+      "query_id": 12,
+      "start": 2453179,
+      "arguments": ["FOB","MAIL","1995-01-01"]
+    },{
+      "query_id": 8,
+      "start": 2470798,
+      "arguments": ["UNITED STATES","AMERICA","LARGE BURNISHED STEEL"]
+    },{
+      "query_id": 21,
+      "start": 2485930,
+      "arguments": ["FRANCE"]
+    },{
+      "query_id": 3,
+      "start": 2492851,
+      "arguments": ["HOUSEHOLD","1995-03-26"]
+    },{
+      "query_id": 23,
+      "start": 2501722,
+      "arguments": [5934016,5940000,0,7]
+    },{
+      "query_id": 16,
+      "start": 2520341,
+      "arguments": ["Brand#44","STANDARD ANODIZED",46,20,31,45,38,11,9,36]
+    },{
+      "query_id": 19,
+      "start": 2527250,
+      "arguments": ["Brand#25","Brand#11","Brand#53",5,14,26]
+    },{
+      "query_id": 13,
+      "start": 2546893,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 10,
+      "start": 2551434,
+      "arguments": ["1993-12-01"]
+    },{
+      "query_id": 5,
+      "start": 2559061,
+      "arguments": ["AMERICA","1997-01-01"]
+    },{
+      "query_id": 15,
+      "start": 2562207,
+      "arguments": ["1994-05-01"]
+    },{
+      "query_id": 6,
+      "start": 2563300,
+      "arguments": ["1993-01-01",7,25]
+    },{
+      "query_id": 14,
+      "start": 2567507,
+      "arguments": ["1995-09-01"]
+    },{
+      "query_id": 18,
+      "start": 2579724,
+      "arguments": [315]
+    },{
+      "query_id": 2,
+      "start": 2580101,
+      "arguments": [14,"TIN","AFRICA"]
+    },{
+      "query_id": 12,
+      "start": 2593261,
+      "arguments": ["RAIL","FOB","1997-01-01"]
+    },{
+      "query_id": 11,
+      "start": 2598203,
+      "arguments": ["EGYPT",1]
+    },{
+      "query_id": 3,
+      "start": 2599969,
+      "arguments": ["BUILDING","1995-03-03"]
+    },{
+      "query_id": 15,
+      "start": 2601720,
+      "arguments": ["1996-12-01"]
+    },{
+      "query_id": 16,
+      "start": 2608827,
+      "arguments": ["Brand#41","LARGE POLISHED",38,49,35,47,20,6,30,24]
+    },{
+      "query_id": 18,
+      "start": 2612875,
+      "arguments": [313]
+    },{
+      "query_id": 4,
+      "start": 2625400,
+      "arguments": ["1995-07-01"]
+    },{
+      "query_id": 9,
+      "start": 2625407,
+      "arguments": ["lemon"]
+    },{
+      "query_id": 4,
+      "start": 2628132,
+      "arguments": ["1997-04-01"]
+    },{
+      "query_id": 6,
+      "start": 2628500,
+      "arguments": ["1997-01-01",2,24]
+    },{
+      "query_id": 10,
+      "start": 2629282,
+      "arguments": ["1994-05-01"]
+    },{
+      "query_id": 23,
+      "start": 2630202,
+      "arguments": [5928000,5934016,0,7]
+    },{
+      "query_id": 19,
+      "start": 2659684,
+      "arguments": ["Brand#42","Brand#32","Brand#11",6,17,28]
+    },{
+      "query_id": 21,
+      "start": 2659773,
+      "arguments": ["CHINA"]
+    },{
+      "query_id": 15,
+      "start": 2662389,
+      "arguments": ["1993-08-01"]
+    },{
+      "query_id": 3,
+      "start": 2664696,
+      "arguments": ["HOUSEHOLD","1995-03-26"]
+    },{
+      "query_id": 6,
+      "start": 2665196,
+      "arguments": ["1996-01-01",8,24]
+    },{
+      "query_id": 11,
+      "start": 2673891,
+      "arguments": ["ROMANIA",1]
+    },{
+      "query_id": 16,
+      "start": 2677647,
+      "arguments": ["Brand#42","ECONOMY ANODIZED",49,4,29,8,17,32,26,28]
+    },{
+      "query_id": 5,
+      "start": 2677715,
+      "arguments": ["MIDDLE EAST","1994-01-01"]
+    },{
+      "query_id": 2,
+      "start": 2681665,
+      "arguments": [30,"TIN","AMERICA"]
+    },{
+      "query_id": 14,
+      "start": 2683805,
+      "arguments": ["1996-02-01"]
+    },{
+      "query_id": 15,
+      "start": 2684043,
+      "arguments": ["1996-02-01"]
+    },{
+      "query_id": 1,
+      "start": 2689005,
+      "arguments": [98]
+    },{
+      "query_id": 15,
+      "start": 2691834,
+      "arguments": ["1997-06-01"]
+    },{
+      "query_id": 7,
+      "start": 2695355,
+      "arguments": ["INDONESIA","GERMANY"]
+    },{
+      "query_id": 10,
+      "start": 2696750,
+      "arguments": ["1995-01-01"]
+    },{
+      "query_id": 14,
+      "start": 2700242,
+      "arguments": ["1996-02-01"]
+    },{
+      "query_id": 10,
+      "start": 2700483,
+      "arguments": ["1994-04-01"]
+    },{
+      "query_id": 17,
+      "start": 2700976,
+      "arguments": ["Brand#32","JUMBO BAG"]
+    },{
+      "query_id": 16,
+      "start": 2702190,
+      "arguments": ["Brand#43","PROMO POLISHED",10,24,41,44,18,5,46,16]
+    },{
+      "query_id": 17,
+      "start": 2709911,
+      "arguments": ["Brand#21","MED CAN"]
+    },{
+      "query_id": 2,
+      "start": 2712996,
+      "arguments": [1,"STEEL","AMERICA"]
+    },{
+      "query_id": 3,
+      "start": 2713034,
+      "arguments": ["MACHINERY","1995-03-05"]
+    },{
+      "query_id": 13,
+      "start": 2715500,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 19,
+      "start": 2750028,
+      "arguments": ["Brand#32","Brand#35","Brand#12",10,19,30]
+    },{
+      "query_id": 20,
+      "start": 2750342,
+      "arguments": ["lace","1994-01-01","FRANCE"]
+    },{
+      "query_id": 3,
+      "start": 2752779,
+      "arguments": ["BUILDING","1995-03-22"]
+    },{
+      "query_id": 20,
+      "start": 2753008,
+      "arguments": ["forest","1993-01-01","ROMANIA"]
+    },{
+      "query_id": 21,
+      "start": 2755130,
+      "arguments": ["BRAZIL"]
+    },{
+      "query_id": 23,
+      "start": 2755469,
+      "arguments": [5922016,5928000,0,7]
+    },{
+      "query_id": 8,
+      "start": 2757573,
+      "arguments": ["RUSSIA","EUROPE","STANDARD BRUSHED TIN"]
+    },{
+      "query_id": 5,
+      "start": 2759819,
+      "arguments": ["AFRICA","1994-01-01"]
+    },{
+      "query_id": 6,
+      "start": 2774138,
+      "arguments": ["1996-01-01",3,24]
+    },{
+      "query_id": 23,
+      "start": 2779779,
+      "arguments": [5916000,5922016,0,7]
+    },{
+      "query_id": 8,
+      "start": 2784105,
+      "arguments": ["CANADA","AMERICA","SMALL POLISHED STEEL"]
+    },{
+      "query_id": 12,
+      "start": 2784317,
+      "arguments": ["TRUCK","SHIP","1997-01-01"]
+    },{
+      "query_id": 16,
+      "start": 2784337,
+      "arguments": ["Brand#41","LARGE ANODIZED",45,5,3,43,26,37,28,32]
+    },{
+      "query_id": 11,
+      "start": 2786350,
+      "arguments": ["GERMANY",1]
+    },{
+      "query_id": 23,
+      "start": 2788703,
+      "arguments": [5910016,5916000,0,7]
+    },{
+      "query_id": 14,
+      "start": 2789735,
+      "arguments": ["1997-06-01"]
+    },{
+      "query_id": 21,
+      "start": 2790454,
+      "arguments": ["MOROCCO"]
+    },{
+      "query_id": 9,
+      "start": 2808531,
+      "arguments": ["azure"]
+    },{
+      "query_id": 17,
+      "start": 2810778,
+      "arguments": ["Brand#24","LG CASE"]
+    },{
+      "query_id": 17,
+      "start": 2812572,
+      "arguments": ["Brand#31","LG PKG"]
+    },{
+      "query_id": 3,
+      "start": 2814764,
+      "arguments": ["HOUSEHOLD","1995-03-20"]
+    },{
+      "query_id": 23,
+      "start": 2833680,
+      "arguments": [5904000,5910016,0,7]
+    },{
+      "query_id": 17,
+      "start": 2836167,
+      "arguments": ["Brand#25","JUMBO CASE"]
+    },{
+      "query_id": 22,
+      "start": 2850795,
+      "arguments": [31,32,33,11,24,29,17]
+    },{
+      "query_id": 18,
+      "start": 2850854,
+      "arguments": [312]
+    },{
+      "query_id": 20,
+      "start": 2871605,
+      "arguments": ["ivory","1995-01-01","CHINA"]
+    },{
+      "query_id": 13,
+      "start": 2874886,
+      "arguments": ["express","deposits"]
+    },{
+      "query_id": 19,
+      "start": 2877378,
+      "arguments": ["Brand#31","Brand#55","Brand#23",6,19,28]
+    },{
+      "query_id": 6,
+      "start": 2880948,
+      "arguments": ["1996-01-01",5,24]
+    },{
+      "query_id": 15,
+      "start": 2884621,
+      "arguments": ["1994-01-01"]
+    },{
+      "query_id": 12,
+      "start": 2888341,
+      "arguments": ["REG AIR","SHIP","1996-01-01"]
+    },{
+      "query_id": 4,
+      "start": 2895401,
+      "arguments": ["1997-01-01"]
+    },{
+      "query_id": 19,
+      "start": 2896549,
+      "arguments": ["Brand#25","Brand#32","Brand#33",4,15,30]
+    },{
+      "query_id": 16,
+      "start": 2896979,
+      "arguments": ["Brand#41","PROMO PLATED",16,40,44,36,30,38,27,8]
+    },{
+      "query_id": 1,
+      "start": 2897370,
+      "arguments": [63]
+    },{
+      "query_id": 11,
+      "start": 2900380,
+      "arguments": ["FRANCE",1]
+    },{
+      "query_id": 1,
+      "start": 2917745,
+      "arguments": [119]
+    },{
+      "query_id": 4,
+      "start": 2925800,
+      "arguments": ["1996-04-01"]
+    },{
+      "query_id": 21,
+      "start": 2936604,
+      "arguments": ["VIETNAM"]
+    },{
+      "query_id": 3,
+      "start": 2939985,
+      "arguments": ["AUTOMOBILE","1995-03-28"]
+    },{
+      "query_id": 5,
+      "start": 2940197,
+      "arguments": ["AMERICA","1994-01-01"]
+    },{
+      "query_id": 17,
+      "start": 2954759,
+      "arguments": ["Brand#55","JUMBO JAR"]
+    },{
+      "query_id": 8,
+      "start": 2972579,
+      "arguments": ["ROMANIA","EUROPE","ECONOMY POLISHED NICKEL"]
+    },{
+      "query_id": 11,
+      "start": 2975304,
+      "arguments": ["GERMANY",1]
+    },{
+      "query_id": 18,
+      "start": 2981335,
+      "arguments": [314]
+    },{
+      "query_id": 13,
+      "start": 2988243,
+      "arguments": ["pending","deposits"]
+    },{
+      "query_id": 8,
+      "start": 3002187,
+      "arguments": ["INDIA","ASIA","MEDIUM ANODIZED BRASS"]
+    },{
+      "query_id": 17,
+      "start": 3005363,
+      "arguments": ["Brand#52","JUMBO CAN"]
+    },{
+      "query_id": 4,
+      "start": 3019678,
+      "arguments": ["1997-07-01"]
+    },{
+      "query_id": 21,
+      "start": 3025816,
+      "arguments": ["MOROCCO"]
+    },{
+      "query_id": 7,
+      "start": 3038626,
+      "arguments": ["UNITED STATES","UNITED KINGDOM"]
+    },{
+      "query_id": 22,
+      "start": 3038733,
+      "arguments": [15,32,30,33,31,17,28]
+    },{
+      "query_id": 7,
+      "start": 3042396,
+      "arguments": ["KENYA","SAUDI ARABIA"]
+    },{
+      "query_id": 20,
+      "start": 3042661,
+      "arguments": ["cream","1994-01-01","ALGERIA"]
+    },{
+      "query_id": 8,
+      "start": 3051355,
+      "arguments": ["CANADA","AMERICA","LARGE PLATED STEEL"]
+    },{
+      "query_id": 15,
+      "start": 3056905,
+      "arguments": ["1994-04-01"]
+    },{
+      "query_id": 5,
+      "start": 3061508,
+      "arguments": ["AMERICA","1994-01-01"]
+    },{
+      "query_id": 22,
+      "start": 3063421,
+      "arguments": [15,20,25,24,27,22,29]
+    },{
+      "query_id": 4,
+      "start": 3090052,
+      "arguments": ["1997-05-01"]
+    },{
+      "query_id": 15,
+      "start": 3096549,
+      "arguments": ["1995-01-01"]
+    },{
+      "query_id": 22,
+      "start": 3098987,
+      "arguments": [15,27,30,12,33,18,13]
+    },{
+      "query_id": 5,
+      "start": 3099124,
+      "arguments": ["EUROPE","1994-01-01"]
+    },{
+      "query_id": 3,
+      "start": 3099978,
+      "arguments": ["HOUSEHOLD","1995-03-22"]
+    },{
+      "query_id": 7,
+      "start": 3130238,
+      "arguments": ["JORDAN","ETHIOPIA"]
+    },{
+      "query_id": 21,
+      "start": 3148235,
+      "arguments": ["CHINA"]
+    },{
+      "query_id": 9,
+      "start": 3169505,
+      "arguments": ["azure"]
+    },{
+      "query_id": 6,
+      "start": 3173463,
+      "arguments": ["1997-01-01",3,25]
+    },{
+      "query_id": 3,
+      "start": 3174683,
+      "arguments": ["HOUSEHOLD","1995-03-08"]
+    },{
+      "query_id": 6,
+      "start": 3175488,
+      "arguments": ["1994-01-01",4,25]
+    },{
+      "query_id": 17,
+      "start": 3187912,
+      "arguments": ["Brand#34","MED BOX"]
+    },{
+      "query_id": 22,
+      "start": 3196241,
+      "arguments": [10,33,15,22,34,27,29]
+    },{
+      "query_id": 8,
+      "start": 3209192,
+      "arguments": ["EGYPT","MIDDLE EAST","SMALL PLATED COPPER"]
+    },{
+      "query_id": 6,
+      "start": 3213951,
+      "arguments": ["1994-01-01",3,24]
+    },{
+      "query_id": 15,
+      "start": 3243913,
+      "arguments": ["1997-05-01"]
+    },{
+      "query_id": 10,
+      "start": 3245011,
+      "arguments": ["1994-11-01"]
+    },{
+      "query_id": 8,
+      "start": 3251372,
+      "arguments": ["SAUDI ARABIA","MIDDLE EAST","ECONOMY BURNISHED STEEL"]
+    },{
+      "query_id": 6,
+      "start": 3271531,
+      "arguments": ["1995-01-01",9,24]
+    },{
+      "query_id": 19,
+      "start": 3275401,
+      "arguments": ["Brand#11","Brand#21","Brand#51",7,13,21]
+    },{
+      "query_id": 22,
+      "start": 3277114,
+      "arguments": [16,34,14,32,33,25,28]
+    },{
+      "query_id": 6,
+      "start": 3291911,
+      "arguments": ["1996-01-01",3,25]
+    },{
+      "query_id": 15,
+      "start": 3293555,
+      "arguments": ["1995-04-01"]
+    },{
+      "query_id": 20,
+      "start": 3294091,
+      "arguments": ["puff","1994-01-01","EGYPT"]
+    },{
+      "query_id": 13,
+      "start": 3299042,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 12,
+      "start": 3321068,
+      "arguments": ["SHIP","MAIL","1996-01-01"]
+    },{
+      "query_id": 4,
+      "start": 3324789,
+      "arguments": ["1995-07-01"]
+    },{
+      "query_id": 20,
+      "start": 3325119,
+      "arguments": ["cornsilk","1997-01-01","PERU"]
+    },{
+      "query_id": 22,
+      "start": 3325158,
+      "arguments": [21,30,11,28,31,18,17]
+    },{
+      "query_id": 15,
+      "start": 3332293,
+      "arguments": ["1995-06-01"]
+    },{
+      "query_id": 16,
+      "start": 3333465,
+      "arguments": ["Brand#51","ECONOMY ANODIZED",49,6,11,23,26,1,15,14]
+    },{
+      "query_id": 7,
+      "start": 3335672,
+      "arguments": ["ROMANIA","FRANCE"]
+    },{
+      "query_id": 5,
+      "start": 3335744,
+      "arguments": ["EUROPE","1996-01-01"]
+    },{
+      "query_id": 17,
+      "start": 3352458,
+      "arguments": ["Brand#33","LG BAG"]
+    },{
+      "query_id": 15,
+      "start": 3355945,
+      "arguments": ["1995-10-01"]
+    },{
+      "query_id": 13,
+      "start": 3360855,
+      "arguments": ["special","deposits"]
+    },{
+      "query_id": 7,
+      "start": 3374867,
+      "arguments": ["UNITED STATES","IRAN"]
+    },{
+      "query_id": 5,
+      "start": 3385244,
+      "arguments": ["AMERICA","1997-01-01"]
+    },{
+      "query_id": 23,
+      "start": 3385293,
+      "arguments": [5898016,5904000,0,7]
+    },{
+      "query_id": 14,
+      "start": 3401285,
+      "arguments": ["1995-03-01"]
+    },{
+      "query_id": 20,
+      "start": 3401806,
+      "arguments": ["rosy","1995-01-01","MOZAMBIQUE"]
+    },{
+      "query_id": 23,
+      "start": 3407058,
+      "arguments": [5892000,5898016,0,7]
+    },{
+      "query_id": 6,
+      "start": 3424465,
+      "arguments": ["1997-01-01",4,24]
+    },{
+      "query_id": 19,
+      "start": 3427874,
+      "arguments": ["Brand#44","Brand#34","Brand#52",4,11,27]
+    },{
+      "query_id": 14,
+      "start": 3439199,
+      "arguments": ["1996-12-01"]
+    },{
+      "query_id": 3,
+      "start": 3439823,
+      "arguments": ["HOUSEHOLD","1995-03-02"]
+    },{
+      "query_id": 21,
+      "start": 3457543,
+      "arguments": ["VIETNAM"]
+    },{
+      "query_id": 18,
+      "start": 3470023,
+      "arguments": [315]
+    },{
+      "query_id": 6,
+      "start": 3495877,
+      "arguments": ["1997-01-01",3,25]
+    },{
+      "query_id": 23,
+      "start": 3497761,
+      "arguments": [5886016,5892000,0,7]
+    },{
+      "query_id": 4,
+      "start": 3498724,
+      "arguments": ["1997-07-01"]
+    },{
+      "query_id": 5,
+      "start": 3510733,
+      "arguments": ["MIDDLE EAST","1995-01-01"]
+    },{
+      "query_id": 22,
+      "start": 3528305,
+      "arguments": [12,13,22,17,27,25,24]
+    },{
+      "query_id": 16,
+      "start": 3529524,
+      "arguments": ["Brand#15","LARGE ANODIZED",19,49,20,3,39,48,1,45]
+    },{
+      "query_id": 13,
+      "start": 3530455,
+      "arguments": ["pending","accounts"]
+    },{
+      "query_id": 18,
+      "start": 3543291,
+      "arguments": [313]
+    },{
+      "query_id": 20,
+      "start": 3554321,
+      "arguments": ["plum","1995-01-01","MOROCCO"]
+    },{
+      "query_id": 2,
+      "start": 3554371,
+      "arguments": [10,"COPPER","EUROPE"]
+    },{
+      "query_id": 21,
+      "start": 3570335,
+      "arguments": ["ALGERIA"]
+    },{
+      "query_id": 7,
+      "start": 3586837,
+      "arguments": ["MOROCCO","GERMANY"]
+    }
+  ]
+}

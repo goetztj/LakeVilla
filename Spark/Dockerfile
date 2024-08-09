@@ -48,9 +48,17 @@ RUN alias pip=pip3
 RUN pip install -q ipython
 RUN pip install delta-spark==3.0.0
 
+
+COPY setup.sql .
+RUN chmod 777 setup.sql
+
 COPY entrypoint.sh .
 
 RUN chmod 777 entrypoint.sh
+
+
+
+
 
 EXPOSE 7077
 EXPOSE 8080

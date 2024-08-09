@@ -8,6 +8,8 @@ services:
       lakevillaNet:
     depends_on:
       - minio
+      - mc
+    command: sleep infinity
   spark-delta3:
     build: ./Spark
     container_name: spark-delta3
@@ -15,6 +17,7 @@ services:
       lakevillaNet:
     depends_on:
       - minio
+      - mc
       - hive
     environment:
       - SPARK_HOST_NAME=spark-delta3
@@ -87,5 +90,24 @@ services:
       - 80:80
       - 9000:9000
     command: ["server", "/data", "--console-address", ":80"]
+  mc:
+    depends_on:
+      - minio
+    image: minio/mc
+    container_name: mc
+    networks:
+      lakevillaNet:
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add minio http://minio:9000 admin password) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc rm -r --force minio/warehouse;
+      /usr/bin/mc mb minio/warehouse;
+      /usr/bin/mc policy set public minio/warehouse;
+      /usr/bin/mc mb minio/data;
+      /usr/bin/mc policy set public minio/data;
+      tail -f /dev/null
+      "
+    
+
 networks:
   lakevillaNet:

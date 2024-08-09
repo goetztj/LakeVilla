@@ -65,5 +65,8 @@ COPY ./CAB/sample/region.parquet ./CAB/sample/
 COPY ./CAB/sample/supplier.parquet ./CAB/sample/
 
 
+RUN git clone https://github.com/basicthinker/YCSB-C.git
 
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["tail -f /dev/null"]

@@ -1,6 +1,6 @@
 # LakeVilla
 
-This repository contains the artifacts of our LakeVilla paper.
+This repository contains the artifacts of our LakeVilla (LV) paper.
 We made use of [docker](https://docs.docker.com/engine/install/) to automate the deployment and reproducibility.
 You will find the following content:
 - YCSB-LH: submodule to the adapted YCSB benchmark for Spark

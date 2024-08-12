@@ -13,7 +13,9 @@ You will find the following content:
 
 We created a fully dockerized replication of our experimental setup. Please remember that the paper used larger setups, especially for Spark.
 
-Additionally, always reset the object store to the initial state after a benchmark to guarantee correct execution.
+Additionally, always reset the object store to the initial state after a benchmark to guarantee correct execution. The following command will restore the initial state of the object store:
+
+````docker exec -it spark-delta3 spark-sql -f ./reset.sql````
 
 ### 1. Inititalization
 

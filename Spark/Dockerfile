@@ -52,6 +52,9 @@ RUN pip install delta-spark==3.0.0
 COPY setup.sql .
 RUN chmod 777 setup.sql
 
+COPY reset.sql .
+RUN chmod 777 reset.sql
+
 COPY entrypoint.sh .
 
 RUN chmod 777 entrypoint.sh

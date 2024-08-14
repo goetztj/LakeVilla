@@ -75,8 +75,8 @@ We provide the following setups:
 - LakeVillaBankingTablelvl0: Multi-table implementation using LakeVilla Level 0
 - LakeVillaBankingQuerylvl1: Multi-Query implementation using LakeVilla Levels 0-1
 - LakeVillaBankingTablelvl1: Multi-table implementation using LakeVilla Levels 0-1
-- LakeVillaBankingQuerylvl2: Multi-Query implementation using LakeVilla Levels 0-2
-- LakeVillaBankingTablelvl2: Multi-table implementation using LakeVilla Levels 0-2
+- LakeVillaBankingQuerylvl2: Multi-Query implementation using LakeVilla Levels 0-2  (currently in development for the new docker setup)
+- LakeVillaBankingTablelvl2: Multi-table implementation using LakeVilla Levels 0-2 (currently in development for the new docker setup)
 
 
 #### Freshness benchmarks
@@ -91,7 +91,8 @@ A prompt will appear asking for the version you want to execute:
 - Freshness benchmark (lvl 0) (simplified)
 - Freshness benchmark (lvl 1)
 - Freshness benchmark (lvl 1) (simplified)
-- Level 2 is coming soon
+- Freshness benchmark (lvl 2) - coming soon
+- Freshness benchmark (lvl 2) (simplified)
 
 The paper uses the simplified versions; the full versions are currently under development for this LakeVilla setup.
 

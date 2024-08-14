@@ -17,11 +17,11 @@ DROP NAMESPACE banking CASCADE;
 CREATE NAMESPACE banking;
 CREATE TABLE spark_catalog.banking.banking0 (Banking_ID string, balance string) USING delta;
 
-INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "500.0"), ("1", "500.0");
+INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "0.0"), ("1", "0.0");
 
 CREATE TABLE spark_catalog.banking.banking1 (Banking_ID string, balance string) USING delta;
 
-INSERT INTO spark_catalog.banking.banking1 VALUES ("0", "500.0");
+INSERT INTO spark_catalog.banking.banking1 VALUES ("0", "0.0");
 
 -- Freshness LakeVilla
 DROP NAMESPACE freshness CASCADE;

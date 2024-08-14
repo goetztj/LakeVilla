@@ -75,8 +75,8 @@ We provide the following setups:
 - LakeVillaBankingTablelvl0: Multi-table implementation using LakeVilla Level 0
 - LakeVillaBankingQuerylvl1: Multi-Query implementation using LakeVilla Levels 0-1
 - LakeVillaBankingTablelvl1: Multi-table implementation using LakeVilla Levels 0-1
-- LakeVillaBankingQuerylvl2: Multi-Query implementation using LakeVilla Levels 0-2  (currently in development for the new docker setup)
-- LakeVillaBankingTablelvl2: Multi-table implementation using LakeVilla Levels 0-2 (currently in development for the new docker setup)
+- LakeVillaBankingQuerylvl2: Multi-Query implementation using LakeVilla Levels 0-2
+- LakeVillaBankingTablelvl2: Multi-table implementation using LakeVilla Levels 0-2
 
 
 #### Freshness benchmarks

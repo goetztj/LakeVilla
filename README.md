@@ -91,10 +91,10 @@ A prompt will appear asking for the version you want to execute:
 - Freshness benchmark (lvl 0) (simplified)
 - Freshness benchmark (lvl 1)
 - Freshness benchmark (lvl 1) (simplified)
-- Freshness benchmark (lvl 2) - coming soon
+- Freshness benchmark (lvl 2)
 - Freshness benchmark (lvl 2) (simplified)
 
-The paper uses the simplified versions; the full versions are currently under development for this LakeVilla setup.
+The paper uses the simplified versions. The other options are extended versions of the benchmark.
 
 #### CAB benchmarks
 

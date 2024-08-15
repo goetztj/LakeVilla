@@ -3,7 +3,7 @@
 This directory contains all files used by the ''lakevilla'' docker container:
 
 - **additional_workloads**: all additional YCSB workloads, we defined
-- **binaries**: binaries of three applications using LakeVilla usable in the docker container ''LakeVilla''
+- **binaries**: aarch64 binaries of three LakeVilla applications usable in the docker container ''LakeVilla''
 - **CAB**: samples for the write streams and the generated read streams we used
 - **Dockerfile**: The Dockerfile that build the ''lakevilla'' container
 - **lvconfig.conf**: The LakeVilla config file. More information down below

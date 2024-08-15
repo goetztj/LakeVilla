@@ -6,6 +6,7 @@ services:
     container_name: lakevilla
     networks:
       lakevillaNet:
+    platform: linux/arm64
     depends_on:
       - minio
       - mc

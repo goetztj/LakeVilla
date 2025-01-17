@@ -28,6 +28,8 @@ COPY lvconfig.conf .
 COPY binaries/ycsbc-lv .
 COPY binaries/cab-lv .
 COPY binaries/LakeVilla .
+COPY binaries/hermitage-lv .
+COPY binaries/tpcds-lv .
 
 RUN mkdir additional_workloads
 COPY additional_workloads/workloadbanking.spec ./additional_workloads/

@@ -1,3 +1,0 @@
-[submodule "YCSB-LH"]
-	path = YCSB-LH
-	url = git@github.com:goetztj/YCSB-LH.git

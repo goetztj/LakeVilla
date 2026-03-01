@@ -27,11 +27,11 @@ RUN mkdir -p ${HADOOP_HOME} && mkdir -p ${SPARK_HOME} && mkdir -p /home/delta/sp
 RUN mkdir /tmp/spark-events
 WORKDIR ${SPARK_HOME}
 
-ENV SPARK_VERSION=3.5.0
+ENV SPARK_VERSION=3.5.3
 ENV HADOOP_VERSION=3.3.4
 ENV SCALA_VERSION=2.12
 
-RUN curl -s https://archive.apache.org/dist/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
+RUN curl -s https://archive.apache.org/dist/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz -o spark-${SPARK_VERSION}-bin-hadoop3.tgz \
  && tar xzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /opt/spark --strip-components 1 \
  && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 

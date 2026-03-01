@@ -4,8 +4,9 @@ This repository contains the artifacts of our LakeVilla (LV) paper.
 We made use of [docker](https://docs.docker.com/engine/install/) to automate the deployment and reproducibility.
 You will find the following content:
 - YCSB-LH: submodule to the adapted YCSB benchmark for Spark (provided as fork of [YCSB](https://github.com/brianfrankcooper/YCSB))
+- benchbase: submodule to the adapted Benchbase implementation for DuckLake (provided as fork of [Benchbase](https://github.com/cmu-db/benchbase))
 - Hive: all files needed for the hive docker container
-- LV: all files for LakeVilla, including binaries for the container
+- LV: all files for LakeVilla, including binaries and libraries for the container
 - Spark: All files for the Spark and Delta Lake container
 - Spark-Iceberg: All files for the Spark and Iceberg container
 
@@ -39,11 +40,17 @@ Please keep in mind that we do not provide a tpc-h generator. Hence, you must ge
 
 ### 2. Execute a LakeVilla benchmark
 
-All LakeVilla benchmarks are executed using the ''lakevilla'' container. For legacy reasons, our drivers still use the old description of the LakeVilla features:
+All LakeVilla benchmarks are executed using the ''lakevilla'' container. For legacy reasons, our drivers still use the old description of the LakeVilla mechanisms:
 
-- Level 0 = LV [R]
-- Level 1 = LV [CT]
-- Level 2 = LV [I]
+- Level 0 = Markers and sublogs
+- Level 1 = Markers and global conflict detection
+- Level 2 = Global Version Log
+
+To activate the three LV variants from the paper, select the following level combinations:
+
+- Level 0 + 1 = LV[Write]
+- Level 2 = LV[Read]
+- Level 0 + 1 + 2 = LV[Hybrid]
 
 #### YCSB
 
@@ -53,7 +60,7 @@ The container provides the ycsbc-lv executable based on YCSB-C (https://github.c
 
 The invocation is similar to the original YCSB-C program (https://github.com/basicthinker/YCSB-C/tree/master):
 - ''-config'' defines the LakeVilla configuration file (see README in LV)
-- ''-db'' defines the used LakeVilla version; we provide: LakeVillalvl0 (LV [R]), LakeVillalvl1 (LV [R, CT]), LakeVillalvl2 (LV [R, CT, I]), and LakeVillaDL (LV [DL]).
+- ''-db'' defines the used LakeVilla version; we provide: LakeVillalvl0, LakeVillalvl1 (LV[Write]), LakeVillalvl2 (LV[Hybrid] and LV[Read]), and LakeVillaDL (LV[DL]).
 - ''-threads'' defines the number of concurrent threads to use
 - ''P'' defines the workload to execute
 
@@ -232,13 +239,13 @@ docker exec -it lakevilla /bin/sh -c "./hermitage-lv lvconfig.conf <lvconfig>"
 ```
 
 We support the following feature combinations for lvconfig:
-- "0" = LV [R]
-- "1" = LV [CT]
-- "2" = LV [I]
-- "01" = LV [R, CT]
-- "02" = LV [R, I]
-- "12" = LV [CT, I]
-- "012" = LV [R, CT, I]
+- "0" = only markers and sublogs
+- "1" = only markers and dependency tracking
+- "2" = LV[Read]
+- "01" = LV[Write]
+- "02" = LV[Hybrid] without global dependecy tracking
+- "12" = LV[Hybrid] without sublogs
+- "012" = LV[Hybrid]
 
 The programm will automatically try to verify the results of all hermitage scenarios. If the comparison was successfull, it will return "sucess". In some cases, Apache Arrow encodes parquet files differently (usally so me adittional arrow wraped around the values). Here, the individual check will fail and print "failure (manual comparison necessary)" and the received and expected arrow parquet structure. A experiment is still sucessfull if both contain the same values.
 
@@ -339,13 +346,13 @@ docker exec -it lakevilla /bin/sh -c "./tpcds-lv lvconfig.conf <lvconfig> <num_t
 ```
 
 We support the following feature combinations for lvconfig:
-- "0" = LV [R]
-- "1" = LV [CT]
-- "2" = LV [I]
-- "01" = LV [R, CT]
-- "02" = LV [R, I]
-- "12" = LV [CT, I]
-- "012" = LV [R, CT, I]
+- "0" = only markers and sublogs
+- "1" = only markers and dependency tracking
+- "2" = LV[Read]
+- "01" = LV[Write]
+- "02" = LV[Hybrid] without global dependecy tracking
+- "12" = LV[Hybrid] without sublogs
+- "012" = LV[Hybrid]
 
 num_threads describe the number of execution threads LV is allowed to use. Furthre, num_runs defines how often each query should be executed.
 

@@ -1,0 +1,6 @@
+[submodule "YCSB-LH"]
+	path = YCSB-LH
+	url = https://github.com/goetztj/YCSB-LH
+[submodule "benchbase"]
+	path = benchbase
+	url = https://github.com/goetztj/benchbase.git

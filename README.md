@@ -5,6 +5,7 @@ We made use of [docker](https://docs.docker.com/engine/install/) to automate the
 You will find the following content:
 - YCSB-LH: submodule to the adapted YCSB benchmark for Spark (provided as fork of [YCSB](https://github.com/brianfrankcooper/YCSB))
 - benchbase: submodule to the adapted Benchbase implementation for DuckLake (provided as fork of [Benchbase](https://github.com/cmu-db/benchbase))
+- trino: submodule of the proof-of-concept Trino integration (provided as fork of [Trino](https://github.com/trinodb/trino))
 - Hive: all files needed for the hive docker container
 - LV: all files for LakeVilla, including binaries and libraries for the container
 - Spark: All files for the Spark and Delta Lake container

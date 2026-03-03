@@ -1,0 +1,1 @@
+target_sources(cab-lv PRIVATE CABClient.cpp CABClientWriteSwitching.cpp CABClientReadSwitching.cpp CABClientTableScaling.cpp)

@@ -1,0 +1,1 @@
+target_sources(tpcds-lv PRIVATE TPCDSClient.cpp)

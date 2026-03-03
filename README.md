@@ -7,7 +7,7 @@ You will find the following content:
 - benchbase: submodule to the adapted Benchbase implementation for DuckLake (provided as fork of [Benchbase](https://github.com/cmu-db/benchbase))
 - trino: submodule of the proof-of-concept Trino integration (provided as fork of [Trino](https://github.com/trinodb/trino))
 - Hive: all files needed for the hive docker container
-- LV: all files for LakeVilla, including binaries and libraries for the container
+- LV: all files for LakeVilla, including the source code, binaries and libraries for the container
 - Spark: All files for the Spark and Delta Lake container
 - Spark-Iceberg: All files for the Spark and Iceberg container
 
@@ -39,7 +39,18 @@ spark-delta3 will create all tables for Spark+Delta Lake and LakeVilla, while sp
 
 Please keep in mind that we do not provide a tpc-h generator. Hence, you must generate and import the data to execute the CAB benchmark. We provide instructions on how to do that with DuckDB down below.
 
-### 2. Execute a LakeVilla benchmark
+### 2. Compilation
+
+If you do not want to use the provided binaries, you can compile LakeVilla from source (in the lakevilla container):
+
+```
+mkdir build
+cd build
+cmake  -DAWSSDK_ROOT_DIR="/LakeVilla/aws/" ../LV/src
+make
+```
+
+### 3. Execute a LakeVilla benchmark
 
 All LakeVilla benchmarks are executed using the ''lakevilla'' container. For legacy reasons, our drivers still use the old description of the LakeVilla mechanisms:
 

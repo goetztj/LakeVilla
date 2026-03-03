@@ -1,0 +1,13 @@
+target_sources(ycsbc-lv PRIVATE db_factory.cc
+lhtransactionsLvl0.cpp
+lhtransactionsLvl1.cpp
+lhtransactionsLvl2.cpp
+lhtransactionsDL.cpp
+lhtransactionsBankingTableLvl0.cpp
+lhtransactionsBankingTableLvl1.cpp
+lhtransactionsBankingTableLvl2.cpp
+lhtransactionsBankingQueryLvl0.cpp
+lhtransactionsBankingQueryLvl1.cpp
+lhtransactionsBankingQueryLvl2.cpp
+./../YCSB-C/core/core_workload.cc
+)

@@ -1,0 +1,1 @@
+target_sources(lakevilla-core PRIVATE Marker.cpp Manager.cpp ManagerGeneric.cpp jni_transaction.cpp)

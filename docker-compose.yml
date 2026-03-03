@@ -10,6 +10,8 @@ services:
     depends_on:
       - minio
       - mc
+    volumes:
+      - ./LV/src:/LakeVilla/src
     command: sleep infinity
   spark-delta3:
     build: ./Spark

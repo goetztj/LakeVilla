@@ -1,0 +1,16 @@
+#define HOST "localhost:9000"
+#define USER "admin"
+#define PASSWD "password"
+#define AWSREGION "eu-central-1"
+#define WARMUPRUNS 2
+#define BENCHMARKRUNS 5
+#define COOLDOWNRUNS 0
+#define PathToMinioTable "test/"
+#define PathToGlobalLog "wh/_global/log.txt"
+#define PathToGlobalTmpLog "wh/_global/log.txt.tmp"
+#define PathToYCSBTable "wh/tmp.db/usertable/"
+#define PathToBankingTable0 "wh/tmp.db/banking0/"
+#define PathToBankingTable1 "wh/tmp.db/banking1/"
+#define LOGTHREADS 1
+#define FRESHRUNS 500
+#define PathToFreshTable "wh/tmp.db/test/"

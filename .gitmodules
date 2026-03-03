@@ -13,3 +13,6 @@
 [submodule "LV/src/CAB/cab"]
 	path = LV/src/CAB/cab
 	url = https://github.com/alexandervanrenen/cab.git
+[submodule "trino"]
+	path = trino
+	url = https://github.com/goetztj/trino.git

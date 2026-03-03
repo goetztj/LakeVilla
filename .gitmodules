@@ -4,9 +4,6 @@
 [submodule "benchbase"]
 	path = benchbase
 	url = https://github.com/goetztj/benchbase.git
-[submodule "trino"]
-	path = trino
-	url = https://github.com/goetztj/trino.git
 [submodule "LV/src/YCSB-C"]
 	path = LV/src/YCSB-C
 	url = https://github.com/basicthinker/YCSB-C.git

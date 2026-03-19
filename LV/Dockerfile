@@ -30,7 +30,7 @@ RUN ./setup_ubuntu.sh
 COPY lvconfig.conf .
 COPY binaries/ycsbc-lv .
 COPY binaries/cab-lv .
-COPY binaries/LakeVilla .
+COPY binaries/ui-lv .
 COPY binaries/hermitage-lv .
 COPY binaries/tpcds-lv .
 

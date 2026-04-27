@@ -14,6 +14,13 @@ sudo apt -y install libparquet-dev
 rm -rf aws-sdk-cpp
 rm -rf aws
 git clone --recurse-submodules https://github.com/aws/aws-sdk-cpp.git
-mkdir aws && cd aws && cmake ./.. -DCMAKE_INSTALL_PREFIX=/LakeVilla/aws -DBUILD_ONLY="s3" -DSIMPLE_INSTALL=ON
-cmake --build .
-cmake --install .
+cd aws-sdk-cpp && mkdir build && cd build && cmake ./../aws-sdk-cpp -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/LakeVilla/aws -DBUILD_ONLY="s3"
+cmake --build . --config=Release
+
+#build around current aws bug
+#ln -s lib/libs2n.so.1 lib/libs2n.so.1.0.0
+
+cmake --install . --config=Release
+
+
+#cmake ./../src   -DCMAKE_PREFIX_PATH=/LakeVilla/aws   -DCMAKE_BUILD_TYPE=Release

@@ -21,7 +21,8 @@ struct DeltaLogManager {
   bool register_operation(DLOperation op, std::string &path,
                           std::vector<std::string> &min,
                           std::vector<std::string> &max,
-
+                          bool use_base_path = false, bool overwrite = false);
+                          
   std::vector<std::string> get_list();
 
   std::vector<std::string> get_list_raw();

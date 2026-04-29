@@ -9,6 +9,15 @@ This directory contains all files used by the ''lakevilla'' docker container:
 - **lvconfig.conf**: The LakeVilla config file. More information down below
 - **setup_ubuntu.sh**: A script installing LakeVilla's dependencies in the container
 
+## Building LakeVilla
+
+To build LakeVilla from source create a build directory and run:
+
+```
+cmake <Path to LV source> -DCMAKE_PREFIX_PATH=<Path to AWS SDK install>
+make
+``` 
+
 ## Configuring LakeVilla
 
 All LakeVilla configurations are done via the config file. The parameters are:

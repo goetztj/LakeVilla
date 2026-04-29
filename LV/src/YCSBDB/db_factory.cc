@@ -11,10 +11,7 @@
 
 #include <string>
 #include "basic_db.h"
-#include "lhtransactionsLvl0.hpp"
-#include "lhtransactionsLvl1.hpp"
-#include "lhtransactionsLvl2.hpp"
-#include "lhtransactionsDL.hpp"
+#include "lhtransactions.hpp"
 #include "lhtransactionsBankingTableLvl0.hpp"
 #include "lhtransactionsBankingTableLvl1.hpp"
 #include "lhtransactionsBankingQueryLvl0.hpp"
@@ -30,12 +27,18 @@ DB* DBFactory::CreateDB(utils::Properties &props) {
   std::string config_path = props["config"];
   if (props["dbname"] == "basic") {
     return new BasicDB;
-  } else if (props["dbname"] == "LakeVillalvl0") {
-    return new LHTransactionsDBLvl0(config_path);
-  } else if (props["dbname"] == "LakeVillalvl1") {
-    return new LHTransactionsDBLvl1(config_path);
-  } else if (props["dbname"] == "LakeVillalvl2") {
-    return new LHTransactionsDBLvl2(config_path);
+  } else if (props["dbname"] == "LakeVillaWrite") {
+    return new LHTransactionsDB(config_path, {true, true, false}, false);
+  } else if (props["dbname"] == "LakeVillaRead") {
+    return new LHTransactionsDB(config_path, {false, false, true}, false);
+  } else if (props["dbname"] == "LakeVilla") {
+    return new LHTransactionsDB(config_path, {true, true, true}, false);
+  } else if (props["dbname"] == "LakeVillaWriteMulti") {
+    return new LHTransactionsDB(config_path, {true, true, false}, true);
+  } else if (props["dbname"] == "LakeVillaReadMulti") {
+    return new LHTransactionsDB(config_path, {false, false, true}, true);
+  } else if (props["dbname"] == "LakeVillaMulti") {
+    return new LHTransactionsDB(config_path, {true, true, true}, true);
   } else if (props["dbname"] == "LakeVillaBankingQuerylvl0") {
     return new LHTransactionsBankingQueryDBLvl0(config_path);
   } else if (props["dbname"] == "LakeVillaBankingTablelvl0") {
@@ -49,7 +52,7 @@ DB* DBFactory::CreateDB(utils::Properties &props) {
   }else if (props["dbname"] == "LakeVillaBankingTablelvl2") {
     return new LHTransactionsBankingTableDBLvl2(config_path);
   }else if (props["dbname"] == "LakeVillaDL") {
-    return new LHTransactionsDBDL(config_path);
+    return new LHTransactionsDB(config_path, {false, false, false}, false);
   } else return NULL;
 }
 

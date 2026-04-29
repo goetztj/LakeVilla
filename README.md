@@ -66,13 +66,13 @@ To activate the three LV variants from the paper, select the following level com
 
 #### YCSB
 
-The container provides the ycsbc-lv executable based on YCSB-C (https://github.com/basicthinker/YCSB-C/tree/master) adapted for LakeVilla. Use the following command to execute a single run of YCSB using LakeVilla level 0:
+The container provides the ycsbc-lv executable based on YCSB-C (https://github.com/basicthinker/YCSB-C/tree/master) adapted for LakeVilla. Use the following command to execute a single run of YCSB using LakeVilla:
 
-``docker exec -it lakevilla /bin/sh -c "./ycsbc-lv -config lvconfig.conf -db LakeVillalvl0 -threads 1 -P YCSB-C/workloads/workloada.spec" ``
+``docker exec -it lakevilla /bin/sh -c "./ycsbc-lv -config lvconfig.conf -db LakeVilla -threads 1 -P YCSB-C/workloads/workloada.spec" ``
 
 The invocation is similar to the original YCSB-C program (https://github.com/basicthinker/YCSB-C/tree/master):
 - ''-config'' defines the LakeVilla configuration file (see README in LV)
-- ''-db'' defines the used LakeVilla version; we provide: LakeVillalvl0, LakeVillalvl1 (LV[Write]), LakeVillalvl2 (LV[Hybrid] and LV[Read]), and LakeVillaDL (LV[DL]).
+- ''-db'' defines the used LakeVilla version; we provide: LakeVilla, LakeVillaWrite (LV[Write]), LakeVillaRead (LV[Read]), LakeVillaDL (LV[DL]), LakeVillaMulti (Multi-Query transactions), LakeVillaWrite (LV[Write], Multi-Query transactions), and LakeVillaRead (LV[Read], Multi-Query transactions).
 - ''-threads'' defines the number of concurrent threads to use
 - ''P'' defines the workload to execute
 

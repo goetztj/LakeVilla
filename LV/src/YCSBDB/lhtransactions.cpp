@@ -1,8 +1,8 @@
-#include "lhtransactionsDL.hpp"
+#include "lhtransactions.hpp"
 
-std::atomic<uint32_t> ycsbc::LHTransactionsDBDL::next_id(0);
+std::atomic<uint32_t> ycsbc::LHTransactionsDB::next_id(0);
 
-ycsbc::LHTransactionsDBDL::LHTransactionsDBDL(std::string& config_path) {
+ycsbc::LHTransactionsDB::LHTransactionsDB(std::string& config_path, std::vector<bool> config, bool single) : config(std::move(config)), single_txn(single) {
   this->settings = std::make_unique<LHConfig::LvSettings>(config_path);
 
   this->settings->parse();
@@ -10,7 +10,7 @@ ycsbc::LHTransactionsDBDL::LHTransactionsDBDL(std::string& config_path) {
   this->read_only = true;
 }
 
-void ycsbc::LHTransactionsDBDL::Init() {
+void ycsbc::LHTransactionsDB::Init() {
   StorageConnector::MinIOConfig config2;
   config2.endpointURI = this->settings->host;
   config2.user = this->settings->user;
@@ -46,42 +46,68 @@ void ycsbc::LHTransactionsDBDL::Init() {
 
   std::string path = this->settings->pathToYCSBTable;
 
-  uint32_t t_id = ycsbc::LHTransactionsDBDL::next_id.fetch_add(1);
+  uint32_t t_id = ycsbc::LHTransactionsDB::next_id.fetch_add(1);
 
-  std::vector<bool> config = {false, false, false};
+  //std::vector<bool> config = {false, true, false};
   this->manager = std::make_unique<LHTransactions::TransactionManagerGeneric>(
       config, path, config2, t_id);
+
+  if(single_txn){
+    std::cerr << "<<<< begin once " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto init_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration = init_end - start;
+    this->init_perf.push_back(duration.count());
+  }
 }
 
-void ycsbc::LHTransactionsDBDL::Close() {
+void ycsbc::LHTransactionsDB::Close() {
   std::cerr << "<<<<< redos: " << this->manager->times_redo << " >>>>>"
             << std::endl;
+  if(single_txn){
+    std::cerr << "<<<< commit once " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->commit(this->read_only);
+    auto commit_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration = commit_end - start;
+    this->commit_perf.push_back(duration.count());
+  }
+
   this->manager = nullptr;
 
   this->print_stats();
 }
 
-int ycsbc::LHTransactionsDBDL::Read(const std::string& table,
-                                    const std::string& key,
-                                    const std::vector<std::string>* fields,
-                                    std::vector<ycsbc::DB::KVPair>& result) {
+int ycsbc::LHTransactionsDB::Read(const std::string& table,
+                                      const std::string& key,
+                                      const std::vector<std::string>* fields,
+                                      std::vector<ycsbc::DB::KVPair>& result) {
   std::string path = "";
-  auto start = std::chrono::high_resolution_clock::now();
-  this->manager->begin_transaction_ycsb();
+
+  if(!single_txn){
+    std::cerr << "<<<< begin multi " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto b_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_i = b_end - start;
+    this->init_perf.push_back(duration_i.count());
+  }
+  
   auto init_end = std::chrono::high_resolution_clock::now();
   auto success = this->manager->read_file(0, key, fields, result, path);
   auto op_end = std::chrono::high_resolution_clock::now();
 
-  this->manager->commit(true);
-  auto end = std::chrono::high_resolution_clock::now();
+  if(!single_txn){
+    std::cerr << "<<<< commit multi " <<std::endl;
+    this->manager->commit(true);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_c = end - op_end;
+    this->commit_perf.push_back(duration_c.count());
+  }
+
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
   this->read_perf.push_back(duration.count());
-
-  std::chrono::duration<double, std::milli> duration_i = init_end - start;
-  this->init_perf.push_back(duration_i.count());
-
-  std::chrono::duration<double, std::milli> duration_c = end - op_end;
-  this->commit_perf.push_back(duration_c.count());
 
   if (success.empty()) {
     return 1;
@@ -90,22 +116,59 @@ int ycsbc::LHTransactionsDBDL::Read(const std::string& table,
   return 0;
 }
 
-int ycsbc::LHTransactionsDBDL::Scan(
-    const std::string& table, const std::string& key, int len,
-    const std::vector<std::string>* fields,
-    std::vector<std::vector<ycsbc::DB::KVPair>>& result) {
+int ycsbc::LHTransactionsDB::Scan(
+    const std::string& table, const std::string&, int,
+    const std::vector<std::string>*,
+    std::vector<std::vector<ycsbc::DB::KVPair>>&) {
+  std::string path = "";
+
+  if(!single_txn){
+    std::cerr << "<<<< begin multi " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto b_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_i = b_end - start;
+    this->init_perf.push_back(duration_i.count());
+  }
+  
+  auto init_end = std::chrono::high_resolution_clock::now();
+  //auto success = this->manager->read_file(0, key, fields, result, path);
+  auto result_ptr = this->manager->read_table(0);
+  auto op_end = std::chrono::high_resolution_clock::now();
+
+  if(!single_txn){
+    std::cerr << "<<<< commit multi " <<std::endl;
+    this->manager->commit(true);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_c = end - op_end;
+    this->commit_perf.push_back(duration_c.count());
+  }
+
+  std::chrono::duration<double, std::milli> duration = op_end - init_end;
+  this->read_perf.push_back(duration.count());
+
+  if (!result_ptr) {
+    return 1;
+  }
+
   return 0;
 }
 
-int ycsbc::LHTransactionsDBDL::Update(const std::string& table,
-                                      const std::string& key,
-                                      std::vector<ycsbc::DB::KVPair>& values) {
+int ycsbc::LHTransactionsDB::Update(
+    const std::string& table, const std::string& key,
+    std::vector<ycsbc::DB::KVPair>& values) {
   this->read_only = false;
   std::vector<ycsbc::DB::KVPair> old_values;
   std::string path = "";
 
-  auto start = std::chrono::high_resolution_clock::now();
-  this->manager->begin_transaction_ycsb();
+  if(!single_txn){
+    std::cerr << "<<<< begin multi " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto b_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_i = b_end - start;
+    this->init_perf.push_back(duration_i.count());
+  }
   auto init_end = std::chrono::high_resolution_clock::now();
   auto arrowBaseTable = this->manager->read_file_as_table(0, key, path);
 
@@ -145,19 +208,17 @@ int ycsbc::LHTransactionsDBDL::Update(const std::string& table,
   bool add_success = this->manager->add_file(0, arrowBaseTable, key, prev_id);
   sub_remove_thread.join();
   auto op_end = std::chrono::high_resolution_clock::now();
-  this->manager->commit(false);
-  auto end = std::chrono::high_resolution_clock::now();
+  if(!single_txn){
+    std::cerr << "<<<< commit multi " <<std::endl;
+    this->manager->commit(false);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_c = end - op_end;
+    this->commit_perf.push_back(duration_c.count());
+  }
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
   this->update_perf.push_back(duration.count());
 
-  std::chrono::duration<double, std::milli> duration_i = init_end - start;
-  this->init_perf.push_back(duration_i.count());
-
-  std::chrono::duration<double, std::milli> duration_c = end - op_end;
-  this->commit_perf.push_back(duration_c.count());
-
   if (add_success) {
-    // std::cout << "success!" << std::endl;
     return 0;
   }
 
@@ -165,27 +226,32 @@ int ycsbc::LHTransactionsDBDL::Update(const std::string& table,
   return 1;
 }
 
-int ycsbc::LHTransactionsDBDL::Insert(const std::string& table,
-                                      const std::string& key,
-                                      std::vector<ycsbc::DB::KVPair>& values) {
+int ycsbc::LHTransactionsDB::Insert(
+    const std::string& table, const std::string& key,
+    std::vector<ycsbc::DB::KVPair>& values) {
   this->read_only = false;
-  auto start = std::chrono::high_resolution_clock::now();
-  this->manager->begin_transaction_ycsb();
+  if(!single_txn){
+    std::cerr << "<<<< begin multi " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto b_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_i = b_end - start;
+    this->init_perf.push_back(duration_i.count());
+  }
   auto init_end = std::chrono::high_resolution_clock::now();
   auto arrowTable = this->arrow_table_builder(key, values);
 
   bool add_success = this->manager->add_file(0, arrowTable, key);
   auto op_end = std::chrono::high_resolution_clock::now();
-  this->manager->commit(false);
-  auto end = std::chrono::high_resolution_clock::now();
+  if(!single_txn){
+    std::cerr << "<<<< commit multi " <<std::endl;
+    this->manager->commit(false);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_c = end - op_end;
+    this->commit_perf.push_back(duration_c.count());
+  }
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
   this->insert_perf.push_back(duration.count());
-
-  std::chrono::duration<double, std::milli> duration_i = init_end - start;
-  this->init_perf.push_back(duration_i.count());
-
-  std::chrono::duration<double, std::milli> duration_c = end - op_end;
-  this->commit_perf.push_back(duration_c.count());
 
   if (add_success) {
     return 0;
@@ -194,19 +260,33 @@ int ycsbc::LHTransactionsDBDL::Insert(const std::string& table,
   }
 }
 
-int ycsbc::LHTransactionsDBDL::Delete(const std::string& table,
-                                      const std::string& key) {
+int ycsbc::LHTransactionsDB::Delete(const std::string& table,
+                                        const std::string& key) {
   this->read_only = false;
-  this->manager->begin_transaction_ycsb();
+  if(!single_txn){
+    std::cerr << "<<<< begin multi " <<std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    this->manager->begin_transaction_ycsb();
+    auto b_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_i = b_end - start;
+    this->init_perf.push_back(duration_i.count());
+  }
   auto success = this->manager->remove_file(0, key);
-  this->manager->commit(false);
+  auto op_end = std::chrono::high_resolution_clock::now();
+  if(!single_txn){
+    std::cerr << "<<<< commit multi " <<std::endl;
+    this->manager->commit(false);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration_c = end - op_end;
+    this->commit_perf.push_back(duration_c.count());
+  }
   if (!success) {
     return 1;
   }
   return 0;
 }
 
-std::shared_ptr<arrow::Table> ycsbc::LHTransactionsDBDL::arrow_table_builder(
+std::shared_ptr<arrow::Table> ycsbc::LHTransactionsDB::arrow_table_builder(
     const std::string& key, std::vector<ycsbc::DB::KVPair>& values,
     bool addKey) {
   arrow::ArrayVector value_vec;
@@ -234,7 +314,7 @@ std::shared_ptr<arrow::Table> ycsbc::LHTransactionsDBDL::arrow_table_builder(
   return arrow::Table::Make(this->table_schema, value_vec, 1);
 }
 
-void ycsbc::LHTransactionsDBDL::print_stats() {
+void ycsbc::LHTransactionsDB::print_stats() {
   if (!this->read_perf.empty()) {
     std::cout << "----- read -----" << std::endl;
     double sum = 0;

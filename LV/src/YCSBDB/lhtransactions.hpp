@@ -1,6 +1,6 @@
 #pragma once
-#ifndef YCSB_C_LHTRANSACTIONSLVL0_DB_H_
-#define YCSB_C_LHTRANSACTIONSLVL0_DB_H_
+#ifndef YCSB_C_LHTRANSACTIONSLVL1_DB_H_
+#define YCSB_C_LHTRANSACTIONSLVL1_DB_H_
 
 #include <arrow/api.h>
 #include <arrow/array/builder_binary.h>
@@ -34,9 +34,10 @@ using std::endl;
 
 namespace ycsbc {
 
-class LHTransactionsDBLvl0 : public DB {
+class LHTransactionsDB : public DB {
  public:
-  LHTransactionsDBLvl0(std::string& config_path);
+  LHTransactionsDB(std::string& config_path, std::vector<bool> config,
+                       bool single = false);
   void Init();
 
   void Close();
@@ -62,6 +63,10 @@ class LHTransactionsDBLvl0 : public DB {
 
  private:
   bool read_only;
+
+  bool single_txn;
+
+  std::vector<bool> config;
 
   std::unique_ptr<LHConfig::LvSettings> settings;
 

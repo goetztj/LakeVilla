@@ -6,7 +6,7 @@
 	url = https://github.com/goetztj/benchbase.git
 [submodule "LV/src/YCSB-C"]
 	path = LV/src/YCSB-C
-	url = https://github.com/basicthinker/YCSB-C.git
+	url = https://github.com/goetztj/YCSB-C.git
 [submodule "LV/src/rapidjson"]
 	path = LV/src/rapidjson
 	url = https://github.com/Tencent/rapidjson.git

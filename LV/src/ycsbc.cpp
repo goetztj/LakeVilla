@@ -5,7 +5,7 @@
 //  Created by Jinglei Ren on 12/19/14.
 //  Copyright (c) 2014 Jinglei Ren <jinglei@ren.systems>.
 //
-// adapted for the LakeVilla Prototype by Tobias Götz
+// adapted for the LHTransactions Prototype by Tobias Götz
 
 #include <aws/core/Aws.h>
 #include <aws/core/auth/AWSCredentialsProviderChain.h>
@@ -31,9 +31,9 @@ bool StrStartWith(const char* str, const char* pre);
 string ParseCommandLine(int argc, const char* argv[], utils::Properties& props);
 
 int DelegateClient(ycsbc::DB* db, ycsbc::CoreWorkload* wl, const int num_ops,
-                   bool is_loading) {
+                   bool is_loading, uint64_t id) {
   db->Init();
-  ycsbc::Client client(*db, *wl);
+  ycsbc::Client client(*db, *wl, id);
   int oks = 0;
   for (int i = 0; i < num_ops; ++i) {
     if (is_loading) {
@@ -51,16 +51,26 @@ int main(const int argc, const char* argv[]) {
   Aws::InitAPI(options);
   {
     utils::Properties props;
-
+    // std::cerr << "parseing args" << std::endl;
     string file_name = ParseCommandLine(argc, argv, props);
 
+    // ycsbc::DB *db = ycsbc::DBFactory::CreateDB(props);
+    // if (!db) {
+    //   cout << "Unknown database name " << props["dbname"] << endl;
+    //   exit(0);
+    // }
+    // std::cerr << "parsed args" << std::endl;
     if (props.GetProperty("config", "error").compare("error") == 0) {
       std::cerr << "no config file provided!" << std::endl;
       return 1;
     }
 
+    // std::cerr << "creating workload" << std::endl;
+
     ycsbc::CoreWorkload wl;
     wl.Init(props);
+
+    // std::cerr << "done workload" << std::endl;
 
     const int num_threads = stoi(props.GetProperty("threadcount", "1"));
 
@@ -68,45 +78,54 @@ int main(const int argc, const char* argv[]) {
     vector<future<int>> actual_ops;
     vector<ycsbc::DB*> dbs;
     int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
-    for (int i = 0; i < num_threads; ++i) {
-      ycsbc::DB* db = ycsbc::DBFactory::CreateDB(props);
-      if (!db) {
-        cout << "Unknown database name " << props["dbname"] << endl;
-        exit(0);
-      }
-      dbs.push_back(db);
-      actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
-                                    total_ops / num_threads, true));
-    }
-    assert((int)actual_ops.size() == num_threads);
-
     int sum = 0;
-    for (auto& n : actual_ops) {
-      assert(n.valid());
-      sum += n.get();
+    if (props.GetProperty("load", "true") == "true") {
+      for (uint64_t i = 0; i < num_threads; ++i) {
+        ycsbc::DB* db = ycsbc::DBFactory::CreateDB(props);
+        if (!db) {
+          cout << "Unknown database name " << props["dbname"] << endl;
+          exit(0);
+        }
+        dbs.push_back(db);
+        actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
+                                      total_ops / num_threads, true, i));
+      }
+      assert((int)actual_ops.size() == num_threads);
+
+      for (auto& n : actual_ops) {
+        assert(n.valid());
+        sum += n.get();
+      }
+      cerr << "# Loading records:\t" << sum << endl;
+    } else {
+      cout << "Skipping load" << endl;
     }
-    cerr << "# Loading records:\t" << sum << endl;
 
     // Peforms transactions
-    actual_ops.clear();
-    total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
-    utils::Timer<double> timer;
-    timer.Start();
-    for (int i = 0; i < num_threads; ++i) {
-      actual_ops.emplace_back(async(launch::async, DelegateClient, dbs[i], &wl,
-                                    total_ops / num_threads, false));
-    }
-    assert((int)actual_ops.size() == num_threads);
+    if (props.GetProperty("run", "true") == "true") {
+      actual_ops.clear();
+      total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
+      utils::Timer<double> timer;
+      timer.Start();
+      for (uint64_t i = 0; i < num_threads; ++i) {
+        actual_ops.emplace_back(async(launch::async, DelegateClient, dbs[i],
+                                      &wl, total_ops / num_threads, false, i));
+      }
+      assert((int)actual_ops.size() == num_threads);
 
-    sum = 0;
-    for (auto& n : actual_ops) {
-      assert(n.valid());
-      sum += n.get();
+      sum = 0;
+      for (auto& n : actual_ops) {
+        assert(n.valid());
+        sum += n.get();
+      }
+      double duration = timer.End();
+      cerr << "# Transaction throughput (KTPS)" << endl;
+      cerr << props["dbname"] << '\t' << file_name << '\t' << num_threads
+           << '\t';
+      cerr << total_ops / duration / 1000 << endl;
+    } else {
+      cout << "skipping run" << endl;
     }
-    double duration = timer.End();
-    cerr << "# Transaction throughput (KTPS)" << endl;
-    cerr << props["dbname"] << '\t' << file_name << '\t' << num_threads << '\t';
-    cerr << total_ops / duration / 1000 << endl;
   }
   Aws::ShutdownAPI(options);
 }
@@ -180,6 +199,22 @@ string ParseCommandLine(int argc, const char* argv[],
       }
       props.SetProperty("config", argv[argindex]);
       argindex++;
+    } else if (strcmp(argv[argindex], "-load") == 0) {
+      argindex++;
+      if (argindex >= argc) {
+        UsageMessage(argv[0]);
+        exit(0);
+      }
+      props.SetProperty("load", argv[argindex]);
+      argindex++;
+    } else if (strcmp(argv[argindex], "-run") == 0) {
+      argindex++;
+      if (argindex >= argc) {
+        UsageMessage(argv[0]);
+        exit(0);
+      }
+      props.SetProperty("run", argv[argindex]);
+      argindex++;
     } else {
       cout << "Unknown option '" << argv[argindex] << "'" << endl;
       exit(0);
@@ -200,6 +235,8 @@ void UsageMessage(const char* command) {
   cout << "  -threads n: execute using n threads (default: 1)" << endl;
   cout << "  -config path: the path to the LakeVilla config file (required!)"
        << endl;
+  cout << "  -load bool: if loading shoudl be executed" << endl;
+  cout << "  -run bool: only performs run" << endl;
   cout << "  -db dbname: specify the name of the DB to use (default: basic)"
        << endl;
   cout << "  -P propertyfile: load properties from the given file. Multiple "

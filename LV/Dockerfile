@@ -69,6 +69,8 @@ COPY ./CAB/sample/partsupp.parquet ./CAB/sample/
 COPY ./CAB/sample/region.parquet ./CAB/sample/
 COPY ./CAB/sample/supplier.parquet ./CAB/sample/
 
+COPY ./congestion /LakeVilla/congestion/
+
 
 RUN git clone https://github.com/basicthinker/YCSB-C.git
 

@@ -79,27 +79,26 @@ int main(const int argc, const char* argv[]) {
     vector<ycsbc::DB*> dbs;
     int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
     int sum = 0;
-    if (props.GetProperty("load", "true") == "true") {
-      for (uint64_t i = 0; i < num_threads; ++i) {
-        ycsbc::DB* db = ycsbc::DBFactory::CreateDB(props);
-        if (!db) {
-          cout << "Unknown database name " << props["dbname"] << endl;
-          exit(0);
-        }
-        dbs.push_back(db);
+
+    for (uint64_t i = 0; i < num_threads; ++i) {
+      ycsbc::DB* db = ycsbc::DBFactory::CreateDB(props);
+      if (!db) {
+        cout << "Unknown database name " << props["dbname"] << endl;
+        exit(0);
+      }
+      dbs.push_back(db);
+      if (props.GetProperty("load", "true") == "true") {
         actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
                                       total_ops / num_threads, true, i));
       }
-      assert((int)actual_ops.size() == num_threads);
-
-      for (auto& n : actual_ops) {
-        assert(n.valid());
-        sum += n.get();
-      }
-      cerr << "# Loading records:\t" << sum << endl;
-    } else {
-      cout << "Skipping load" << endl;
     }
+    assert((int)actual_ops.size() == num_threads);
+
+    for (auto& n : actual_ops) {
+      assert(n.valid());
+      sum += n.get();
+    }
+    cerr << "# Loading records:\t" << sum << endl;
 
     // Peforms transactions
     if (props.GetProperty("run", "true") == "true") {

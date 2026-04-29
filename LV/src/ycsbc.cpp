@@ -92,7 +92,10 @@ int main(const int argc, const char* argv[]) {
                                       total_ops / num_threads, true, i));
       }
     }
-    assert((int)actual_ops.size() == num_threads);
+
+    if (props.GetProperty("load", "true") == "true") {
+      assert((int)actual_ops.size() == num_threads);
+    }
 
     for (auto& n : actual_ops) {
       assert(n.valid());

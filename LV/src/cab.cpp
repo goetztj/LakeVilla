@@ -50,7 +50,7 @@ int table_scaling(LHConfig::LvSettings& settings, std::string& sample_path,
     double writes_2_w;
 
     std::vector<std::vector<bool>> levels;
-    levels.push_back({true, true, false});
+    levels.push_back({false, false, true});
 
     std::vector<bool> triggers;
     triggers.reserve(1);

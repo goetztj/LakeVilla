@@ -238,7 +238,7 @@ docker exec -it lakevilla /bin/sh -c "./cab-lv table lvconfig.conf /LakeVilla/CA
 
 "num_tables" defines the maximal number of tables that should be accessed from a single transaction.
 
-"base_path" is the path all distinct tables share. E.g. "/wh/tpcds1000.db/".
+"base_path" is the path all distinct tables share. E.g. "/wh/tpcds1000.db/customer".
 
 This will execute the table-sacling experiment from our paper. 
 

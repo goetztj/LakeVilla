@@ -38,5 +38,7 @@ struct CABClientTableScaling : CABClient {
   bool executeMultiTableTransaction(
       uint32_t runs, uint32_t num_tables,
       std::vector<std::pair<int64_t, int64_t>>& times);
+
+  void resetTables(uint32_t runs, uint32_t num_tables);
 };
 };  // namespace LHCAB

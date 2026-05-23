@@ -12,12 +12,13 @@ RUN apt-get -qq update && \
       rsync \
       git \
       cmake \
-      openjdk-21-jdk \
+      openjdk-11-jdk \
+      maven \
       ssh && \
     apt-get -qq clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 RUN mkdir /LakeVilla
@@ -73,6 +74,8 @@ COPY ./congestion /LakeVilla/congestion/
 
 
 RUN git clone https://github.com/basicthinker/YCSB-C.git
+
+RUN git clone https://github.com/goetztj/YCSB-LH.git
 
 #ENTRYPOINT ["/bin/sh"]
 ENTRYPOINT ["tail", "-f", "/dev/null"]

@@ -12,9 +12,14 @@
 
 using namespace LHTransactions;
 
-extern "C" JNIEXPORT jlong JNICALL Java_TransactionManagerNative_createNative(
+Aws::SDKOptions options;
+
+extern "C" JNIEXPORT jlong JNICALL Java_site_ycsb_db_LakeVillaTransactionManager_createNative(
     JNIEnv* env, jobject, jbooleanArray jLevels, jstring jPath,
     jstring jConfig_path, jint transactionId) {
+
+  Aws::InitAPI(options);
+
   const char* pathCLVConfig = env->GetStringUTFChars(jConfig_path, nullptr);
   std::string pathToConfig(pathCLVConfig);
   env->ReleaseStringUTFChars(jConfig_path, pathCLVConfig);
@@ -50,12 +55,13 @@ extern "C" JNIEXPORT jlong JNICALL Java_TransactionManagerNative_createNative(
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_TransactionManagerNative_destroyNative(JNIEnv*, jobject, jlong handle) {
+Java_site_ycsb_db_LakeVillaTransactionManager_destroyNative(JNIEnv*, jobject, jlong handle) {
   delete reinterpret_cast<TransactionManagerGeneric*>(handle);
+  Aws::ShutdownAPI(options);
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_TransactionManagerNative_openTable(JNIEnv* env, jobject, jlong handle, jstring jPath) {
+Java_site_ycsb_db_LakeVillaTransactionManager_openTable(JNIEnv* env, jobject, jlong handle, jstring jPath) {
   const char* pathC = env->GetStringUTFChars(jPath, nullptr);
   std::string pathToTable(pathC);
   env->ReleaseStringUTFChars(jPath, pathC);
@@ -63,20 +69,20 @@ Java_TransactionManagerNative_openTable(JNIEnv* env, jobject, jlong handle, jstr
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_TransactionManagerNative_beginTransaction(JNIEnv*, jobject, jlong handle) {
+Java_site_ycsb_db_LakeVillaTransactionManager_beginTransaction(JNIEnv*, jobject, jlong handle) {
   return reinterpret_cast<TransactionManagerGeneric*>(handle)
       ->begin_transaction_ycsb();
 }
 
-extern "C" JNIEXPORT jlong JNICALL Java_TransactionManagerNative_readTable(
+/*extern "C" JNIEXPORT jlong JNICALL Java_io_trino_1plugin_1lakevilla_LakeVillaTransactionManagerreadTable(
     JNIEnv*, jobject, jlong handle, jint tableId, jint numThreads) {
   auto table = reinterpret_cast<TransactionManagerGeneric*>(handle)->read_table(
       static_cast<uint32_t>(tableId), static_cast<uint32_t>(numThreads));
   return reinterpret_cast<jlong>(new std::shared_ptr<arrow::Table>(table));
-}
+}*/
 
 extern "C" JNIEXPORT jbyteArray JNICALL
-Java_TransactionManagerNative_readTableAsBytes(JNIEnv* env, jobject,
+Java_site_ycsb_db_LakeVillaTransactionManager_readTableAsBytes(JNIEnv* env, jobject,
                                                jlong handle, jint tableId) {
   auto table = reinterpret_cast<TransactionManagerGeneric*>(handle)->read_table(
       static_cast<uint32_t>(tableId));
@@ -121,7 +127,7 @@ Java_TransactionManagerNative_readTableAsBytes(JNIEnv* env, jobject,
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_TransactionManagerNative_writeToTable(JNIEnv* env, jobject, jlong handle,
+Java_site_ycsb_db_LakeVillaTransactionManager_writeToTableNative(JNIEnv* env, jobject, jlong handle,
                                            jint tableId,
                                            jbyteArray arrowTableBytes) {
   if (arrowTableBytes == nullptr) {
@@ -133,8 +139,6 @@ Java_TransactionManagerNative_writeToTable(JNIEnv* env, jobject, jlong handle,
 
   auto buffer = std::make_shared<arrow::Buffer>(
       reinterpret_cast<const uint8_t*>(bytes), static_cast<int64_t>(len));
-
-  env->ReleaseByteArrayElements(arrowTableBytes, bytes, JNI_ABORT);
 
   auto input = std::make_shared<arrow::io::BufferReader>(buffer);
 
@@ -162,11 +166,19 @@ Java_TransactionManagerNative_writeToTable(JNIEnv* env, jobject, jlong handle,
   }
   std::shared_ptr<arrow::Table> table = *tableResult;
 
+  if (table->num_columns() <= 1 || table->column(1)->num_chunks() == 0) {
+    return false;
+  }
+
   auto column = table->column(1);
   auto chunk = column->chunk(0);
 
   auto string_array =
         std::static_pointer_cast<arrow::StringArray>(chunk);
+
+  if (string_array->length() == 0) {
+    return false; 
+  }
 
   std::string update_val = "";
   if(!string_array->IsNull(0)){
@@ -181,10 +193,11 @@ Java_TransactionManagerNative_writeToTable(JNIEnv* env, jobject, jlong handle,
   bool success = reinterpret_cast<TransactionManagerGeneric*>(handle)->add_file(
       static_cast<uint32_t>(tableId), table, "value", prev_id);
 
+  env->ReleaseByteArrayElements(arrowTableBytes, bytes, JNI_ABORT);
   return success;
 }
 
-extern "C" JNIEXPORT void JNICALL Java_TransactionManagerNative_commitNative(
+extern "C" JNIEXPORT void JNICALL Java_site_ycsb_db_LakeVillaTransactionManager_commitNative(
     JNIEnv*, jobject, jlong handle, jboolean readOnly) {
   reinterpret_cast<TransactionManagerGeneric*>(handle)->commit(readOnly);
 }

@@ -10,6 +10,19 @@ You will find the following content:
 - LV: all files for LakeVilla, including the source code, binaries and libraries for the container
 - Spark: All files for the Spark and Delta Lake container
 - Spark-Iceberg: All files for the Spark and Iceberg container
+- Trino-Delta: All files for the Trino and Delta Lake container
+
+## What is LakeVilla?
+
+LakeVilla is a client-side library for OTFs. It offers read and write optimization to offer full, multi-table ACID transactions while preserving full OTF interoperability.
+
+### Interoperability of LV and other solutions for OTF transactions
+
+| Solution | Architecture | Client-side Requirements | Global Requirements | Deployment Scope | Client Compatibility |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **LakeVilla** | Client-side library (middleware) | Apache Arrow support | None (Builds on object store guarantees) | Existing and new OTF tables (no migration) | LV and unmodified legacy OTF clients |
+| **DuckLake** | Relational Metadata Representation | DuckLake runtime | Centralized Database | Migrated and new DuckLake tables | DuckLake clients only |
+| **Project Nessie** | Catalog service | Nessie runtime | Centralized Catalog | Existing and new OTF tables (catalog managed) | Nessie clients only |
 
 ## Usage
 
@@ -34,6 +47,8 @@ It will create the following containers:
 - **postgres**: The Postgres backend for the HIVE catalog
 - **minio**: A minio object store. 
 - **mc**: A minio client container that creates the bucket ''warehouse''. Inspired by (https://iceberg.apache.org/spark-quickstart/#docker-compose)
+- **trino-coordinator:**: The trino coordinator (commented out by default; due to port conficts with Spark; comment out Spark to use Trino instead)
+- **2xtrino-worker:**: Two trino workers (commented out by default; due to port conficts with Spark; comment out Spark to use Trino instead)
 
 spark-delta3 will create all tables for Spark+Delta Lake and LakeVilla, while spark-iceberg-hive create the respective iceberg tables. 
 

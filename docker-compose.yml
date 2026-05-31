@@ -57,6 +57,30 @@ services:
  #     - 7078:7077
  #     - 8081:8080
  #     - 15003:15002
+  #trino-coordinator:
+  #  image: trinodb/trino:latest
+  #  ports:
+  #    - "8080:8080"
+  #  depends_on:
+  #    - minio
+  #    - mc
+  #    - hive
+  #  networks:
+  #    lakevillaNet:
+  #  volumes:
+  #    - ./Trino-Delta/coordinator/config.properties:/etc/trino/config.properties
+  #    - ./Trino-Delta/catalogs:/etc/trino/catalog      
+  #trino-worker:
+  #  image: trinodb/trino:latest
+  #  deploy:
+  #    replicas: 2
+  #  networks:
+  #    lakevillaNet:
+  #  volumes:
+  #    - ./Trino-Delta/worker/config.properties:/etc/trino/config.properties
+  #    - ./Trino-Delta/catalogs:/etc/trino/catalog
+  #  depends_on:
+  #    - trino-coordinator
   postgres:
     container_name: postgres
     image: postgres:latest

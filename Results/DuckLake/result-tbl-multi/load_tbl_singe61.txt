@@ -1,0 +1,23 @@
+[INFO ] 2026-05-08 01:49:28,108 [main]  com.oltpbenchmark.DBWorkload main - ======================================================================
+Benchmark:                       YCSB {com.oltpbenchmark.benchmarks.ycsb.YCSBBenchmark}
+Configuration:                   /benchbase/multi-query/target61/benchbase-duckdb/config/ducklake/ycsb_config_a1.xml
+Type:                            DUCKDB
+Driver:                          org.duckdb.DuckDBDriver
+URL:                             jdbc:duckdb:/benchbase/multi-query/target61/tpcc2.lake
+Isolation:                       TRANSACTION_SERIALIZABLE
+Batch Size:                      128
+DDL Path:                        null
+Loader Threads:                  128
+Session Setup File:              config/ducklake/setup_ducklake_ycsb.sql
+Scale Factor:                    1.0
+Terminals:                       1
+New Connection Per Txn:          false
+Reconnect on Connection Failure: false
+[INFO ] 2026-05-08 01:49:28,109 [main]  com.oltpbenchmark.DBWorkload main - ======================================================================
+[INFO ] 2026-05-08 01:49:28,126 [main]  com.oltpbenchmark.DBWorkload main - Creating new YCSB database...
+[INFO ] 2026-05-08 01:49:28,745 [main]  com.oltpbenchmark.DBWorkload main - Finished creating new YCSB database...
+[INFO ] 2026-05-08 01:49:28,775 [main]  com.oltpbenchmark.DBWorkload main - Loading data into YCSB database...
+[INFO ] 2026-05-08 01:49:28,777 [main]  com.oltpbenchmark.util.ThreadUtil runLoaderThreads - Creating a Thread Pool with a size of 1 to run 1 Loader Threads.  0 threads will be queued.
+[INFO ] 2026-05-08 01:49:33,254 [main]  com.oltpbenchmark.util.ThreadUtil runLoaderThreads - Finished executing 1 Loader Threads [time=4.48s]
+[INFO ] 2026-05-08 01:49:33,254 [main]  com.oltpbenchmark.DBWorkload main - Finished loading data into YCSB database...
+[INFO ] 2026-05-08 01:49:33,254 [main]  com.oltpbenchmark.DBWorkload main - Skipping benchmark workload execution

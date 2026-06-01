@@ -11,6 +11,7 @@ You will find the following content:
 - Spark: All files for the Spark and Delta Lake container
 - Spark-Iceberg: All files for the Spark and Iceberg container
 - Trino-Delta: All files for the Trino and Delta Lake container
+- Results: Contains raw traces from the paper's experiments
 
 ## What is LakeVilla?
 

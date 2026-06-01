@@ -1,0 +1,455 @@
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+executing table scaling
+./../src/CAB/cab/benchmark-query-streams/small_1tb_10cpu/streamssf1/query_stream_1.json
+1 tables
+2 tables
+3 tables
+4 tables
+5 tables
+6 tables
+7 tables
+8 tables
+9 tables
+10 tables
+11 tables
+12 tables
+13 tables
+14 tables
+15 tables
+16 tables
+17 tables
+18 tables
+19 tables
+20 tables
+21 tables
+22 tables
+23 tables
+24 tables
+25 tables
+26 tables
+27 tables
+28 tables
+29 tables
+30 tables
+31 tables
+32 tables
+33 tables
+34 tables
+35 tables
+36 tables
+37 tables
+38 tables
+39 tables
+40 tables
+41 tables
+42 tables
+43 tables
+44 tables
+45 tables
+46 tables
+47 tables
+48 tables
+49 tables
+50 tables
+51 tables
+52 tables
+53 tables
+54 tables
+55 tables
+56 tables
+57 tables
+58 tables
+59 tables
+60 tables
+61 tables
+62 tables
+63 tables
+64 tables
+benchmark ended
+---1---
+latency;commit
+20;5
+340;5
+998;5
+---2---
+latency;commit
+1010;9
+1000;9
+1001;10
+---3---
+latency;commit
+1010;15
+992;14
+1008;16
+---4---
+latency;commit
+1004;23
+989;18
+1000;18
+---5---
+latency;commit
+991;21
+1011;25
+993;21
+---6---
+latency;commit
+986;23
+1000;25
+1016;29
+---7---
+latency;commit
+967;29
+1057;46
+956;30
+---8---
+latency;commit
+970;32
+1005;35
+1010;35
+---9---
+latency;commit
+975;38
+999;41
+1005;38
+---10---
+latency;commit
+972;44
+989;40
+1014;43
+---11---
+latency;commit
+948;44
+1003;45
+1032;49
+---12---
+latency;commit
+948;54
+1011;56
+992;49
+---13---
+latency;commit
+967;55
+995;63
+1016;50
+---14---
+latency;commit
+935;67
+1006;58
+1012;58
+---15---
+latency;commit
+941;63
+1013;67
+1018;79
+---16---
+latency;commit
+911;64
+1023;68
+999;68
+---17---
+latency;commit
+924;72
+1012;70
+1010;67
+---18---
+latency;commit
+949;83
+1032;96
+986;76
+---19---
+latency;commit
+891;81
+988;75
+1028;77
+---20---
+latency;commit
+903;78
+1029;77
+1015;79
+---21---
+latency;commit
+940;108
+989;100
+983;80
+---22---
+latency;commit
+901;83
+1029;91
+1013;90
+---23---
+latency;commit
+962;103
+963;107
+1016;95
+---24---
+latency;commit
+972;103
+944;105
+1011;101
+---25---
+latency;commit
+853;103
+1017;100
+1024;104
+---26---
+latency;commit
+878;104
+1006;105
+1039;105
+---27---
+latency;commit
+865;130
+1066;145
+944;113
+---28---
+latency;commit
+807;117
+1009;111
+1046;119
+---29---
+latency;commit
+845;139
+985;126
+1026;127
+---30---
+latency;commit
+842;140
+988;127
+1014;127
+---31---
+latency;commit
+794;121
+1003;121
+1047;126
+---32---
+latency;commit
+815;129
+988;121
+1070;139
+---33---
+latency;commit
+865;150
+977;133
+1039;130
+---34---
+latency;commit
+805;136
+1024;137
+1026;140
+---35---
+latency;commit
+853;145
+1038;169
+1016;160
+---36---
+latency;commit
+851;163
+968;151
+1023;146
+---37---
+latency;commit
+803;156
+1004;143
+1029;149
+---38---
+latency;commit
+807;150
+1040;177
+1044;166
+---39---
+latency;commit
+791;156
+1013;161
+1018;159
+---40---
+latency;commit
+820;161
+1027;156
+995;159
+---41---
+latency;commit
+942;228
+926;176
+1053;184
+---42---
+latency;commit
+809;187
+987;176
+1089;221
+---43---
+latency;commit
+802;188
+959;186
+1092;190
+---44---
+latency;commit
+802;216
+970;221
+1067;246
+---45---
+latency;commit
+762;192
+968;183
+1066;215
+---46---
+latency;commit
+765;198
+1039;221
+1201;273
+---47---
+latency;commit
+748;198
+905;190
+1010;197
+---48---
+latency;commit
+764;230
+1124;274
+976;206
+---49---
+latency;commit
+753;213
+1017;193
+994;194
+---50---
+latency;commit
+732;206
+1025;223
+1065;221
+---51---
+latency;commit
+844;230
+947;220
+1024;202
+---52---
+latency;commit
+774;208
+956;213
+1074;219
+---53---
+latency;commit
+782;213
+975;221
+1118;248
+---54---
+latency;commit
+842;236
+834;217
+1043;222
+---55---
+latency;commit
+801;224
+930;227
+1029;215
+---56---
+latency;commit
+768;220
+944;228
+1090;229
+---57---
+latency;commit
+848;252
+895;234
+1000;212
+---58---
+latency;commit
+783;221
+995;233
+1109;229
+---59---
+latency;commit
+840;249
+896;255
+1028;252
+---60---
+latency;commit
+852;245
+875;238
+1023;242
+---61---
+latency;commit
+1035;296
+930;238
+930;238
+---62---
+latency;commit
+935;275
+939;255
+990;257
+---63---
+latency;commit
+864;247
+1016;258
+1062;294
+---64---
+latency;commit
+914;260
+1055;305
+1070;309
+--- avgs ---
+table;latency;commit
+0;451;3
+1;1002;9
+2;1002;14
+3;996;19
+4;998;22
+5;999;24
+6;992;34
+7;994;32
+8;993;37
+9;991;41
+10;994;45
+11;983;52
+12;991;55
+13;983;60
+14;989;69
+15;977;65
+16;981;69
+17;988;84
+18;968;77
+19;982;77
+20;969;95
+21;980;87
+22;979;100
+23;975;102
+24;964;101
+25;973;104
+26;957;128
+27;953;115
+28;951;130
+29;947;130
+30;947;122
+31;956;129
+32;959;137
+33;951;136
+34;968;157
+35;946;152
+36;944;148
+37;963;164
+38;939;158
+39;946;158
+40;973;195
+41;961;193
+42;950;187
+43;945;227
+44;931;196
+45;1001;230
+46;886;194
+47;953;235
+48;921;199
+49;940;215
+50;937;216
+51;934;213
+52;957;226
+53;905;224
+54;920;220
+55;933;225
+56;913;232
+57;961;226
+58;920;252
+59;916;240
+60;965;256
+61;954;261
+62;980;266
+63;1011;290

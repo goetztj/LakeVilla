@@ -1,0 +1,90 @@
+[INFO ] 2026-05-08 01:37:26,556 [main]  com.oltpbenchmark.DBWorkload main - ======================================================================
+Benchmark:                       YCSB {com.oltpbenchmark.benchmarks.ycsb.YCSBBenchmark}
+Configuration:                   /benchbase/multi-query/target73/benchbase-duckdb/config/ducklake/ycsb_config_a8.xml
+Type:                            DUCKDB
+Driver:                          org.duckdb.DuckDBDriver
+URL:                             jdbc:duckdb:/benchbase/multi-query/target73/tpcc2.lake
+Isolation:                       TRANSACTION_SERIALIZABLE
+Batch Size:                      128
+DDL Path:                        null
+Loader Threads:                  128
+Session Setup File:              config/ducklake/setup_ducklake_ycsb.sql
+Scale Factor:                    1.0
+Terminals:                       8
+New Connection Per Txn:          false
+Reconnect on Connection Failure: false
+[INFO ] 2026-05-08 01:37:26,557 [main]  com.oltpbenchmark.DBWorkload main - ======================================================================
+[INFO ] 2026-05-08 01:37:26,951 [main]  com.oltpbenchmark.DBWorkload runWorkload - Creating 8 virtual terminals...
+[INFO ] 2026-05-08 01:37:27,806 [main]  com.oltpbenchmark.DBWorkload runWorkload - Launching the YCSB Benchmark with 1 Phase...
+[INFO ] 2026-05-08 01:37:27,811 [main]  com.oltpbenchmark.ThreadBench runRateLimitedMultiPhase - [0;1mPHASE START[0;0m :: [Workload=YCSB] [Serial=false] [Time=600] [WarmupTime=0] [Rate=unlimited] [Arrival=REGULAR] [Ratios=[50.0, 0.0, 0.0, 50.0, 0.0, 0.0]] [ActiveWorkers=8]
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+setting autocommit to false
+[INFO ] 2026-05-08 01:37:28,812 [main]  com.oltpbenchmark.ThreadBench runRateLimitedMultiPhase - [0;1mMEASURE[0;0m :: Warmup complete, starting measurements.
+[INFO ] 2026-05-08 01:47:29,812 [main]  com.oltpbenchmark.ThreadBench runRateLimitedMultiPhase - [0;1mTERMINATE[0;0m :: Waiting for all terminals to finish ..
+starting commit
+starting commit
+starting commit
+starting commit
+starting commit
+starting commit
+starting commit
+starting commit
+[INFO ] 2026-05-08 01:47:30,195 [Thread-8]  com.oltpbenchmark.ThreadBench run - Starting WatchDogThread
+commit done
+Error committing
+Error committing
+Error committing
+Error committing
+starting commit
+Error committing
+starting commit
+Error committing
+starting commit
+Error committing
+Error committing
+starting commit
+Error committing
+Error committing
+Error committing
+starting commit
+Error committing
+starting commit
+Error committing
+starting commit
+Error committing
+starting commit
+Error committing
+[INFO ] 2026-05-08 01:47:33,454 [main]  com.oltpbenchmark.DBWorkload runWorkload - ======================================================================
+[INFO ] 2026-05-08 01:47:33,454 [main]  com.oltpbenchmark.DBWorkload runWorkload - Rate limited reqs/s: Results(state=EXIT, nanoSeconds=600999826976, measuredRequests=3573) = 5.945093225696856 requests/sec (throughput), 5.971715529534289 requests/sec (goodput)
+[INFO ] 2026-05-08 01:47:33,460 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output Raw data into file: ycsb_2026-05-08_01-47-33.raw.csv
+[INFO ] 2026-05-08 01:47:33,501 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output samples into file: ycsb_2026-05-08_01-47-33.samples.csv
+[INFO ] 2026-05-08 01:47:33,536 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output summary data into file: ycsb_2026-05-08_01-47-33.summary.json
+[INFO ] 2026-05-08 01:47:33,545 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output DBMS parameters into file: ycsb_2026-05-08_01-47-33.params.json
+[INFO ] 2026-05-08 01:47:33,546 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output benchmark config into file: ycsb_2026-05-08_01-47-33.config.xml
+[INFO ] 2026-05-08 01:47:33,579 [main]  com.oltpbenchmark.DBWorkload writeOutputs - Output results into file: ycsb_2026-05-08_01-47-33.results.csv with window size 5
+[INFO ] 2026-05-08 01:47:33,620 [main]  com.oltpbenchmark.DBWorkload writeHistograms - ======================================================================
+[INFO ] 2026-05-08 01:47:33,620 [main]  com.oltpbenchmark.DBWorkload writeHistograms - Workload Histograms:
+[0;1mCompleted Transactions:[0;0m
+com.oltpbenchmark.benchmarks.ycsb.procedures.ReadRecord/01                       [1780] ******************************************************************************
+com.oltpbenchmark.benchmarks.ycsb.procedures.InsertRecord/02                     [   0] 
+com.oltpbenchmark.benchmarks.ycsb.procedures.ScanRecord/03                       [   0] 
+com.oltpbenchmark.benchmarks.ycsb.procedures.UpdateRecord/04                     [1809] ********************************************************************************
+com.oltpbenchmark.benchmarks.ycsb.procedures.DeleteRecord/05                     [   0] 
+com.oltpbenchmark.benchmarks.ycsb.procedures.ReadModifyWriteRecord/06            [   0] 
+[0;1mAborted Transactions:[0;0m
+<EMPTY>
+[0;1mRejected Transactions (Server Retry):[0;0m
+<EMPTY>
+[0;1mRejected Transactions (Retry Different):[0;0m
+<EMPTY>
+[0;1mUnexpected SQL Errors:[0;0m
+<EMPTY>
+[0;1mUnknown Status Transactions:[0;0m
+<EMPTY>
+[INFO ] 2026-05-08 01:47:33,620 [main]  com.oltpbenchmark.DBWorkload writeHistograms - ======================================================================

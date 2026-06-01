@@ -1,0 +1,455 @@
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+executing table scaling
+./../src/CAB/cab/benchmark-query-streams/small_1tb_10cpu/streamssf1/query_stream_1.json
+1 tables
+2 tables
+3 tables
+4 tables
+5 tables
+6 tables
+7 tables
+8 tables
+9 tables
+10 tables
+11 tables
+12 tables
+13 tables
+14 tables
+15 tables
+16 tables
+17 tables
+18 tables
+19 tables
+20 tables
+21 tables
+22 tables
+23 tables
+24 tables
+25 tables
+26 tables
+27 tables
+28 tables
+29 tables
+30 tables
+31 tables
+32 tables
+33 tables
+34 tables
+35 tables
+36 tables
+37 tables
+38 tables
+39 tables
+40 tables
+41 tables
+42 tables
+43 tables
+44 tables
+45 tables
+46 tables
+47 tables
+48 tables
+49 tables
+50 tables
+51 tables
+52 tables
+53 tables
+54 tables
+55 tables
+56 tables
+57 tables
+58 tables
+59 tables
+60 tables
+61 tables
+62 tables
+63 tables
+64 tables
+benchmark ended
+---1---
+latency;commit
+7;-1
+5;-1
+4;-1
+---2---
+latency;commit
+10;-1
+9;-1
+9;-1
+---3---
+latency;commit
+14;-1
+14;-1
+14;-1
+---4---
+latency;commit
+19;-1
+19;-1
+18;-1
+---5---
+latency;commit
+23;-1
+23;-1
+23;-1
+---6---
+latency;commit
+28;-1
+28;-1
+28;-1
+---7---
+latency;commit
+33;-1
+32;-1
+32;-1
+---8---
+latency;commit
+37;-1
+37;-1
+38;-1
+---9---
+latency;commit
+44;-1
+42;-1
+43;-1
+---10---
+latency;commit
+45;-1
+47;-1
+46;-1
+---11---
+latency;commit
+51;-1
+50;-1
+51;-1
+---12---
+latency;commit
+54;-1
+58;-1
+57;-1
+---13---
+latency;commit
+62;-1
+61;-1
+65;-1
+---14---
+latency;commit
+66;-1
+67;-1
+66;-1
+---15---
+latency;commit
+70;-1
+69;-1
+69;-1
+---16---
+latency;commit
+74;-1
+76;-1
+76;-1
+---17---
+latency;commit
+79;-1
+79;-1
+80;-1
+---18---
+latency;commit
+90;-1
+89;-1
+86;-1
+---19---
+latency;commit
+90;-1
+90;-1
+89;-1
+---20---
+latency;commit
+100;-1
+100;-1
+96;-1
+---21---
+latency;commit
+100;-1
+101;-1
+99;-1
+---22---
+latency;commit
+104;-1
+103;-1
+105;-1
+---23---
+latency;commit
+108;-1
+107;-1
+110;-1
+---24---
+latency;commit
+116;-1
+115;-1
+117;-1
+---25---
+latency;commit
+126;-1
+119;-1
+119;-1
+---26---
+latency;commit
+125;-1
+118;-1
+120;-1
+---27---
+latency;commit
+128;-1
+127;-1
+127;-1
+---28---
+latency;commit
+135;-1
+132;-1
+132;-1
+---29---
+latency;commit
+143;-1
+145;-1
+139;-1
+---30---
+latency;commit
+145;-1
+147;-1
+144;-1
+---31---
+latency;commit
+154;-1
+150;-1
+149;-1
+---32---
+latency;commit
+154;-1
+152;-1
+159;-1
+---33---
+latency;commit
+157;-1
+155;-1
+154;-1
+---34---
+latency;commit
+167;-1
+159;-1
+162;-1
+---35---
+latency;commit
+167;-1
+166;-1
+167;-1
+---36---
+latency;commit
+175;-1
+173;-1
+180;-1
+---37---
+latency;commit
+178;-1
+184;-1
+179;-1
+---38---
+latency;commit
+184;-1
+188;-1
+194;-1
+---39---
+latency;commit
+211;-1
+196;-1
+198;-1
+---40---
+latency;commit
+201;-1
+194;-1
+190;-1
+---41---
+latency;commit
+197;-1
+197;-1
+207;-1
+---42---
+latency;commit
+211;-1
+206;-1
+202;-1
+---43---
+latency;commit
+209;-1
+207;-1
+206;-1
+---44---
+latency;commit
+213;-1
+217;-1
+216;-1
+---45---
+latency;commit
+217;-1
+214;-1
+212;-1
+---46---
+latency;commit
+222;-1
+218;-1
+222;-1
+---47---
+latency;commit
+215;-1
+218;-1
+219;-1
+---48---
+latency;commit
+222;-1
+223;-1
+223;-1
+---49---
+latency;commit
+236;-1
+239;-1
+238;-1
+---50---
+latency;commit
+246;-1
+240;-1
+247;-1
+---51---
+latency;commit
+251;-1
+248;-1
+247;-1
+---52---
+latency;commit
+249;-1
+252;-1
+253;-1
+---53---
+latency;commit
+267;-1
+262;-1
+254;-1
+---54---
+latency;commit
+261;-1
+276;-1
+257;-1
+---55---
+latency;commit
+266;-1
+262;-1
+267;-1
+---56---
+latency;commit
+273;-1
+268;-1
+268;-1
+---57---
+latency;commit
+278;-1
+282;-1
+280;-1
+---58---
+latency;commit
+276;-1
+276;-1
+276;-1
+---59---
+latency;commit
+292;-1
+288;-1
+290;-1
+---60---
+latency;commit
+295;-1
+291;-1
+301;-1
+---61---
+latency;commit
+290;-1
+291;-1
+290;-1
+---62---
+latency;commit
+294;-1
+294;-1
+301;-1
+---63---
+latency;commit
+309;-1
+302;-1
+300;-1
+---64---
+latency;commit
+308;-1
+313;-1
+310;-1
+--- avgs ---
+table;latency;commit
+0;4;0
+1;9;0
+2;12;0
+3;18;0
+4;21;0
+5;27;0
+6;31;0
+7;36;0
+8;42;0
+9;45;0
+10;50;0
+11;56;0
+12;61;0
+13;66;0
+14;69;0
+15;74;0
+16;78;0
+17;87;0
+18;89;0
+19;98;0
+20;99;0
+21;103;0
+22;107;0
+23;115;0
+24;120;0
+25;120;0
+26;126;0
+27;133;0
+28;141;0
+29;145;0
+30;150;0
+31;154;0
+32;154;0
+33;162;0
+34;165;0
+35;175;0
+36;179;0
+37;187;0
+38;201;0
+39;194;0
+40;199;0
+41;205;0
+42;206;0
+43;215;0
+44;213;0
+45;220;0
+46;216;0
+47;222;0
+48;236;0
+49;244;0
+50;247;0
+51;251;0
+52;260;0
+53;264;0
+54;264;0
+55;269;0
+56;279;0
+57;276;0
+58;289;0
+59;295;0
+60;289;0
+61;296;0
+62;303;0
+63;309;0

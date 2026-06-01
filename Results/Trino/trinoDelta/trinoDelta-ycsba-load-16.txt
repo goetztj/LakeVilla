@@ -1,0 +1,34 @@
+[WARN]  Running against a source checkout. In order to get our runtime dependencies we'll have to invoke Maven. Depending on the state of your system, this may take ~30-45 seconds
+[DEBUG]  Running 'mvn -pl site.ycsb:jdbc-binding -am package -DskipTests dependency:build-classpath -DincludeScope=compile -Dmdep.outputFilterFile=true'
+java -cp jdbc/lib/trino-jdbc-481.jar:/LakeVilla/YCSB-LH/jdbc/conf:/LakeVilla/YCSB-LH/jdbc/target/jdbc-binding-0.18.0-SNAPSHOT.jar:/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar:/.m2/repository/org/apache/htrace/htrace-core4/4.1.0-incubating/htrace-core4-4.1.0-incubating.jar:/.m2/repository/net/sourceforge/serp/serp/1.13.1/serp-1.13.1.jar:/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.4/HdrHistogram-2.1.4.jar:/.m2/repository/org/apache/openjpa/openjpa-jdbc/2.1.1/openjpa-jdbc-2.1.1.jar:/.m2/repository/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar:/.m2/repository/org/apache/openjpa/openjpa-kernel/2.1.1/openjpa-kernel-2.1.1.jar:/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar:/LakeVilla/YCSB-LH/core/target/core-0.18.0-SNAPSHOT.jar:/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar:/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar:/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar:/.m2/repository/org/apache/openjpa/openjpa-lib/2.1.1/openjpa-lib-2.1.1.jar:/.m2/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar site.ycsb.Client -db site.ycsb.db.JdbcDBClient -P workloads/workloada -P jdbc/config/trino.properties -load
+Command line: -db site.ycsb.db.JdbcDBClient -P workloads/workloada -P jdbc/config/trino.properties -load
+YCSB Client 0.18.0-SNAPSHOT
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+[OVERALL], RunTime(ms), 667837
+[OVERALL], Throughput(ops/sec), 1.4973713645694982
+[TOTAL_GCS_G1_Young_Generation], Count, 5
+[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), 53
+[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), 0.007936068232218341
+[TOTAL_GCS_G1_Old_Generation], Count, 0
+[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), 0
+[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), 0.0
+[TOTAL_GCs], Count, 5
+[TOTAL_GC_TIME], Time(ms), 53
+[TOTAL_GC_TIME_%], Time(%), 0.007936068232218341
+[CLEANUP], Operations, 1
+[CLEANUP], AverageLatency(us), 1077.0
+[CLEANUP], MinLatency(us), 1077
+[CLEANUP], MaxLatency(us), 1077
+[CLEANUP], 95thPercentileLatency(us), 1077
+[CLEANUP], 99thPercentileLatency(us), 1077
+[INSERT], Operations, 1000
+[INSERT], AverageLatency(us), 667483.264
+[INSERT], MinLatency(us), 351232
+[INSERT], MaxLatency(us), 5525503
+[INSERT], 95thPercentileLatency(us), 1517567
+[INSERT], 99thPercentileLatency(us), 4517887
+[INSERT], Return=OK, 1000

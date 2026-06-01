@@ -1,0 +1,514 @@
+[WARN]  Running against a source checkout. In order to get our runtime dependencies we'll have to invoke Maven. Depending on the state of your system, this may take ~30-45 seconds
+[DEBUG]  Running 'mvn -pl site.ycsb:jdbc-binding -am package -DskipTests dependency:build-classpath -DincludeScope=compile -Dmdep.outputFilterFile=true'
+java -cp jdbc/lib/trino-jdbc-481.jar:/LakeVilla/YCSB-LH/jdbc/conf:/LakeVilla/YCSB-LH/jdbc/target/jdbc-binding-0.18.0-SNAPSHOT.jar:/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar:/.m2/repository/org/apache/htrace/htrace-core4/4.1.0-incubating/htrace-core4-4.1.0-incubating.jar:/.m2/repository/net/sourceforge/serp/serp/1.13.1/serp-1.13.1.jar:/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.4/HdrHistogram-2.1.4.jar:/.m2/repository/org/apache/openjpa/openjpa-jdbc/2.1.1/openjpa-jdbc-2.1.1.jar:/.m2/repository/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar:/.m2/repository/org/apache/openjpa/openjpa-kernel/2.1.1/openjpa-kernel-2.1.1.jar:/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar:/LakeVilla/YCSB-LH/core/target/core-0.18.0-SNAPSHOT.jar:/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar:/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar:/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar:/.m2/repository/org/apache/openjpa/openjpa-lib/2.1.1/openjpa-lib-2.1.1.jar:/.m2/repository/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar site.ycsb.Client -db site.ycsb.db.JdbcDBClient -P workloads/workloada -P jdbc/config/trino.properties -threads 16 -t
+Command line: -db site.ycsb.db.JdbcDBClient -P workloads/workloada -P jdbc/config/trino.properties -threads 16 -t
+YCSB Client 0.18.0-SNAPSHOT
+Loading workload...
+Starting test.
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Adding shard node URL: jdbc:trino://localhost:8080/delta/default
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Using shards: 1, batchSize:-1, fetchSize: -1
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203825_05468_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203825_05469_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203825_05458_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05481_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05489_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05484_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05488_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05506_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05502_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05496_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05500_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05493_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05499_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05513_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05511_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05518_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05521_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05519_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203826_05509_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05536_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05530_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05531_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05523_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05559_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05565_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05573_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05569_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203827_05557_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05576_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05578_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05596_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05598_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05591_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05601_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05603_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05609_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05600_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05611_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05607_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05588_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203828_05594_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05622_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05626_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05629_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05633_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05624_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05635_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05637_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05640_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05614_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05654_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05660_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05658_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05656_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05652_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203829_05648_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05664_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05673_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05675_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05684_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05692_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05690_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05694_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203830_05678_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05707_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05701_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05705_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05709_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05712_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05714_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05718_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05721_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05698_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05738_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05737_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05731_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05736_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05741_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05742_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05740_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05743_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203831_05728_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05745_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05732_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05749_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05760_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05764_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05761_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05762_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05766_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05767_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05768_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05773_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05759_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05775_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05771_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05777_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203832_05758_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05784_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05787_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05785_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05799_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05792_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05794_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203833_05790_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05812_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05811_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05808_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05809_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05814_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05816_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05801_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05822_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05821_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05804_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05823_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05827_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05832_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05834_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05829_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05837_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203834_05825_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05850_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05841_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05847_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05846_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05856_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05843_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05852_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203835_05844_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05861_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05875_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05874_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05870_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05877_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05882_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05866_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05884_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05885_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05901_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05907_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05902_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05905_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05910_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203836_05893_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05913_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05898_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05916_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05917_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05924_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203837_05930_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05935_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05934_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05940_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05945_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05944_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05949_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05966_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05963_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05967_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05969_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05968_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05961_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203838_05953_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05976_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05974_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05985_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05981_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05983_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05990_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05988_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05991_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05992_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05994_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_06005_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_05999_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06008_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06014_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06010_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06011_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06013_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06016_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06018_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203839_06001_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06031_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06027_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06029_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06023_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06035_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06034_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06032_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06037_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06038_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06040_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06043_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203840_06045_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06051_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06047_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06048_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06055_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06058_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06059_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06062_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06063_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06064_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06066_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06049_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06073_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06078_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06075_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06086_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06082_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06083_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06084_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06088_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06089_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06074_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203841_06070_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06107_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06103_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06104_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06090_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06101_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203842_06091_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06108_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06114_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06115_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06122_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06121_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06124_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06126_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06129_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06125_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06130_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06131_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203843_06111_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06141_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06145_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06143_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06146_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06140_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06137_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06151_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06150_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06157_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06166_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06164_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06177_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06174_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06175_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06172_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06178_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06179_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203844_06154_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06181_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06187_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06188_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06194_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06180_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06190_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203845_06182_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06202_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06206_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06215_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06217_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06221_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06218_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06219_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06220_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06200_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06208_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06229_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06232_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06237_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06234_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06239_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203846_06225_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06238_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06233_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06236_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06246_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06255_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203847_06258_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06266_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06264_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06268_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06274_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06280_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06275_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06278_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06282_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06284_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06287_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06288_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06289_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06269_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06296_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06297_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06302_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06305_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06306_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06308_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06307_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203848_06292_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06311_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06319_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06316_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06322_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06323_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06325_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06327_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06328_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06329_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06331_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06330_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203849_06314_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06338_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06337_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06340_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06345_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06341_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06335_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06348_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06350_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203850_06352_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06356_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06361_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06359_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06362_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06365_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06366_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06370_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06377_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06382_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203851_06378_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06386_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06389_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06395_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06394_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06398_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06404_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06397_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06406_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06410_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06412_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06414_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06417_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06416_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203852_06402_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06425_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06429_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06431_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06435_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06433_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06420_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06437_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06445_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06449_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06444_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06448_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06452_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06457_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06456_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06459_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06461_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203853_06451_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06466_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06470_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06471_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06475_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06473_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06477_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06480_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06462_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06465_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06487_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203854_06481_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06489_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06490_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06496_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06495_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06485_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06510_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06508_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06509_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06511_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06512_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06515_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06513_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06516_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06517_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203855_06500_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06523_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06524_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06525_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06526_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06528_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06529_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06530_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06531_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06535_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06533_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06538_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06543_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06541_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203856_06537_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06544_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06545_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06547_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06546_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06550_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06557_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06563_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06564_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06568_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203857_06553_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06571_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06576_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06581_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06570_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203858_06578_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06589_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06587_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06594_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06592_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06590_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203859_06591_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06598_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06604_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06596_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06608_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06607_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203901_06610_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203900_06606_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203901_06613_aqiwf): Failed to write Delta Lake transaction log entry
+Error in processing update to table: usertablejava.sql.SQLException: Query failed (#20260530_203901_06612_aqiwf): Failed to write Delta Lake transaction log entry
+[OVERALL], RunTime(ms), 37873
+[OVERALL], Throughput(ops/sec), 26.404034536477173
+[TOTAL_GCS_G1_Young_Generation], Count, 4
+[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), 49
+[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), 0.12937976922873815
+[TOTAL_GCS_G1_Old_Generation], Count, 0
+[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), 0
+[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), 0.0
+[TOTAL_GCs], Count, 4
+[TOTAL_GC_TIME], Time(ms), 49
+[TOTAL_GC_TIME_%], Time(%), 0.12937976922873815
+[READ], Operations, 512
+[READ], AverageLatency(us), 354405.625
+[READ], MinLatency(us), 242176
+[READ], MaxLatency(us), 953343
+[READ], 95thPercentileLatency(us), 478975
+[READ], 99thPercentileLatency(us), 922623
+[READ], Return=OK, 512
+[UPDATE-FAILED], Operations, 436
+[UPDATE-FAILED], AverageLatency(us), 754097.3211009174
+[UPDATE-FAILED], MinLatency(us), 574464
+[UPDATE-FAILED], MaxLatency(us), 1511423
+[UPDATE-FAILED], 95thPercentileLatency(us), 1270783
+[UPDATE-FAILED], 99thPercentileLatency(us), 1388543
+[CLEANUP], Operations, 16
+[CLEANUP], AverageLatency(us), 145.5625
+[CLEANUP], MinLatency(us), 51
+[CLEANUP], MaxLatency(us), 971
+[CLEANUP], 95thPercentileLatency(us), 154
+[CLEANUP], 99thPercentileLatency(us), 971
+[UPDATE], Operations, 52
+[UPDATE], AverageLatency(us), 917068.3076923077
+[UPDATE], MinLatency(us), 509184
+[UPDATE], MaxLatency(us), 1950719
+[UPDATE], 95thPercentileLatency(us), 1926143
+[UPDATE], 99thPercentileLatency(us), 1946623
+[UPDATE], Return=OK, 52
+[UPDATE], Return=ERROR, 436

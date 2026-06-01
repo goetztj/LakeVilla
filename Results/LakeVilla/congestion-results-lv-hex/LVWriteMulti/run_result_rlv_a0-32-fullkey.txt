@@ -1,0 +1,937 @@
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+parsing config file ./lvconfig39.conf
+parsing done
+# Loading records:	0
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+----- read -----
+4.22941
+3.21993
+2.48348
+----------------
+read (avg): 3.31094
+----------------
+----- init -----
+10.0716
+----------------
+init (avg): 10.0716
+----------------
+----- commit -----
+12.6607
+----------------
+commit (avg): 12.6607
+----------------
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+s user1
+<<<< begin once 
+e found 0
+<<<< begin once 
+<<<< begin once 
+s user25
+----- read -----
+2.78233
+2.52303
+2.22633
+----------------
+read (avg): 2.51056
+----------------
+----- init -----
+15.9581
+----------------
+init (avg): 15.9581
+----------------
+----- commit -----
+7.4749
+----------------
+commit (avg): 7.4749
+----------------
+e found 1
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<< begin once 
+<<<< begin once 
+----- read -----
+2.28781
+3.13846
+2.79902
+----------------
+read (avg): 2.74176
+----------------
+----- init -----
+17.916
+----------------
+init (avg): 17.916
+----------------
+----- commit -----
+8.28245
+----------------
+commit (avg): 8.28245
+----------------
+<<<< begin once 
+<<<< begin once 
+<<<< begin once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+----- read -----
+2.66433
+2.20759
+2.08257
+----------------
+read (avg): 2.31817
+----------------
+----- init -----
+121.34
+----------------
+init (avg): 121.34
+----------------
+----- commit -----
+7.25852
+----------------
+commit (avg): 7.25852
+----------------
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+<<<<< redos: 0 >>>>>
+<<<< commit once 
+s user54
+e found 2
+----- update -----
+9.52982
+21.894
+43.2249
+----------------
+update (avg): 24.8829
+----------------
+----- init -----
+10.0383
+----------------
+init (avg): 10.0383
+----------------
+----- commit -----
+1288.01
+----------------
+commit (avg): 1288.01
+----------------
+s user40
+e found 0
+s user34
+s user14
+e found 1
+----- read -----
+2.28754
+----------------
+read (avg): 2.28754
+----------------
+----- update -----
+15.1119
+32.2914
+----------------
+update (avg): 23.7016
+----------------
+----- init -----
+12.5446
+----------------
+init (avg): 12.5446
+----------------
+----- commit -----
+2304.35
+----------------
+commit (avg): 2304.35
+----------------
+s user2
+s user52
+e found 0
+s user27
+----- read -----
+2.89291
+2.40065
+----------------
+read (avg): 2.64678
+----------------
+----- update -----
+7.27598
+----------------
+update (avg): 7.27598
+----------------
+----- init -----
+16.0789
+----------------
+init (avg): 16.0789
+----------------
+----- commit -----
+2383.92
+----------------
+commit (avg): 2383.92
+----------------
+s user56
+e found 0
+s user16
+s user20
+----- read -----
+2.1746
+2.45298
+----------------
+read (avg): 2.31379
+----------------
+----- update -----
+41.5691
+----------------
+update (avg): 41.5691
+----------------
+----- init -----
+11.2324
+----------------
+init (avg): 11.2324
+----------------
+----- commit -----
+2392.24
+----------------
+commit (avg): 2392.24
+----------------
+s user52
+e found 0
+s user86
+e found 1
+s user50
+e found 2
+s user42
+s user75
+s user25
+e found 0
+----- update -----
+6.90778
+7.11965
+8.07811
+----------------
+update (avg): 7.36852
+----------------
+----- init -----
+50.5801
+----------------
+init (avg): 50.5801
+----------------
+----- commit -----
+4308.73
+----------------
+commit (avg): 4308.73
+----------------
+----- read -----
+2.36939
+2.43547
+----------------
+read (avg): 2.40243
+----------------
+----- update -----
+34.1278
+----------------
+update (avg): 34.1278
+----------------
+----- init -----
+12.5054
+----------------
+init (avg): 12.5054
+----------------
+----- commit -----
+4290.97
+----------------
+commit (avg): 4290.97
+----------------
+s user24
+s user32
+e found 0
+s user70
+----- read -----
+3.09233
+2.73857
+----------------
+read (avg): 2.91545
+----------------
+----- update -----
+40.2878
+----------------
+update (avg): 40.2878
+----------------
+----- init -----
+14.0447
+----------------
+init (avg): 14.0447
+----------------
+----- commit -----
+4330.88
+----------------
+commit (avg): 4330.88
+----------------
+s user91
+e found 0
+s user95
+s user53
+e found 1
+----- read -----
+3.11162
+----------------
+read (avg): 3.11162
+----------------
+----- update -----
+30.9692
+34.8377
+----------------
+update (avg): 32.9034
+----------------
+----- init -----
+67.8674
+----------------
+init (avg): 67.8674
+----------------
+----- commit -----
+5235.69
+----------------
+commit (avg): 5235.69
+----------------
+s user24
+e found 0
+s user58
+s user32
+----- read -----
+2.91469
+2.72145
+----------------
+read (avg): 2.81807
+----------------
+----- update -----
+24.6962
+----------------
+update (avg): 24.6962
+----------------
+----- init -----
+16.3298
+----------------
+init (avg): 16.3298
+----------------
+----- commit -----
+5301.69
+----------------
+commit (avg): 5301.69
+----------------
+s user8
+e found 0
+s user9
+e found 1
+s user76
+----- read -----
+2.15526
+----------------
+read (avg): 2.15526
+----------------
+----- update -----
+26.6344
+34.76
+----------------
+update (avg): 30.6972
+----------------
+----- init -----
+33.6807
+----------------
+init (avg): 33.6807
+----------------
+----- commit -----
+6221.34
+----------------
+commit (avg): 6221.34
+----------------
+s user46
+s user25
+e found 0
+s user48
+----- read -----
+2.63047
+2.18292
+----------------
+read (avg): 2.4067
+----------------
+----- update -----
+41.0873
+----------------
+update (avg): 41.0873
+----------------
+----- init -----
+15.5978
+----------------
+init (avg): 15.5978
+----------------
+----- commit -----
+6252.21
+----------------
+commit (avg): 6252.21
+----------------
+s user4
+s user51
+e found 0
+s user91
+e found 1
+----- read -----
+2.89845
+----------------
+read (avg): 2.89845
+----------------
+----- update -----
+7.765
+56.9666
+----------------
+update (avg): 32.3658
+----------------
+----- init -----
+18.0044
+----------------
+init (avg): 18.0044
+----------------
+----- commit -----
+7198.69
+----------------
+commit (avg): 7198.69
+----------------
+s user3
+e found 0
+s user63
+e found 1
+exceeded
+s user86
+----- read -----
+2.19294
+----------------
+read (avg): 2.19294
+----------------
+----- update -----
+56.024
+6.63398
+----------------
+update (avg): 31.329
+----------------
+----- init -----
+22.9202
+----------------
+init (avg): 22.9202
+----------------
+----- commit -----
+8192.19
+----------------
+commit (avg): 8192.19
+----------------
+s user15
+e found 0
+s user8
+s user22
+e found 1
+----- read -----
+2.7146
+----------------
+read (avg): 2.7146
+----------------
+----- update -----
+51.7734
+16.7736
+----------------
+update (avg): 34.2735
+----------------
+----- init -----
+22.8006
+----------------
+init (avg): 22.8006
+----------------
+----- commit -----
+9197.23
+----------------
+commit (avg): 9197.23
+----------------
+s user99
+s user62
+e found 0
+s user36
+e found 1
+----- read -----
+2.14398
+----------------
+read (avg): 2.14398
+----------------
+----- update -----
+8.68944
+55.9632
+----------------
+update (avg): 32.3263
+----------------
+----- init -----
+51.9106
+----------------
+init (avg): 51.9106
+----------------
+----- commit -----
+10197.5
+----------------
+commit (avg): 10197.5
+----------------
+s user30
+e found 0
+s user28
+s user63
+----- read -----
+2.1861
+2.32304
+----------------
+read (avg): 2.25457
+----------------
+----- update -----
+7.01823
+----------------
+update (avg): 7.01823
+----------------
+----- init -----
+74.9133
+----------------
+init (avg): 74.9133
+----------------
+----- commit -----
+10280.1
+----------------
+commit (avg): 10280.1
+----------------
+s user30
+s user93
+e found 0
+s user37
+----- read -----
+2.31231
+2.91967
+----------------
+read (avg): 2.61599
+----------------
+----- update -----
+46.5771
+----------------
+update (avg): 46.5771
+----------------
+----- init -----
+21.3237
+----------------
+init (avg): 21.3237
+----------------
+----- commit -----
+10264.7
+----------------
+commit (avg): 10264.7
+----------------
+s user72
+e found 0
+s user7
+e found 1
+s user28
+----- read -----
+2.55454
+----------------
+read (avg): 2.55454
+----------------
+----- update -----
+6.70401
+26.3363
+----------------
+update (avg): 16.5201
+----------------
+----- init -----
+82.7323
+----------------
+init (avg): 82.7323
+----------------
+----- commit -----
+11196.3
+----------------
+commit (avg): 11196.3
+----------------
+s user72
+e found 0
+s user8
+s user42
+----- read -----
+2.51178
+2.32562
+----------------
+read (avg): 2.4187
+----------------
+----- update -----
+6.76584
+----------------
+update (avg): 6.76584
+----------------
+----- init -----
+64.7216
+----------------
+init (avg): 64.7216
+----------------
+----- commit -----
+11239.8
+----------------
+commit (avg): 11239.8
+----------------
+s user49
+s user76
+s user60
+e found 0
+----- read -----
+2.47885
+2.20595
+----------------
+read (avg): 2.3424
+----------------
+----- update -----
+26.133
+----------------
+update (avg): 26.133
+----------------
+----- init -----
+62.2324
+----------------
+init (avg): 62.2324
+----------------
+----- commit -----
+11239
+----------------
+commit (avg): 11239
+----------------
+s user27
+s user22
+s user99
+e found 0
+----- read -----
+2.56248
+2.19856
+----------------
+read (avg): 2.38052
+----------------
+----- update -----
+8.03421
+----------------
+update (avg): 8.03421
+----------------
+----- init -----
+49.5924
+----------------
+init (avg): 49.5924
+----------------
+----- commit -----
+11277.6
+----------------
+commit (avg): 11277.6
+----------------
+s user43
+s user21
+e found 0
+s user2
+----- read -----
+2.27478
+2.12376
+----------------
+read (avg): 2.19927
+----------------
+----- update -----
+36.7382
+----------------
+update (avg): 36.7382
+----------------
+----- init -----
+55.6295
+----------------
+init (avg): 55.6295
+----------------
+----- commit -----
+11274.9
+----------------
+commit (avg): 11274.9
+----------------
+s user84
+e found 0
+s user49
+e found 1
+s user74
+----- read -----
+2.64384
+----------------
+read (avg): 2.64384
+----------------
+----- update -----
+17.4321
+6.60495
+----------------
+update (avg): 12.0185
+----------------
+----- init -----
+87.0355
+----------------
+init (avg): 87.0355
+----------------
+----- commit -----
+12160.6
+----------------
+commit (avg): 12160.6
+----------------
+s user94
+e found 0
+s user11
+e found 1
+s user46
+s user86
+----- read -----
+2.23304
+----------------
+read (avg): 2.23304
+----------------
+----- update -----
+22.437
+11.2748
+----------------
+update (avg): 16.8559
+----------------
+----- init -----
+89.8111
+----------------
+init (avg): 89.8111
+----------------
+----- commit -----
+13138.6
+----------------
+commit (avg): 13138.6
+----------------
+s user2
+e found 0
+s user52
+----- read -----
+2.30497
+2.21344
+----------------
+read (avg): 2.25921
+----------------
+----- update -----
+7.06741
+----------------
+update (avg): 7.06741
+----------------
+----- init -----
+88.1827
+----------------
+init (avg): 88.1827
+----------------
+----- commit -----
+13175.8
+----------------
+commit (avg): 13175.8
+----------------
+s user36
+e found 0
+s user83
+e found 1
+s user49
+e found 2
+s user42
+e found 0
+----- update -----
+30.3182
+56.3515
+35.9681
+----------------
+update (avg): 40.8793
+----------------
+----- init -----
+101.05
+----------------
+init (avg): 101.05
+----------------
+----- commit -----
+15050.3
+----------------
+commit (avg): 15050.3
+----------------
+s user91
+s user69
+----- read -----
+7.30885
+2.19807
+----------------
+read (avg): 4.75346
+----------------
+----- update -----
+6.22956
+----------------
+update (avg): 6.22956
+----------------
+----- init -----
+111.925
+----------------
+init (avg): 111.925
+----------------
+----- commit -----
+15168.7
+----------------
+commit (avg): 15168.7
+----------------
+s user74
+s user53
+e found 0
+s user87
+e found 1
+----- read -----
+2.16848
+----------------
+read (avg): 2.16848
+----------------
+----- update -----
+14.6442
+6.82353
+----------------
+update (avg): 10.7339
+----------------
+----- init -----
+115.659
+----------------
+init (avg): 115.659
+----------------
+----- commit -----
+16121.5
+----------------
+commit (avg): 16121.5
+----------------
+# Transaction throughput (KTPS)
+LakeVillaWriteMulti	/LakeVilla/src/YCSB-C/workloads/workloada-interval-full.spec	32	0.00604427

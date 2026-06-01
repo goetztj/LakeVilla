@@ -1,0 +1,2108 @@
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath /LakeVilla/YCSB-LH/conf:/LakeVilla/YCSB-LH/core/target/core-0.18.0-SNAPSHOT.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/lakevillaTrinoAPI-binding-0.18.0-SNAPSHOT.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/HdrHistogram-2.1.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/HikariCP-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/RoaringBitmap-0.9.45.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ST4-4.0.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/activation-1.1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aircompressor-0.27.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-core-4.5.10.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-kms-2.11.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-ram-3.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-sdk-oss-3.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/annotations-17.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/annotations-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/antlr-runtime-3.5.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/antlr4-runtime-4.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aopalliance-repackaged-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/apache-client-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arns-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-format-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-memory-core-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-memory-netty-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-vector-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/audience-annotations-0.5.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/auth-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-ipc-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-mapred-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-java-sdk-bundle-1.12.262.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-query-protocol-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-xml-protocol-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-data-lake-store-sdk-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-keyvault-core-1.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-storage-7.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/bonecp-0.8.0.RELEASE.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/bundle-2.20.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/caffeine-2.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checker-qual-3.31.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checksums-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checksums-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/chill-java-0.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/chill_2.12-0.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-cli-1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-codec-1.16.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-collections-3.2.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-collections4-4.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-compiler-3.1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-compress-1.23.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-crypto-1.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-dbcp-1.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-io-2.16.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-lang-2.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-lang3-3.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-logging-1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-math3-3.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-pool-1.5.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-text-1.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/compress-lzf-1.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/crt-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-client-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-framework-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-recipes-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-api-jdo-4.2.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-core-4.1.17.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-rdbms-4.1.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datasketches-java-3.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datasketches-memory-2.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-contribs_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-hive_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-iceberg_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-kernel-api-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-spark_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-standalone_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-storage-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-storage-s3-dynamodb-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/derby-10.14.2.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/dropwizard-metrics-hadoop-metrics2-reporter-0.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/endpoints-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/error_prone_annotations-2.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/eventstream-1.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/flatbuffers-java-1.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/gcs-connector-hadoop3-2.2.14-shaded.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/gson-2.2.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/guava-16.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-aliyun-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-annotations-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-aws-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-azure-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-azure-datalake-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-client-api-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-client-runtime-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-cloud-storage-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-openstack-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-shaded-guava-1.1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-exec-2.3.9-core.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-llap-client-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-llap-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-metastore-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-serde-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-0.23-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-scheduler-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-storage-api-2.8.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-api-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-locator-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-utils-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/htrace-core4-4.1.0-incubating.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-aws-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-client-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/httpclient-4.5.14.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/httpcore-4.4.16.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/iceberg-spark-runtime-3.5_2.12-1.4.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/identity-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ini4j-0.5.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ivy-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-annotations-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-core-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-core-asl-1.9.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-databind-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-dataformat-cbor-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-datatype-jsr310-2.15.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-mapper-asl-1.9.13.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-module-scala_2.12-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.activation-api-2.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.annotation-api-1.3.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.inject-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.servlet-api-4.0.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.validation-api-2.0.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.ws.rs-api-2.1.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.xml.bind-api-4.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/janino-3.1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javassist-3.29.2-GA.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javax.activation-api-1.2.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javax.jdo-3.2.0-m3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javolution-5.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jaxb-api-2.3.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jcl-over-slf4j-2.0.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jdo-api-3.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jdom2-2.0.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-client-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-common-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-container-servlet-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-container-servlet-core-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-hk2-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-server-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jettison-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jetty-util-9.4.54.v20240208.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jetty-util-ajax-9.4.54.v20240208.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jline-2.12.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/joda-time-2.12.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jodd-core-3.5.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json-1.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json-utils-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-ast_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-core_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-jackson_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-scalap_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jsr305-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jta-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jul-to-slf4j-2.0.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/kryo-shaded-4.0.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/leveldbjni-all-1.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/libfb303-0.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/libthrift-0.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-1.2-api-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-api-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-core-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-slf4j2-impl-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/lz4-java-1.8.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-core-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-graphite-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-jmx-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-json-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-jvm-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/minlog-1.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-all-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-buffer-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-http-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-http2-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-socks-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-common-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-handler-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-handler-proxy-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-nio-client-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-resolver-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-classes-epoll-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-classes-kqueue-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-epoll-4.1.96.Final-linux-aarch_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-epoll-4.1.96.Final-linux-x86_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-kqueue-4.1.96.Final-osx-aarch_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-kqueue-4.1.96.Final-osx-x86_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-unix-common-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/objenesis-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opencsv-2.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-api-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-noop-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-util-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-core-1.9.4-shaded-protobuf.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-mapreduce-1.9.4-shaded-protobuf.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-shims-1.9.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/oro-2.0.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/osgi-resource-locator-1.0.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/paranamer-2.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-column-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-common-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-encoding-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-format-structures-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-hadoop-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-jackson-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/pickle-1.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/postgresql-42.7.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/profiles-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/protobuf-java-2.5.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/protocol-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/py4j-0.10.9.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/reactive-streams-1.0.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/regions-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/rocksdbjni-8.3.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/s3-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-collection-compat_2.12-2.7.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-library-2.12.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-parser-combinators_2.12-2.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-reflect-2.12.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-xml_2.12-2.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/sdk-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/shapeless_2.12-2.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/shims-0.9.45.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-api-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-nop-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-simple-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/snappy-java-1.1.10.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-catalyst_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-common-utils_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-core_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-hadoop-cloud_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-hive_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-kvstore_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-launcher_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-network-common_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-network-shuffle_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sketch_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sql-api_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sql_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-tags_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-unsafe_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/stax-api-1.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/stream-2.9.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/third-party-jackson-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/threeten-extra-1.7.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/tink-1.9.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/transaction-api-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/univocity-parsers-2.9.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/url-connection-client-2.20.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/utils-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/wildfly-openssl-1.0.7.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/xbean-asm9-shaded-4.23.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/xz-1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zookeeper-3.6.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zookeeper-jute-3.6.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zstd-jni-1.5.5-4.jar site.ycsb.Client -t -db site.ycsb.db.LakeVillaTrinoAPIClient -P workloads/workloada -threads 64
+Command line: -t -db site.ycsb.db.LakeVillaTrinoAPIClient -P workloads/workloada -threads 64
+YCSB Client 0.18.0-SNAPSHOT
+Loading workload...
+Starting test.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-nop-1.7.21.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-simple-1.7.21.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Loaded native library: /LakeVilla/build2/liblakevilla.so
+parsing config file parsing config file parsing config file /LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.confparsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing doneparsing doneparsing config file parsing done/LakeVilla/lvconfig.conf
+parsing config file 
+parsing doneparsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file 
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+/LakeVilla/lvconfig.confparsing doneparsing doneparsing done
+parsing done
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.confparsing done
+parsing config file parsing done
+/LakeVilla/lvconfig.confparsing doneparsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing done
+/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.confparsing doneparsing config file 
+parsing config file parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.confparsing done
+parsing doneparsing config file parsing done/LakeVilla/lvconfig.conf
+parsing config file parsing config file /LakeVilla/lvconfig.confparsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file 
+/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.confparsing config file parsing doneparsing doneparsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing config file /LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing config file 
+/LakeVilla/lvconfig.confparsing config file parsing done/LakeVilla/lvconfig.conf
+parsing doneparsing config file /LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing config file parsing done/LakeVilla/lvconfig.conf
+parsing doneparsing config file parsing doneparsing doneparsing config file parsing config file parsing config file 
+/LakeVilla/lvconfig.conf
+parsing config file parsing done
+parsing doneparsing config file /LakeVilla/lvconfig.confparsing doneparsing done
+parsing config file 
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing done/LakeVilla/lvconfig.conf
+parsing config file 
+parsing config file parsing done
+parsing config file 
+/LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf/LakeVilla/lvconfig.confparsing done
+parsing done/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file parsing config file parsing done
+/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file 
+/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing done
+parsing doneparsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+/LakeVilla/lvconfig.confparsing done
+parsing done
+parsing done
+parsing done
+parsing done
+/LakeVilla/lvconfig.conf
+parsing done
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+Beginning persistent single-transaction context...
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.arrow.memory.util.MemoryUtil (file:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-memory-core-12.0.1.jar) to field java.nio.Buffer.address
+WARNING: Please consider reporting this to the maintainers of org.apache.arrow.memory.util.MemoryUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+----- read -----
+10337.596457
+8203.519763
+8600.895728
+10141.745358
+----------------
+read (avg): 9320.9393265
+----------------
+----- update -----
+490.36329
+994.683393
+87.26595
+64.318367
+----------------
+update (avg): 409.15775
+----------------
+----- init -----
+288.194076
+----------------
+init (avg): 288.194076
+----------------
+----- commit -----
+320.069488
+----------------
+commit (avg): 320.069488
+----------------
+----- read -----
+10252.30697
+9822.526765
+----------------
+read (avg): 10037.4168675
+----------------
+----- update -----
+577.030553
+1010.225607
+58.298604
+933.330165
+1014.3387
+----------------
+update (avg): 718.6447258000001
+----------------
+----- init -----
+348.293684
+----------------
+init (avg): 348.293684
+----------------
+----- commit -----
+15716.48272
+----------------
+commit (avg): 15716.48272
+----------------
+exceeded
+exceeded
+----- read -----
+10218.015209
+8165.104953
+8203.040635
+----------------
+read (avg): 8862.053598999999
+----------------
+----- update -----
+68.71712
+58.286011
+66.673293
+63.31376
+----------------
+update (avg): 64.247546
+----------------
+----- init -----
+374.374908
+----------------
+init (avg): 374.374908
+----------------
+----- commit -----
+12675.838515
+----------------
+commit (avg): 12675.838515
+----------------
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+----- read -----
+9898.184005
+8304.320769
+8309.842248
+----------------
+read (avg): 8837.449007333335
+----------------
+----- update -----
+199.239659
+73.32138
+790.476379
+990.277685
+63.009398
+----------------
+update (avg): 423.2649002
+----------------
+----- init -----
+389.943926
+----------------
+init (avg): 389.943926
+----------------
+----- commit -----
+11176.906397
+----------------
+commit (avg): 11176.906397
+----------------
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+----- read -----
+9967.241546
+8115.136468
+8140.12066
+8113.252995
+8979.813546
+8764.637139
+8041.543488
+----------------
+read (avg): 8588.820834571428
+----------------
+----- update -----
+137.541407
+----------------
+update (avg): 137.541407
+----------------
+----- init -----
+369.461924
+----------------
+init (avg): 369.461924
+----------------
+----- commit -----
+438.561448
+----------------
+commit (avg): 438.561448
+----------------
+----- read -----
+10041.398219
+8055.584632
+8311.022389
+8120.593806
+8235.321119
+8134.912015
+9208.924471
+----------------
+read (avg): 8586.822378714285
+----------------
+----- update -----
+63.971069
+----------------
+update (avg): 63.971069
+----------------
+----- init -----
+409.469611
+----------------
+init (avg): 409.469611
+----------------
+----- commit -----
+707.319579
+----------------
+commit (avg): 707.319579
+----------------
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+Cleaning up LakeVilla Client...
+Committing persistent transaction block...
+----- read -----
+9948.939976
+8271.378288
+8188.313397
+8221.797581
+8193.831489
+8270.577542
+8175.912041
+9339.164461
+----------------
+read (avg): 8576.239346875002
+----------------
+----- init -----
+382.522722
+----------------
+init (avg): 382.522722
+----------------
+----- commit -----
+501.333948
+----------------
+commit (avg): 501.333948
+----------------
+----- read -----
+9668.802265
+8149.658619
+8255.027853
+8206.504696
+8171.666943
+8164.502638
+----------------
+read (avg): 8436.027168999999
+----------------
+----- update -----
+70.708385
+64.054498
+----------------
+update (avg): 67.3814415
+----------------
+----- init -----
+804.521104
+----------------
+init (avg): 804.521104
+----------------
+----- commit -----
+18807.302272
+----------------
+commit (avg): 18807.302272
+----------------
+exceeded
+----- read -----
+9559.039138
+9511.567126
+9135.669657
+9311.691783
+8929.729977
+9154.493301
+----------------
+read (avg): 9267.031830333335
+----------------
+----- update -----
+92.334252
+64.68334
+----------------
+update (avg): 78.508796
+----------------
+----- init -----
+887.092374
+----------------
+init (avg): 887.092374
+----------------
+----- commit -----
+14068.279989
+----------------
+commit (avg): 14068.279989
+----------------
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+exceeded
+----- read -----
+8584.391722
+8347.889006
+8253.476732
+8293.292921
+8247.618175
+----------------
+read (avg): 8345.333711199997
+----------------
+----- update -----
+770.963111
+78.268257
+59.959672
+----------------
+update (avg): 303.06368
+----------------
+----- init -----
+1220.73836
+----------------
+init (avg): 1220.73836
+----------------
+----- commit -----
+27680.980324
+----------------
+commit (avg): 27680.980324
+----------------
+exceeded
+----- read -----
+9038.483979
+8097.424214
+8175.939519
+8145.824711
+8142.095831
+8186.005488
+----------------
+read (avg): 8297.628956999999
+----------------
+----- update -----
+62.97691
+82.028726
+----------------
+update (avg): 72.502818
+----------------
+----- init -----
+1472.280086
+----------------
+init (avg): 1472.280086
+----------------
+----- commit -----
+20801.087997
+----------------
+commit (avg): 20801.087997
+----------------
+----- read -----
+8958.132707
+8248.1688
+8212.213164
+8299.329158
+8214.960699
+8198.724421
+----------------
+read (avg): 8355.254824833335
+----------------
+----- update -----
+70.046739
+348.877121
+----------------
+update (avg): 209.46193
+----------------
+----- init -----
+1535.555661
+----------------
+init (avg): 1535.555661
+----------------
+----- commit -----
+20834.853584
+----------------
+commit (avg): 20834.853584
+----------------
+----- read -----
+8221.332539
+8230.270049
+8226.14948
+8149.630911
+8266.291156
+8181.461365
+8178.30746
+8166.400064
+----------------
+read (avg): 8202.480378
+----------------
+----- init -----
+2261.773837
+----------------
+init (avg): 2261.773837
+----------------
+----- commit -----
+6381.667464
+----------------
+commit (avg): 6381.667464
+----------------
+----- read -----
+8819.679644
+8016.370138
+8729.66529
+8157.745126
+8448.935214
+----------------
+read (avg): 8434.4790824
+----------------
+----- update -----
+728.641422
+105.643358
+59.377393
+----------------
+update (avg): 297.88739100000004
+----------------
+----- init -----
+3336.10156
+----------------
+init (avg): 3336.10156
+----------------
+----- commit -----
+30086.891204
+----------------
+commit (avg): 30086.891204
+----------------
+----- read -----
+8228.242805
+8338.22231
+8412.457588
+8237.638986
+8369.821733
+----------------
+read (avg): 8317.2766844
+----------------
+----- update -----
+234.266071
+663.125293
+368.322052
+----------------
+update (avg): 421.904472
+----------------
+----- init -----
+3496.393432
+----------------
+init (avg): 3496.393432
+----------------
+----- commit -----
+31561.679318
+----------------
+commit (avg): 31561.679318
+----------------
+----- read -----
+9215.56977
+9097.345188
+9312.624318
+9476.685827
+9039.020904
+----------------
+read (avg): 9228.249201400002
+----------------
+----- update -----
+78.39361
+389.297287
+65.698249
+----------------
+update (avg): 177.796382
+----------------
+----- init -----
+3918.383452
+----------------
+init (avg): 3918.383452
+----------------
+----- commit -----
+28998.154545
+----------------
+commit (avg): 28998.154545
+----------------
+----- read -----
+8207.059541
+8311.704933
+8344.396274
+8253.055265
+8925.899896
+8267.274599
+9617.449544
+----------------
+read (avg): 8560.977150285717
+----------------
+----- update -----
+77.938753
+----------------
+update (avg): 77.938753
+----------------
+----- init -----
+3910.798359
+----------------
+init (avg): 3910.798359
+----------------
+----- commit -----
+16957.970583
+----------------
+commit (avg): 16957.970583
+----------------
+----- read -----
+8573.29321
+8350.129081
+8279.620632
+----------------
+read (avg): 8401.014307666666
+----------------
+----- update -----
+151.1975
+66.744281
+59.18903
+56.9805
+80.763033
+----------------
+update (avg): 82.9748688
+----------------
+----- init -----
+1603.848869
+----------------
+init (avg): 1603.848869
+----------------
+----- commit -----
+56346.421827
+----------------
+commit (avg): 56346.421827
+----------------
+----- read -----
+8587.122557
+8258.487931
+8322.625542
+----------------
+read (avg): 8389.41201
+----------------
+----- update -----
+569.403199
+63.687262
+65.62
+699.407398
+----------------
+update (avg): 349.52946475
+----------------
+----- init -----
+1256.531338
+----------------
+init (avg): 1256.531338
+----------------
+----- commit -----
+57573.638836
+----------------
+commit (avg): 57573.638836
+----------------
+----- read -----
+9248.6499
+8352.167558
+8257.440344
+----------------
+read (avg): 8619.419267333333
+----------------
+----- update -----
+62.647438
+336.674201
+641.505783
+59.068628
+55.481915
+----------------
+update (avg): 231.07559299999997
+----------------
+----- init -----
+1105.8132
+----------------
+init (avg): 1105.8132
+----------------
+----- commit -----
+59079.63194
+----------------
+commit (avg): 59079.63194
+----------------
+----- read -----
+8225.742423
+8254.9275
+8277.944339
+----------------
+read (avg): 8252.871420666668
+----------------
+----- update -----
+926.114679
+59.148058
+957.498036
+59.038794
+663.872153
+----------------
+update (avg): 533.134344
+----------------
+----- init -----
+3718.949389
+----------------
+init (avg): 3718.949389
+----------------
+----- commit -----
+58335.856739
+----------------
+commit (avg): 58335.856739
+----------------
+----- read -----
+8258.665008
+8219.695269
+8213.541218
+----------------
+read (avg): 8230.633831666666
+----------------
+----- update -----
+530.000459
+1014.353916
+738.635055
+63.668606
+----------------
+update (avg): 586.664509
+----------------
+----- init -----
+4443.038054
+----------------
+init (avg): 4443.038054
+----------------
+----- commit -----
+60177.05669
+----------------
+commit (avg): 60177.05669
+----------------
+----- read -----
+8148.404527
+8152.844776
+8197.185496
+8210.525473
+----------------
+read (avg): 8177.240068000001
+----------------
+----- update -----
+60.790149
+63.299889
+59.644044
+66.493201
+----------------
+update (avg): 62.55682075
+----------------
+----- init -----
+2443.859956
+----------------
+init (avg): 2443.859956
+----------------
+----- commit -----
+58998.938759
+----------------
+commit (avg): 58998.938759
+----------------
+----- read -----
+8580.829067
+8339.317001
+8390.7475
+8286.793901
+----------------
+read (avg): 8399.42186725
+----------------
+----- update -----
+507.212855
+82.945989
+62.442955
+62.727135
+----------------
+update (avg): 178.8322335
+----------------
+----- init -----
+1445.712088
+----------------
+init (avg): 1445.712088
+----------------
+----- commit -----
+60670.281905
+----------------
+commit (avg): 60670.281905
+----------------
+----- read -----
+9538.460889
+8340.688355
+8265.669251
+8275.251888
+----------------
+read (avg): 8605.01759575
+----------------
+----- update -----
+104.065045
+57.784569
+63.751286
+740.153651
+----------------
+update (avg): 241.43863775
+----------------
+----- init -----
+646.681083
+----------------
+init (avg): 646.681083
+----------------
+----- commit -----
+62346.098433
+----------------
+commit (avg): 62346.098433
+----------------
+----- read -----
+8188.252794
+8171.682358
+8275.755519
+8146.347256
+----------------
+read (avg): 8195.50948175
+----------------
+----- update -----
+63.918442
+60.739947
+60.239866
+58.822948
+----------------
+update (avg): 60.93030075
+----------------
+----- init -----
+3327.357897
+----------------
+init (avg): 3327.357897
+----------------
+----- commit -----
+64426.907949
+----------------
+commit (avg): 64426.907949
+----------------
+----- read -----
+8099.213055
+8132.881148
+8125.074584
+8166.410161
+----------------
+read (avg): 8130.8947370000005
+----------------
+----- update -----
+61.030768
+314.565661
+1004.846737
+60.039982
+----------------
+update (avg): 360.120787
+----------------
+----- init -----
+2475.734844
+----------------
+init (avg): 2475.734844
+----------------
+----- commit -----
+66495.651929
+----------------
+commit (avg): 66495.651929
+----------------
+----- read -----
+8854.960265
+9725.88524
+8342.392988
+8361.85731
+----------------
+read (avg): 8821.27395075
+----------------
+----- update -----
+98.686403
+61.315801
+59.396816
+64.760875
+----------------
+update (avg): 71.03997375
+----------------
+----- init -----
+1712.470317
+----------------
+init (avg): 1712.470317
+----------------
+----- commit -----
+67871.294739
+----------------
+commit (avg): 67871.294739
+----------------
+----- read -----
+9563.858232
+8940.188801
+8160.814319
+9103.837333
+----------------
+read (avg): 8942.17467125
+----------------
+----- update -----
+63.621793
+58.550448
+349.655432
+903.74603
+----------------
+update (avg): 343.89342575
+----------------
+----- init -----
+789.491216
+----------------
+init (avg): 789.491216
+----------------
+----- commit -----
+69332.442295
+----------------
+commit (avg): 69332.442295
+----------------
+----- read -----
+8189.955313
+8380.992111
+8229.465849
+8546.067458
+----------------
+read (avg): 8336.620182749999
+----------------
+----- update -----
+239.827957
+422.866292
+233.104241
+----------------
+update (avg): 298.59949666666665
+----------------
+----- init -----
+3758.894708
+----------------
+init (avg): 3758.894708
+----------------
+----- commit -----
+71660.660715
+----------------
+commit (avg): 71660.660715
+----------------
+----- read -----
+8558.585395
+8259.012176
+8217.595115
+8272.122548
+----------------
+read (avg): 8326.828808499999
+----------------
+----- update -----
+739.988345
+68.856428
+56.662605
+75.079192
+----------------
+update (avg): 235.1466425
+----------------
+----- init -----
+1176.317056
+----------------
+init (avg): 1176.317056
+----------------
+----- commit -----
+76412.245977
+----------------
+commit (avg): 76412.245977
+----------------
+----- read -----
+9907.460728
+8521.157411
+----------------
+read (avg): 9214.3090695
+----------------
+----- update -----
+69.074194
+343.827552
+993.143448
+61.559225
+423.525019
+90.931096
+----------------
+update (avg): 330.3434223333333
+----------------
+----- init -----
+459.935119
+----------------
+init (avg): 459.935119
+----------------
+----- commit -----
+93078.84256
+----------------
+commit (avg): 93078.84256
+----------------
+----- read -----
+8216.884825
+9158.257124
+9527.386873
+----------------
+read (avg): 8967.509607333332
+----------------
+----- update -----
+360.236234
+1012.231616
+778.702541
+1012.761765
+87.273481
+----------------
+update (avg): 650.2411274
+----------------
+----- init -----
+5379.224394
+----------------
+init (avg): 5379.224394
+----------------
+----- commit -----
+80815.717748
+----------------
+commit (avg): 80815.717748
+----------------
+----- read -----
+8227.487836
+8422.398415
+8664.549037
+9912.395211
+----------------
+read (avg): 8806.70762475
+----------------
+----- update -----
+803.690051
+65.853739
+629.907543
+87.005496
+----------------
+update (avg): 396.61420725
+----------------
+----- init -----
+3030.734875
+----------------
+init (avg): 3030.734875
+----------------
+----- commit -----
+78672.76835
+----------------
+commit (avg): 78672.76835
+----------------
+----- read -----
+8292.938014
+8265.129119
+----------------
+read (avg): 8279.033566499998
+----------------
+----- update -----
+70.605015
+338.783662
+1011.705441
+720.084563
+994.980124
+----------------
+update (avg): 627.231761
+----------------
+----- init -----
+2184.862586
+----------------
+init (avg): 2184.862586
+----------------
+----- commit -----
+99282.304618
+----------------
+commit (avg): 99282.304618
+----------------
+----- read -----
+9540.001672
+9756.014761
+8263.313106
+----------------
+read (avg): 9186.443179666667
+----------------
+----- update -----
+236.997053
+60.140021
+389.524425
+1002.398287
+----------------
+update (avg): 422.2649465
+----------------
+----- init -----
+627.911422
+----------------
+init (avg): 627.911422
+----------------
+----- commit -----
+93662.729905
+----------------
+commit (avg): 93662.729905
+----------------
+----- read -----
+9011.328434
+8315.148114
+8863.481496
+9966.109464
+----------------
+read (avg): 9039.016877
+----------------
+----- update -----
+999.543611
+56.986859
+64.073316
+726.672942
+----------------
+update (avg): 461.81918200000007
+----------------
+----- init -----
+2865.783298
+----------------
+init (avg): 2865.783298
+----------------
+----- commit -----
+85072.672941
+----------------
+commit (avg): 85072.672941
+----------------
+----- read -----
+8466.751117
+8322.782392
+----------------
+read (avg): 8394.7667545
+----------------
+----- update -----
+735.925355
+996.554238
+63.993242
+60.276589
+76.612018
+60.822657
+----------------
+update (avg): 332.3640165
+----------------
+----- init -----
+4127.997304
+----------------
+init (avg): 4127.997304
+----------------
+----- commit -----
+105652.557197
+----------------
+commit (avg): 105652.557197
+----------------
+----- read -----
+8209.973571
+9321.265956
+----------------
+read (avg): 8765.619763499999
+----------------
+----- update -----
+1013.550178
+930.046164
+805.47246
+67.007096
+60.296427
+531.775685
+----------------
+update (avg): 568.0246683333334
+----------------
+----- init -----
+3008.754431
+----------------
+init (avg): 3008.754431
+----------------
+----- commit -----
+106997.135394
+----------------
+commit (avg): 106997.135394
+----------------
+----- read -----
+9359.098453
+9724.659225
+9572.153636
+9240.644008
+----------------
+read (avg): 9474.1388305
+----------------
+----- update -----
+610.332703
+660.604173
+985.089319
+60.80875
+----------------
+update (avg): 579.20873625
+----------------
+----- init -----
+3153.734812
+----------------
+init (avg): 3153.734812
+----------------
+----- commit -----
+90082.531393
+----------------
+commit (avg): 90082.531393
+----------------
+----- read -----
+8422.403299
+8249.380084
+8163.528524
+8177.115443
+8206.773011
+----------------
+read (avg): 8243.8400722
+----------------
+----- update -----
+63.618297
+61.425468
+----------------
+update (avg): 62.521882500000004
+----------------
+----- init -----
+1922.317171
+----------------
+init (avg): 1922.317171
+----------------
+----- commit -----
+92775.216795
+----------------
+commit (avg): 92775.216795
+----------------
+----- read -----
+8337.782608
+8252.379877
+----------------
+read (avg): 8295.0812425
+----------------
+----- update -----
+388.875653
+1009.157774
+661.360746
+995.547908
+740.745165
+67.121125
+----------------
+update (avg): 643.8013951666668
+----------------
+----- init -----
+4439.892271
+----------------
+init (avg): 4439.892271
+----------------
+----- commit -----
+113950.268185
+----------------
+commit (avg): 113950.268185
+----------------
+----- read -----
+8478.337348
+8378.453699
+8253.447208
+8277.019976
+9250.231422
+----------------
+read (avg): 8527.497930599999
+----------------
+----- update -----
+99.523386
+64.174562
+59.556601
+----------------
+update (avg): 74.418183
+----------------
+----- init -----
+1962.840146
+----------------
+init (avg): 1962.840146
+----------------
+----- commit -----
+96669.445816
+----------------
+commit (avg): 96669.445816
+----------------
+----- read -----
+8902.145222
+8307.449059
+8233.240407
+8309.346223
+8363.987237
+----------------
+read (avg): 8423.2336296
+----------------
+----- update -----
+66.940623
+339.0755
+707.939517
+----------------
+update (avg): 371.3185466666667
+----------------
+----- init -----
+1524.562358
+----------------
+init (avg): 1524.562358
+----------------
+----- commit -----
+99078.451845
+----------------
+commit (avg): 99078.451845
+----------------
+----- read -----
+9143.537483
+8378.304692
+----------------
+read (avg): 8760.921087499999
+----------------
+----- update -----
+380.515923
+994.682881
+58.9551
+58.746464
+379.672931
+60.160094
+----------------
+update (avg): 322.12223216666666
+----------------
+----- init -----
+3606.14261
+----------------
+init (avg): 3606.14261
+----------------
+----- commit -----
+123769.516018
+----------------
+commit (avg): 123769.516018
+----------------
+----- read -----
+9352.594428
+9062.384772
+9544.350574
+----------------
+read (avg): 9319.776591333333
+----------------
+----- update -----
+295.107335
+58.3436
+58.51027
+59.403525
+425.020517
+----------------
+update (avg): 179.27704939999998
+----------------
+----- init -----
+3572.468623
+----------------
+init (avg): 3572.468623
+----------------
+----- commit -----
+116983.665512
+----------------
+commit (avg): 116983.665512
+----------------
+----- read -----
+8650.165012
+8334.846441
+8757.094894
+9309.618505
+8791.910696
+----------------
+read (avg): 8768.7271096
+----------------
+----- update -----
+71.725236
+324.132468
+905.523527
+----------------
+update (avg): 433.7937436666666
+----------------
+----- init -----
+1959.92402
+----------------
+init (avg): 1959.92402
+----------------
+----- commit -----
+104912.83594
+----------------
+commit (avg): 104912.83594
+----------------
+----- read -----
+8242.900297
+8352.997875
+8261.421836
+8350.039818
+8387.923809
+----------------
+read (avg): 8319.056727
+----------------
+----- update -----
+639.799193
+1004.10263
+63.343375
+----------------
+update (avg): 569.0817326666667
+----------------
+----- init -----
+3943.889801
+----------------
+init (avg): 3943.889801
+----------------
+----- commit -----
+106964.750482
+----------------
+commit (avg): 106964.750482
+----------------
+----- read -----
+8242.014642
+9615.498732
+8334.209667
+8418.295009
+8249.078682
+----------------
+read (avg): 8571.8193464
+----------------
+----- update -----
+399.930775
+60.25713
+315.335242
+----------------
+update (avg): 258.5077156666667
+----------------
+----- init -----
+4110.387154
+----------------
+init (avg): 4110.387154
+----------------
+----- commit -----
+109060.115165
+----------------
+commit (avg): 109060.115165
+----------------
+----- read -----
+9440.896956
+----------------
+read (avg): 9440.896956
+----------------
+----- update -----
+72.333322
+326.816746
+997.252495
+59.064609
+63.465494
+61.304157
+60.913361
+----------------
+update (avg): 234.4500262857143
+----------------
+----- init -----
+1163.261904
+----------------
+init (avg): 1163.261904
+----------------
+----- commit -----
+147537.353507
+----------------
+commit (avg): 147537.353507
+----------------
+----- read -----
+8224.056541
+----------------
+read (avg): 8224.056541
+----------------
+----- update -----
+909.340241
+1030.760634
+61.530401
+702.433154
+58.826079
+78.407898
+----------------
+update (avg): 473.54973449999994
+----------------
+----- init -----
+3918.308857
+----------------
+init (avg): 3918.308857
+----------------
+----- commit -----
+147207.397166
+----------------
+commit (avg): 147207.397166
+----------------
+----- read -----
+9146.83157
+9166.72961
+8851.459169
+9858.298649
+9071.594797
+----------------
+read (avg): 9218.982759
+----------------
+----- update -----
+764.853472
+64.881606
+56.782555
+----------------
+update (avg): 295.50587766666666
+----------------
+----- init -----
+3015.661908
+----------------
+init (avg): 3015.661908
+----------------
+----- commit -----
+114728.374238
+----------------
+commit (avg): 114728.374238
+----------------
+----- read -----
+8485.599657
+8210.487143
+8188.110265
+8234.756475
+8320.281527
+----------------
+read (avg): 8287.8470134
+----------------
+----- update -----
+67.770577
+69.348098
+79.323041
+----------------
+update (avg): 72.14723866666667
+----------------
+----- init -----
+1882.259674
+----------------
+init (avg): 1882.259674
+----------------
+----- commit -----
+123857.673347
+----------------
+commit (avg): 123857.673347
+----------------
+----- read -----
+8177.931957
+8834.052186
+9180.88455
+----------------
+read (avg): 8730.956231000002
+----------------
+----- update -----
+666.522066
+58.451864
+898.999036
+66.131059
+80.145096
+----------------
+update (avg): 354.0498242
+----------------
+----- init -----
+4059.342194
+----------------
+init (avg): 4059.342194
+----------------
+----- commit -----
+138173.369893
+----------------
+commit (avg): 138173.369893
+----------------
+----- read -----
+8868.836009
+8109.676991
+8105.592261
+8144.862452
+----------------
+read (avg): 8307.24192825
+----------------
+----- update -----
+64.452501
+66.190898
+394.644001
+856.544374
+----------------
+update (avg): 345.45794349999994
+----------------
+----- init -----
+5307.872365
+----------------
+init (avg): 5307.872365
+----------------
+----- commit -----
+132763.122731
+----------------
+commit (avg): 132763.122731
+----------------
+----- read -----
+8361.531291
+8152.864615
+8121.945466
+8163.405803
+----------------
+read (avg): 8199.93679375
+----------------
+----- update -----
+64.501593
+189.517747
+60.096667
+63.222546
+----------------
+update (avg): 94.33463825
+----------------
+----- init -----
+2237.433839
+----------------
+init (avg): 2237.433839
+----------------
+----- commit -----
+139727.881543
+----------------
+commit (avg): 139727.881543
+----------------
+----- read -----
+8257.711819
+8279.264339
+8290.365929
+8375.09693
+----------------
+read (avg): 8300.60975425
+----------------
+----- update -----
+514.943607
+771.8017
+970.505993
+67.710122
+----------------
+update (avg): 581.2403555
+----------------
+----- init -----
+5319.494045
+----------------
+init (avg): 5319.494045
+----------------
+----- commit -----
+136509.618973
+----------------
+commit (avg): 136509.618973
+----------------
+----- read -----
+9032.091021
+----------------
+read (avg): 9032.091021
+----------------
+----- update -----
+1007.702159
+66.625971
+67.119453
+77.432449
+58.733004
+663.179562
+----------------
+update (avg): 323.465433
+----------------
+----- init -----
+1967.616978
+----------------
+init (avg): 1967.616978
+----------------
+----- commit -----
+167070.355628
+----------------
+commit (avg): 167070.355628
+----------------
+----- read -----
+8216.669011
+8240.333718
+9495.621563
+----------------
+read (avg): 8650.874764
+----------------
+----- update -----
+178.991564
+511.961313
+1011.998547
+984.332363
+1001.849556
+----------------
+update (avg): 737.8266686000001
+----------------
+----- init -----
+2852.867278
+----------------
+init (avg): 2852.867278
+----------------
+----- commit -----
+150059.787583
+----------------
+commit (avg): 150059.787583
+----------------
+----- read -----
+8449.360617
+8227.00769
+8273.755731
+8083.306016
+8258.761279
+8268.500659
+----------------
+read (avg): 8260.115332
+----------------
+----- update -----
+73.193947
+----------------
+update (avg): 73.193947
+----------------
+----- init -----
+2494.155171
+----------------
+init (avg): 2494.155171
+----------------
+----- commit -----
+132672.68876
+----------------
+commit (avg): 132672.68876
+----------------
+----- read -----
+9734.264571
+8214.788476
+9074.072245
+8263.873172
+8228.951861
+----------------
+read (avg): 8703.190065
+----------------
+----- update -----
+61.86371
+627.111811
+503.541206
+----------------
+update (avg): 397.50557566666663
+----------------
+----- init -----
+4060.833101
+----------------
+init (avg): 4060.833101
+----------------
+----- commit -----
+138590.397579
+----------------
+commit (avg): 138590.397579
+----------------
+----- read -----
+8961.743629
+9076.870252
+8331.366991
+8303.320451
+----------------
+read (avg): 8668.32533075
+----------------
+----- update -----
+74.313072
+250.525675
+660.01917
+----------------
+update (avg): 328.28597233333335
+----------------
+----- init -----
+2395.940943
+----------------
+init (avg): 2395.940943
+----------------
+----- commit -----
+151684.724543
+----------------
+commit (avg): 151684.724543
+----------------
+----- read -----
+8281.652773
+8363.295574
+----------------
+read (avg): 8322.474173499999
+----------------
+----- update -----
+285.50379
+953.483338
+720.194989
+62.19149
+59.66621
+509.307722
+----------------
+update (avg): 431.7245898333333
+----------------
+----- init -----
+2627.223432
+----------------
+init (avg): 2627.223432
+----------------
+----- commit -----
+170691.65551
+----------------
+commit (avg): 170691.65551
+----------------
+----- read -----
+8297.280262
+9179.332865
+8652.754755
+----------------
+read (avg): 8709.789294
+----------------
+----- update -----
+90.592979
+69.178514
+68.244098
+61.391331
+61.584102
+----------------
+update (avg): 70.19820480000001
+----------------
+----- init -----
+2883.025574
+----------------
+init (avg): 2883.025574
+----------------
+----- commit -----
+165954.353846
+----------------
+commit (avg): 165954.353846
+----------------
+[OVERALL], RunTime(ms), 196686
+[OVERALL], Throughput(ops/sec), 2.542122977741171
+[TOTAL_GCS_G1_Young_Generation], Count, 3
+[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), 20
+[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), 0.010168491910964686
+[TOTAL_GCS_G1_Old_Generation], Count, 0
+[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), 0
+[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), 0.0
+[TOTAL_GCs], Count, 3
+[TOTAL_GC_TIME], Time(ms), 20
+[TOTAL_GC_TIME_%], Time(%), 0.010168491910964686
+[READ], Operations, 258
+[READ], AverageLatency(us), 8595273.42635659
+[READ], MinLatency(us), 8015872
+[READ], MaxLatency(us), 10338303
+[READ], 95thPercentileLatency(us), 9756671
+[READ], 99thPercentileLatency(us), 10149887
+[READ], Return=OK, 258
+[CLEANUP], Operations, 64
+[CLEANUP], AverageLatency(us), 7.9726952E7
+[CLEANUP], MinLatency(us), 323584
+[CLEANUP], MaxLatency(us), 170786815
+[CLEANUP], 95thPercentileLatency(us), 151781375
+[CLEANUP], 99thPercentileLatency(us), 167116799
+[UPDATE], Operations, 242
+[UPDATE], AverageLatency(us), 342349.02479338844
+[UPDATE], MinLatency(us), 55488
+[UPDATE], MaxLatency(us), 1031167
+[UPDATE], 95thPercentileLatency(us), 1004543
+[UPDATE], 99thPercentileLatency(us), 1014783
+[UPDATE], Return=OK, 242

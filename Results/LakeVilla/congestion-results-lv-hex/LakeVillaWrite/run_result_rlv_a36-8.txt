@@ -1,0 +1,75 @@
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+parsing config file ./lvconfig36.conf
+parsing done
+# Loading records:	0
+s user1000385178204227360
+e found 0
+s user1000385178204227360
+d found0
+s user14861930573070844191
+e found 0
+s user1000385178204227360
+e found 0
+terminate called after throwing an instance of 'parquet::ParquetInvalidOrCorruptedFileException'
+  what():  Invalid: Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file.

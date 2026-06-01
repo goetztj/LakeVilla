@@ -1,0 +1,2 @@
+python2 bin/ycsb load jdbc -P workloads/workloadb -P jdbc/config/trino.properties  -cp jdbc/lib/trino-jdbc-481.jar &> ./trinoDelta-ycsbb-load-1.txt
+python2 bin/ycsb run jdbc -P workloads/workloadb -P jdbc/config/trino.properties  -cp jdbc/lib/trino-jdbc-481.jar -threads 1 &> ./trinoDelta-ycsbb-run-1.txt

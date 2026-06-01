@@ -1,0 +1,1308 @@
+/usr/lib/jvm/java-21-openjdk-amd64/bin/java  -classpath /LakeVilla/YCSB-LH/conf:/LakeVilla/YCSB-LH/core/target/core-0.18.0-SNAPSHOT.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/lakevillaTrinoAPI-binding-0.18.0-SNAPSHOT.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/HdrHistogram-2.1.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/HikariCP-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/RoaringBitmap-0.9.45.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ST4-4.0.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/activation-1.1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aircompressor-0.27.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-core-4.5.10.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-kms-2.11.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-java-sdk-ram-3.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aliyun-sdk-oss-3.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/annotations-17.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/annotations-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/antlr-runtime-3.5.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/antlr4-runtime-4.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aopalliance-repackaged-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/apache-client-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arns-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-format-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-memory-core-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-memory-netty-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/arrow-vector-12.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/audience-annotations-0.5.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/auth-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-ipc-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/avro-mapred-1.11.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-java-sdk-bundle-1.12.262.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-query-protocol-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/aws-xml-protocol-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-data-lake-store-sdk-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-keyvault-core-1.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/azure-storage-7.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/bonecp-0.8.0.RELEASE.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/bundle-2.20.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/caffeine-2.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checker-qual-3.31.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checksums-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/checksums-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/chill-java-0.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/chill_2.12-0.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-cli-1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-codec-1.16.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-collections-3.2.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-collections4-4.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-compiler-3.1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-compress-1.23.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-crypto-1.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-dbcp-1.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-io-2.16.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-lang-2.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-lang3-3.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-logging-1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-math3-3.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-pool-1.5.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/commons-text-1.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/compress-lzf-1.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/crt-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-client-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-framework-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/curator-recipes-2.13.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-api-jdo-4.2.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-core-4.1.17.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datanucleus-rdbms-4.1.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datasketches-java-3.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/datasketches-memory-2.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-contribs_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-hive_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-iceberg_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-kernel-api-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-spark_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-standalone_2.12-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-storage-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/delta-storage-s3-dynamodb-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/derby-10.14.2.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/dropwizard-metrics-hadoop-metrics2-reporter-0.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/endpoints-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/error_prone_annotations-2.10.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/eventstream-1.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/flatbuffers-java-1.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/gcs-connector-hadoop3-2.2.14-shaded.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/gson-2.2.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/guava-16.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-aliyun-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-annotations-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-aws-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-azure-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-azure-datalake-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-client-api-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-client-runtime-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-cloud-storage-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-openstack-3.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hadoop-shaded-guava-1.1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-exec-2.3.9-core.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-llap-client-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-llap-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-metastore-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-serde-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-0.23-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-common-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-shims-scheduler-2.3.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hive-storage-api-2.8.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-api-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-locator-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/hk2-utils-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/htrace-core4-4.1.0-incubating.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-aws-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-auth-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/http-client-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/httpclient-4.5.14.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/httpcore-4.4.16.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/iceberg-spark-runtime-3.5_2.12-1.4.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/identity-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ini4j-0.5.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/ivy-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-annotations-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-core-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-core-asl-1.9.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-databind-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-dataformat-cbor-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-datatype-jsr310-2.15.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-mapper-asl-1.9.13.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jackson-module-scala_2.12-2.15.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.activation-api-2.1.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.annotation-api-1.3.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.inject-2.6.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.servlet-api-4.0.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.validation-api-2.0.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.ws.rs-api-2.1.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jakarta.xml.bind-api-4.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/janino-3.1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javassist-3.29.2-GA.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javax.activation-api-1.2.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javax.jdo-3.2.0-m3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/javolution-5.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jaxb-api-2.3.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jcl-over-slf4j-2.0.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jdo-api-3.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jdom2-2.0.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-client-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-common-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-container-servlet-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-container-servlet-core-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-hk2-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jersey-server-2.40.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jettison-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jetty-util-9.4.54.v20240208.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jetty-util-ajax-9.4.54.v20240208.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jline-2.12.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/joda-time-2.12.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jodd-core-3.5.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json-1.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json-utils-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-ast_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-core_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-jackson_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/json4s-scalap_2.12-3.7.0-M11.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jsr305-3.0.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jta-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/jul-to-slf4j-2.0.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/kryo-shaded-4.0.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/leveldbjni-all-1.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/libfb303-0.9.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/libthrift-0.12.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-1.2-api-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-api-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-core-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/log4j-slf4j2-impl-2.20.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/lz4-java-1.8.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-core-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-graphite-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-jmx-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-json-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-jvm-4.2.19.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/metrics-spi-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/minlog-1.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-all-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-buffer-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-http-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-http2-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-codec-socks-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-common-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-handler-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-handler-proxy-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-nio-client-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-resolver-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-classes-epoll-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-classes-kqueue-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-epoll-4.1.96.Final-linux-aarch_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-epoll-4.1.96.Final-linux-x86_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-kqueue-4.1.96.Final-osx-aarch_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-kqueue-4.1.96.Final-osx-x86_64.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/netty-transport-native-unix-common-4.1.96.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/objenesis-2.5.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opencsv-2.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-api-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-noop-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/opentracing-util-0.33.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-core-1.9.4-shaded-protobuf.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-mapreduce-1.9.4-shaded-protobuf.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/orc-shims-1.9.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/oro-2.0.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/osgi-resource-locator-1.0.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/paranamer-2.8.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-column-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-common-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-encoding-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-format-structures-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-hadoop-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/parquet-jackson-1.13.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/pickle-1.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/postgresql-42.7.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/profiles-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/protobuf-java-2.5.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/protocol-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/py4j-0.10.9.7.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/reactive-streams-1.0.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/regions-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/rocksdbjni-8.3.2.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/s3-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-collection-compat_2.12-2.7.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-library-2.12.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-parser-combinators_2.12-2.3.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-reflect-2.12.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/scala-xml_2.12-2.1.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/sdk-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/shapeless_2.12-2.3.4.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/shims-0.9.45.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-api-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-nop-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-simple-1.7.21.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/snappy-java-1.1.10.5.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-catalyst_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-common-utils_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-core_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-hadoop-cloud_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-hive_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-kvstore_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-launcher_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-network-common_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-network-shuffle_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sketch_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sql-api_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-sql_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-tags_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/spark-unsafe_2.12-3.5.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/stax-api-1.0.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/stream-2.9.6.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/third-party-jackson-core-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/threeten-extra-1.7.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/tink-1.9.0.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/transaction-api-1.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/univocity-parsers-2.9.1.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/url-connection-client-2.20.18.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/utils-2.21.33.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/wildfly-openssl-1.0.7.Final.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/xbean-asm9-shaded-4.23.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/xz-1.9.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zookeeper-3.6.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zookeeper-jute-3.6.3.jar:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/zstd-jni-1.5.5-4.jar site.ycsb.Client -t -db site.ycsb.db.LakeVillaTrinoAPIClient -P workloads/workloada -threads 64
+Command line: -t -db site.ycsb.db.LakeVillaTrinoAPIClient -P workloads/workloada -threads 64
+YCSB Client 0.18.0-SNAPSHOT
+Loading workload...
+Starting test.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-nop-1.7.21.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/LakeVilla/YCSB-LH/lakevillaTrinoAPI/target/dependency/slf4j-simple-1.7.21.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Initializing LakeVilla Native Transaction Manager...
+Loaded native library: /LakeVilla/build2/liblakevilla.so
+parsing config file parsing config file parsing config file /LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing config file 
+/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing done
+parsing done/LakeVilla/lvconfig.confparsing config file 
+parsing done
+parsing done
+/LakeVilla/lvconfig.conf
+parsing done
+parsing doneparsing config file parsing config file /LakeVilla/lvconfig.confparsing config file parsing config file 
+parsing done/LakeVilla/lvconfig.confparsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing doneparsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing config file parsing done
+/LakeVilla/lvconfig.conf
+parsing doneparsing config file parsing config file /LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing config file parsing config file parsing config file parsing doneparsing config file parsing config file /LakeVilla/lvconfig.conf/LakeVilla/lvconfig.confparsing config file parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file parsing config file 
+parsing config file parsing config file /LakeVilla/lvconfig.conf/LakeVilla/lvconfig.confparsing config file 
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing done/LakeVilla/lvconfig.confparsing done
+/LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.confparsing config file parsing done
+/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf/LakeVilla/lvconfig.conf
+parsing done/LakeVilla/lvconfig.confparsing doneparsing config file parsing done/LakeVilla/lvconfig.conf
+parsing config file parsing config file parsing done/LakeVilla/lvconfig.conf
+parsing doneparsing config file 
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing done
+/LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing doneparsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.confparsing doneparsing config file 
+/LakeVilla/lvconfig.confparsing done/LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file 
+parsing config file parsing doneparsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file /LakeVilla/lvconfig.conf
+parsing doneparsing doneparsing done
+parsing config file parsing done
+parsing done
+parsing config file parsing done/LakeVilla/lvconfig.conf
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing config file parsing done
+parsing config file parsing doneparsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done
+/LakeVilla/lvconfig.confparsing done
+parsing done
+parsing done
+parsing done
+parsing config file /LakeVilla/lvconfig.conf
+parsing done/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing config file parsing done
+parsing doneparsing config file 
+parsing config file /LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.confparsing doneparsing done
+parsing done
+/LakeVilla/lvconfig.conf
+/LakeVilla/lvconfig.conf
+parsing done/LakeVilla/lvconfig.confparsing done
+/LakeVilla/lvconfig.conf
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+parsing done
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html)
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field long java.nio.Buffer.address accessible: module java.base does not "opens java.nio" to unnamed module @16d04d3d
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:391)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:367)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:315)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:183)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:177)
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:84)
+	... 13 more
+Exception in thread "Thread-19" java.lang.ExceptionInInitializerError
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html)
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field long java.nio.Buffer.address accessible: module java.base does not "opens java.nio" to unnamed module @16d04d3d
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:391)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:367)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:315)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:183)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:177)
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:84)
+	... 13 more
+Exception in thread "Thread-41" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-26" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-38" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-63" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-10" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-3" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-52" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-18" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-1" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-47" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-32" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-28" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-46" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-6" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-30" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-27" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-29" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-13" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-11" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-40" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-14" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-9" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-31" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-16" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-49" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-45" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-53" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-5" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-55" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-44" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-8" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-2" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-25" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-64" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-37" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-56" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-57" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-51" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-60" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-24" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-4" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-36" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-43" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-17" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-20" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-62" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-7" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-23" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-35" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-54" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-58" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-21" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-33" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-42" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-39" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-34" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-50" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-15" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-48" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-22" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-59" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-12" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+Exception in thread "Thread-61" java.lang.NoClassDefFoundError: Could not initialize class org.apache.arrow.memory.util.MemoryUtil
+	at org.apache.arrow.memory.ArrowBuf.setZero(ArrowBuf.java:1175)
+	at org.apache.arrow.vector.BaseVariableWidthVector.initOffsetBuffer(BaseVariableWidthVector.java:243)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateBytes(BaseVariableWidthVector.java:469)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:420)
+	at org.apache.arrow.vector.BaseVariableWidthVector.allocateNew(BaseVariableWidthVector.java:380)
+	at org.apache.arrow.vector.VectorSchemaRoot.allocateNew(VectorSchemaRoot.java:147)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.arrowTableBuilder(LakeVillaTrinoAPIClient.java:385)
+	at site.ycsb.db.LakeVillaTrinoAPIClient.update(LakeVillaTrinoAPIClient.java:287)
+	at site.ycsb.DBWrapper.update(DBWrapper.java:204)
+	at site.ycsb.workloads.CoreWorkload.doTransactionUpdate(CoreWorkload.java:853)
+	at site.ycsb.workloads.CoreWorkload.doTransaction(CoreWorkload.java:686)
+	at site.ycsb.ClientThread.run(ClientThread.java:122)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.RuntimeException: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`? (See https://arrow.apache.org/docs/java/install.html) [in thread "Thread-19"]
+	at org.apache.arrow.memory.util.MemoryUtil.<clinit>(MemoryUtil.java:138)
+	... 13 more
+[OVERALL], RunTime(ms), 286547
+[OVERALL], Throughput(ops/sec), 0.2582473381330113
+[TOTAL_GCS_G1_Young_Generation], Count, 2
+[TOTAL_GC_TIME_G1_Young_Generation], Time(ms), 22
+[TOTAL_GC_TIME_%_G1_Young_Generation], Time(%), 0.0076776235661165535
+[TOTAL_GCS_G1_Concurrent_GC], Count, 0
+[TOTAL_GC_TIME_G1_Concurrent_GC], Time(ms), 0
+[TOTAL_GC_TIME_%_G1_Concurrent_GC], Time(%), 0.0
+[TOTAL_GCS_G1_Old_Generation], Count, 0
+[TOTAL_GC_TIME_G1_Old_Generation], Time(ms), 0
+[TOTAL_GC_TIME_%_G1_Old_Generation], Time(%), 0.0
+[TOTAL_GCs], Count, 2
+[TOTAL_GC_TIME], Time(ms), 22
+[TOTAL_GC_TIME_%], Time(%), 0.0076776235661165535
+[READ], Operations, 74
+[READ], AverageLatency(us), 3.661868281081081E7
+[READ], MinLatency(us), 34701312
+[READ], MaxLatency(us), 41058303
+[READ], 95thPercentileLatency(us), 39550975
+[READ], 99thPercentileLatency(us), 39878655
+[READ], Return=OK, 74

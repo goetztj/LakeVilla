@@ -1,0 +1,28 @@
+2025-06-18T16:03:51.438 [200 OK] s3.HeadObject localhost:9000/warehouse/ducklake/ducklake-0197830c-b898-7d43-bf2d-3b83f90fccd5.parquet localhost      667µs       ⇣  630.414µs  ↑ 84 B ↓ 0 B
+2025-06-18T16:03:51.439 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-0197830c-b898-7d43-bf2d-3b83f90fccd5.parquet localhost      787µs       ⇣  702.428µs  ↑ 90 B ↓ 29 KiB
+2025-06-18T16:03:51.441 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-0197834a-5f22-7e8b-8b66-7da990c051c8.parquet localhost      1.08ms       ⇣  1.037331ms  ↑ 90 B ↓ 3.0 KiB
+2025-06-18T16:03:51.442 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-0197834b-cc57-76b4-beee-7075ec4c2478.parquet localhost      689µs       ⇣  644.646µs  ↑ 90 B ↓ 3.7 KiB
+2025-06-18T16:03:51.448 [200 OK] s3.HeadObject localhost:9000/warehouse/ducklake/ducklake-0197834c-c4e0-7a98-9b08-eb229bf7fa3b.parquet localhost      466µs       ⇣  438.32µs  ↑ 84 B ↓ 0 B
+2025-06-18T16:03:51.461 [200 OK] s3.HeadObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      603µs       ⇣  567.869µs  ↑ 84 B ↓ 0 B
+2025-06-18T16:03:51.463 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.687ms      ⇣  1.581263ms  ↑ 90 B ↓ 166 KiB
+2025-06-18T16:03:51.463 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.383ms      ⇣  1.277679ms  ↑ 90 B ↓ 179 KiB
+2025-06-18T16:03:51.463 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.265ms      ⇣  1.16863ms  ↑ 90 B ↓ 175 KiB
+2025-06-18T16:03:51.464 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.229ms      ⇣  1.195402ms  ↑ 90 B ↓ 53 KiB
+2025-06-18T16:03:51.464 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.357ms      ⇣  1.292628ms  ↑ 90 B ↓ 159 KiB
+2025-06-18T16:03:51.464 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.487ms      ⇣  1.412825ms  ↑ 90 B ↓ 179 KiB
+2025-06-18T16:03:51.464 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.645ms      ⇣  1.55072ms  ↑ 90 B ↓ 165 KiB
+2025-06-18T16:03:51.465 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.625ms      ⇣  987.041µs  ↑ 90 B ↓ 254 KiB
+2025-06-18T16:03:51.465 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.273ms      ⇣  1.129933ms  ↑ 90 B ↓ 279 KiB
+2025-06-18T16:03:51.465 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.351ms      ⇣  1.231076ms  ↑ 90 B ↓ 271 KiB
+2025-06-18T16:03:51.465 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.091ms      ⇣  1.046455ms  ↑ 90 B ↓ 56 KiB
+2025-06-18T16:03:51.466 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.349ms      ⇣  1.256156ms  ↑ 90 B ↓ 240 KiB
+2025-06-18T16:03:51.466 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.298ms      ⇣  1.180596ms  ↑ 90 B ↓ 252 KiB
+2025-06-18T16:03:51.466 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.679ms      ⇣  1.14727ms  ↑ 90 B ↓ 279 KiB
+2025-06-18T16:03:51.467 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.254ms      ⇣  1.157135ms  ↑ 90 B ↓ 254 KiB
+2025-06-18T16:03:51.467 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.125ms      ⇣  1.091663ms  ↑ 90 B ↓ 56 KiB
+2025-06-18T16:03:51.467 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.323ms      ⇣  1.176061ms  ↑ 90 B ↓ 279 KiB
+2025-06-18T16:03:51.467 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.141ms      ⇣  1.043633ms  ↑ 90 B ↓ 240 KiB
+2025-06-18T16:03:51.467 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.688ms      ⇣  1.146342ms  ↑ 90 B ↓ 271 KiB
+2025-06-18T16:03:51.468 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.312ms      ⇣  1.210755ms  ↑ 90 B ↓ 252 KiB
+2025-06-18T16:03:51.468 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978351-64e8-7f32-8bdf-e9acf50fa842.parquet localhost      1.819ms      ⇣  1.206383ms  ↑ 90 B ↓ 279 KiB
+2025-06-18T16:03:51.526 [206 Partial Content] s3.GetObject localhost:9000/warehouse/ducklake/ducklake-01978339-bf46-7aff-9bd3-ca35dd3500fa.parquet localhost      38.084ms     ⇣  2.50587ms  ↑ 90 B ↓ 43 MiB

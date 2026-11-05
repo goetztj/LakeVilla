@@ -9,14 +9,13 @@
 #include <utility>
 
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "TpccClient.hpp"
 
 namespace LHTPC {
 
 // This client simulates the TPC-C accesses with the LakeVilla client
 struct TpccClientMultiTable : public TpccClient {
-  uint32_t aborts;
 
   TpccPaths paths;
 

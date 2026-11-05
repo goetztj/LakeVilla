@@ -1,3 +1,4 @@
+#include <atomic>
 #include <aws/core/Aws.h>
 #include <aws/core/auth/AWSCredentialsProviderChain.h>
 #include <aws/s3/S3Client.h>
@@ -10,7 +11,7 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "Settings/LvSettings.hpp"
 #include "Timer/Timer.hpp"
 #include "settings.hpp"
@@ -130,7 +131,7 @@ std::shared_ptr<arrow::Table> arrow_table_builder() {
   return arrow::Table::Make(schema, value_vec, raw_entries.size());
 }
 
-bool read_file(LHTransactions::TransactionManagerGeneric& manager) {
+bool read_file(LHTransactions::TransactionManagerDeltaLake& manager) {
   std::cout << "Which table do you want to access?" << std::endl;
   std::string str_input = "";
 
@@ -160,7 +161,7 @@ bool read_file(LHTransactions::TransactionManagerGeneric& manager) {
   return true;
 }
 
-bool add_file(LHTransactions::TransactionManagerGeneric& manager) {
+bool add_file(LHTransactions::TransactionManagerDeltaLake& manager) {
   std::cout << "Which table do you want to edit?" << std::endl;
   std::string str_input = "";
 
@@ -187,12 +188,12 @@ bool add_file(LHTransactions::TransactionManagerGeneric& manager) {
   return manager.add_file(table_id, table, key);
 }
 
-bool delete_file(LHTransactions::TransactionManagerGeneric& manager) {
+bool delete_file(LHTransactions::TransactionManagerDeltaLake& manager) {
   std::cerr << "comming soon!";
   return true;
 }
 
-bool open_table(LHTransactions::TransactionManagerGeneric& manager) {
+bool open_table(LHTransactions::TransactionManagerDeltaLake& manager) {
   while (true) {
     std::cout << "Please provide the path after s3a://warehouse/" << std::endl;
     std::string table_path = "";
@@ -218,7 +219,8 @@ bool open_table(LHTransactions::TransactionManagerGeneric& manager) {
   return true;
 }
 
-bool interactive_txn(std::string& config_path) {
+// returns the exit code (0: success)
+int interactive_txn(std::string& config_path) {
   std::cout << "Welcome to the interactive LakeVilla interface!" << std::endl;
 
   std::vector<bool> levels = {false, false, false};
@@ -256,22 +258,17 @@ bool interactive_txn(std::string& config_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
+  int exit_code = 0;
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
     std::cout << "creating manager" << std::endl;
     std::string path = settings.pathToMinioTable;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
-    uint32_t t_id = 0;
+    uint32_t t_id = LHTransactions::unique_transaction_id();
 
     uint32_t counter = 0;
     uint32_t next_unique_id = 0;
@@ -279,8 +276,8 @@ bool interactive_txn(std::string& config_path) {
     auto connector =
         std::make_unique<StorageConnector::MinIOConnector>(&config2);
 
-    LHTransactions::TransactionManagerGeneric manager(levels, path,
-                                                      connector.get(), t_id);
+    LHTransactions::TransactionManagerDeltaLake manager(levels, path,
+                                                        connector.get(), t_id);
 
     std::cout << "Executing 'BEGIN TRANSACTION' ... ";
     bool opened = manager.begin_transaction_ycsb();
@@ -352,28 +349,24 @@ bool interactive_txn(std::string& config_path) {
           std::cout << "success" << std::endl;
         } else {
           std::cout << "aborting transaction" << std::endl;
-          return false;
+          exit_code = 1;
+          // leaves all scopes (destroys the manager) before ShutdownAPI
+          goto shutdown;
         }
       }
     }
   }
+shutdown:
   Aws::ShutdownAPI(options);
 
-  return true;
+  return exit_code;
 }
 
-void fresh_bench_writer(bool& found, std::string& path, LHTimer::Timer& timer,
+void fresh_bench_writer(std::atomic<bool>& found, std::string& path, LHTimer::Timer& timer,
                         LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -387,13 +380,13 @@ void fresh_bench_writer(bool& found, std::string& path, LHTimer::Timer& timer,
 
   while (counter < config.freshruns) {
     while (!found) {
-      // wait
+      std::this_thread::yield();
     }
     std::cerr << counter + 1 << "/" << config.freshruns << std::endl;
     found = false;
 
-    LHTransactions::TransactionManagerGeneric manager({true, false, false},
-                                                      path, config2, t_id);
+    LHTransactions::TransactionManagerDeltaLake manager({true, false, false},
+                                                        path, config2, t_id);
 
     arrow::ArrayVector value_vec;
 
@@ -424,19 +417,12 @@ void fresh_bench_writer(bool& found, std::string& path, LHTimer::Timer& timer,
   }
 }
 
-void fresh_bench_reader(bool& found, std::vector<double>& times,
+void fresh_bench_reader(std::atomic<bool>& found, std::vector<double>& times,
                         std::string& path, LHTimer::Timer& timer,
                         LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -446,13 +432,14 @@ void fresh_bench_reader(bool& found, std::vector<double>& times,
 
   while (counter < config.freshruns) {
     if (!first) {
-      first = false;
+      // wait until the writer starts the next record
       while (found) {
+        std::this_thread::yield();
       }
     }
 
-    LHTransactions::TransactionManagerGeneric manager({true, false, false},
-                                                      path, config2, t_id);
+    LHTransactions::TransactionManagerDeltaLake manager({true, false, false},
+                                                        path, config2, t_id);
     auto t = timer.end();
     bool opened = manager.begin_transaction_ycsb();
     while (!opened) {
@@ -472,6 +459,7 @@ void fresh_bench_reader(bool& found, std::vector<double>& times,
       next_unique_id++;
       counter++;
       found = true;
+      first = false;
     }
 
     manager.commit(false, true);
@@ -484,13 +472,14 @@ int fresh_bench_main(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
     std::cout << "starting freshbench" << std::endl;
 
-    bool found = false;
+    std::atomic<bool> found = false;
     std::vector<double> times = {};
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
@@ -515,18 +504,11 @@ int fresh_bench_main(std::string& conf_path) {
   return 0;
 }
 
-void fresh_bench_writer1(bool& found, std::string& path, LHTimer::Timer& timer,
+void fresh_bench_writer1(std::atomic<bool>& found, std::string& path, LHTimer::Timer& timer,
                          LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -541,13 +523,13 @@ void fresh_bench_writer1(bool& found, std::string& path, LHTimer::Timer& timer,
 
   while (counter < config.freshruns) {
     while (!found) {
-      // wait
+      std::this_thread::yield();
     }
     std::cerr << counter + 1 << "/" << config.freshruns << std::endl;
     found = false;
 
-    LHTransactions::TransactionManagerGeneric manager({true, true, false}, path,
-                                                      config2, t_id);
+    LHTransactions::TransactionManagerDeltaLake manager({true, true, false},
+                                                        path, config2, t_id);
 
     arrow::ArrayVector value_vec;
 
@@ -579,19 +561,12 @@ void fresh_bench_writer1(bool& found, std::string& path, LHTimer::Timer& timer,
   }
 }
 
-void fresh_bench_reader1(bool& found, std::vector<double>& times,
+void fresh_bench_reader1(std::atomic<bool>& found, std::vector<double>& times,
                          std::string& path, LHTimer::Timer& timer,
                          LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -601,13 +576,14 @@ void fresh_bench_reader1(bool& found, std::vector<double>& times,
 
   while (counter < config.freshruns) {
     if (!first) {
-      first = false;
+      // wait until the writer starts the next record
       while (found) {
+        std::this_thread::yield();
       }
     }
 
-    LHTransactions::TransactionManagerGeneric manager({true, true, false}, path,
-                                                      config2, t_id);
+    LHTransactions::TransactionManagerDeltaLake manager({true, true, false},
+                                                        path, config2, t_id);
     auto t = timer.end();
     bool opened = manager.begin_transaction_ycsb();
     while (!opened) {
@@ -627,6 +603,7 @@ void fresh_bench_reader1(bool& found, std::vector<double>& times,
       next_unique_id++;
       counter++;
       found = true;
+      first = false;
     }
 
     manager.commit(false, true);
@@ -639,13 +616,14 @@ int fresh_bench_main1(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
     std::cout << "starting freshbench" << std::endl;
 
-    bool found = false;
+    std::atomic<bool> found = false;
     std::vector<double> times = {};
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
@@ -670,18 +648,11 @@ int fresh_bench_main1(std::string& conf_path) {
   return 0;
 }
 
-void fresh_bench_writer2(bool& found, std::string& path, LHTimer::Timer& timer,
+void fresh_bench_writer2(std::atomic<bool>& found, std::string& path, LHTimer::Timer& timer,
                          LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -695,14 +666,14 @@ void fresh_bench_writer2(bool& found, std::string& path, LHTimer::Timer& timer,
 
   while (counter < config.freshruns) {
     while (!found) {
-      // wait
+      std::this_thread::yield();
     }
     found = false;
 
     // --- build arrow table ----
     std::vector<bool> levels = {true, true, true};
-    LHTransactions::TransactionManagerGeneric manager(levels, path, config2,
-                                                      t_id);
+    LHTransactions::TransactionManagerDeltaLake manager(levels, path, config2,
+                                                        t_id);
 
     arrow::ArrayVector value_vec;
 
@@ -735,19 +706,12 @@ void fresh_bench_writer2(bool& found, std::string& path, LHTimer::Timer& timer,
   std::cerr << "-end" << counter << std::endl;
 }
 
-void fresh_bench_reader2(bool& found, std::vector<double>& times,
+void fresh_bench_reader2(std::atomic<bool>& found, std::vector<double>& times,
                          std::string& path, LHTimer::Timer& timer,
                          LHConfig::LvSettings& config) {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = config.host;
-  config2.user = config.user;
-  config2.passwd = config.passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = config.minio_config();
 
-  uint32_t t_id = 0;
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   uint32_t counter = 0;
   uint32_t next_unique_id = 0;
@@ -758,14 +722,16 @@ void fresh_bench_reader2(bool& found, std::vector<double>& times,
   while (counter < config.freshruns) {
     std::cerr << counter + 1 << "/" << config.freshruns << std::endl;
     if (!first) {
+      // wait until the writer starts the next record
       while (found) {
+        std::this_thread::yield();
       }
     }
 
     // --- build arrow table ----
     std::vector<bool> levels = {false, false, true};
-    LHTransactions::TransactionManagerGeneric manager(levels, path, config2,
-                                                      t_id);
+    LHTransactions::TransactionManagerDeltaLake manager(levels, path, config2,
+                                                        t_id);
     auto t = timer.end();
     bool opened = manager.begin_transaction_ycsb();
     while (!opened) {
@@ -800,13 +766,14 @@ int fresh_bench_main2(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
     std::cout << "starting freshbench" << std::endl;
 
-    bool found = false;
+    std::atomic<bool> found = false;
     std::vector<double> times = {};
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
@@ -839,6 +806,7 @@ int fresh_bench_main_simple(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
@@ -847,16 +815,9 @@ int fresh_bench_main_simple(std::string& conf_path) {
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
-    uint32_t t_id = 0;
+    uint32_t t_id = LHTransactions::unique_transaction_id();
 
     uint32_t counter = 0;
     uint32_t next_unique_id = 0;
@@ -870,8 +831,8 @@ int fresh_bench_main_simple(std::string& conf_path) {
     while (counter < settings.freshruns) {
       std::cerr << counter + 1 << "/" << settings.freshruns << std::endl;
 
-      LHTransactions::TransactionManagerGeneric manager({true, false, false},
-                                                        path, config2, t_id);
+      LHTransactions::TransactionManagerDeltaLake manager({true, false, false},
+                                                          path, config2, t_id);
 
       arrow::ArrayVector value_vec;
 
@@ -921,6 +882,7 @@ int fresh_bench_main_simple1(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
@@ -929,16 +891,9 @@ int fresh_bench_main_simple1(std::string& conf_path) {
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
-    uint32_t t_id = 0;
+    uint32_t t_id = LHTransactions::unique_transaction_id();
 
     uint32_t counter = 0;
     uint32_t next_unique_id = 0;
@@ -952,8 +907,8 @@ int fresh_bench_main_simple1(std::string& conf_path) {
     while (counter < settings.freshruns) {
       std::cerr << counter + 1 << "/" << settings.freshruns << std::endl;
 
-      LHTransactions::TransactionManagerGeneric manager({true, true, false},
-                                                        path, config2, t_id);
+      LHTransactions::TransactionManagerDeltaLake manager({true, true, false},
+                                                          path, config2, t_id);
 
       arrow::ArrayVector value_vec;
 
@@ -1004,6 +959,7 @@ int fresh_bench_main_simple2(std::string& conf_path) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
@@ -1012,16 +968,9 @@ int fresh_bench_main_simple2(std::string& conf_path) {
     std::string path = settings.pathToFreshTable;
     LHTimer::Timer timer;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
-    uint32_t t_id = 0;
+    uint32_t t_id = LHTransactions::unique_transaction_id();
 
     uint32_t counter = 0;
     uint32_t next_unique_id = 0;
@@ -1037,8 +986,8 @@ int fresh_bench_main_simple2(std::string& conf_path) {
 
       // --- build arrow table ----
       std::vector<bool> levels = {true, true, true};
-      LHTransactions::TransactionManagerGeneric manager(levels, path, config2,
-                                                        t_id);
+      LHTransactions::TransactionManagerDeltaLake manager(levels, path, config2,
+                                                          t_id);
 
       arrow::ArrayVector value_vec;
 

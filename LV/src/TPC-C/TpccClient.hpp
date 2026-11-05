@@ -30,6 +30,8 @@ struct TpccClient {
 
   TpccClient(std::vector<bool> levels);
 
+  virtual ~TpccClient() = default;
+
   std::vector<bool> levels;
 
   virtual bool executeOne() = 0;

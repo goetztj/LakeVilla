@@ -40,6 +40,7 @@ void LHLST::SingleUser::run(std::vector<double>& times) {
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double> duration = end - start;
+    times.push_back(duration.count());
 
     std::cerr << i << "; " << duration.count() << std::endl;
   }
@@ -103,7 +104,7 @@ bool LHLST::SingleUser::q9() {
  */
 
   this->txnmanager =
-      std::make_unique<LHTransactions::TransactionManagerGeneric>(
+      std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
           level_config, paths.store_sales, connector, id);
   this->txnmanager->begin_transaction_ycsb();
 
@@ -161,7 +162,7 @@ sumsales , rk limit 100;
 */
 
   this->txnmanager =
-      std::make_unique<LHTransactions::TransactionManagerGeneric>(
+      std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
           level_config, paths.store_sales, connector, id);
   this->txnmanager->begin_transaction_ycsb();
 
@@ -238,7 +239,7 @@ limit 100;
   */
 
   this->txnmanager =
-      std::make_unique<LHTransactions::TransactionManagerGeneric>(
+      std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
           level_config, paths.store_sales, connector, id);
   this->txnmanager->begin_transaction_ycsb();
 
@@ -315,7 +316,7 @@ limit 100;
   */
 
   this->txnmanager =
-      std::make_unique<LHTransactions::TransactionManagerGeneric>(
+      std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
           level_config, paths.web_sales, connector, id);
   this->txnmanager->begin_transaction_ycsb();
 

@@ -78,7 +78,7 @@ void LHLST::Mixed::run(std::vector<double>& times) {
 
     auto start = std::chrono::high_resolution_clock::now();
     this->txnmanager =
-        std::make_unique<LHTransactions::TransactionManagerGeneric>(
+        std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
             level_config, table, connector, id);
     this->txnmanager->begin_transaction_ycsb();
 

@@ -256,6 +256,7 @@ int main(const int argc, const char* argv[]) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   std::vector<bool> levels = {false, false, false};
 
@@ -300,14 +301,7 @@ int main(const int argc, const char* argv[]) {
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = Aws::Region::EU_CENTRAL_1;
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     LHLST::TpcdsPaths paths;
     paths.customer_address = TPCDS_customer_address;

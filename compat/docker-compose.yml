@@ -1,0 +1,57 @@
+# Compatibility harness: LakeVilla (ManagerDeltaLake) and Spark 3.5 / Delta 3.0
+# on a private MinIO instance. Started by run_compat.py under its own project
+# name: no fixed container names and no host ports, so it runs next to the
+# main docker-compose.yml (and other projects) without conflicts.
+name: lv-compat
+
+services:
+  minio:
+    build:
+      context: ../MinIO
+      target: minio
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+    command: ["server", "/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9000/minio/health/live"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+
+  # Spark image of the main setup; the harness drives a local SparkSession
+  # through compat/spark/spark_server.py (no Hive metastore, path-based tables)
+  spark:
+    build: ../Spark
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: ["sleep", "infinity"]
+    command: []
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+    volumes:
+      - ./spark:/compat:ro
+      # Delta/Hadoop jars (spark.jars.packages) are downloaded once
+      - ivy:/root/.ivy2
+
+  # build environment of the lakevilla image (pinned Arrow and AWS SDK);
+  # compat-lv is compiled from the mounted sources on every run
+  lv:
+    build:
+      context: ../LV
+      target: deps
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: ["sleep", "infinity"]
+    command: []
+    volumes:
+      - ../LV/src:/src:ro
+      - lv-build:/build
+
+volumes:
+  ivy:
+  lv-build:

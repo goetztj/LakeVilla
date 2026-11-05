@@ -23,6 +23,7 @@
 #include "YCSB-C/core/timer.h"
 #include "YCSB-C/core/utils.h"
 #include "YCSBDB/db_factory.h"
+#include "YCSBDB/stats_db.hpp"
 
 using namespace std;
 
@@ -30,9 +31,9 @@ void UsageMessage(const char* command);
 bool StrStartWith(const char* str, const char* pre);
 string ParseCommandLine(int argc, const char* argv[], utils::Properties& props);
 
+// executes num_ops operations; Init() has to be called before
 int DelegateClient(ycsbc::DB* db, ycsbc::CoreWorkload* wl, const int num_ops,
                    bool is_loading, uint64_t id) {
-  db->Init();
   ycsbc::Client client(*db, *wl, id);
   int oks = 0;
   for (int i = 0; i < num_ops; ++i) {
@@ -42,82 +43,101 @@ int DelegateClient(ycsbc::DB* db, ycsbc::CoreWorkload* wl, const int num_ops,
       oks += client.DoTransaction();
     }
   }
+  // commits single-transaction runs; statistics are printed later
   db->Close();
   return oks;
+}
+
+// operations of thread i when total_ops are split across num_threads
+int OpsOfThread(int total_ops, int num_threads, int i) {
+  return total_ops / num_threads + (i < total_ops % num_threads ? 1 : 0);
+}
+
+void PrintStats(vector<ycsbc::DB*>& dbs) {
+  for (auto db : dbs) {
+    if (auto stats = dynamic_cast<ycsbc::StatsDB*>(db)) {
+      stats->print_stats();
+    }
+  }
 }
 
 int main(const int argc, const char* argv[]) {
   Aws::SDKOptions options;
   Aws::InitAPI(options);
+  int exit_code = 0;
   {
     utils::Properties props;
-    // std::cerr << "parseing args" << std::endl;
     string file_name = ParseCommandLine(argc, argv, props);
 
-    // ycsbc::DB *db = ycsbc::DBFactory::CreateDB(props);
-    // if (!db) {
-    //   cout << "Unknown database name " << props["dbname"] << endl;
-    //   exit(0);
-    // }
-    // std::cerr << "parsed args" << std::endl;
     if (props.GetProperty("config", "error").compare("error") == 0) {
       std::cerr << "no config file provided!" << std::endl;
+      Aws::ShutdownAPI(options);
       return 1;
     }
-
-    // std::cerr << "creating workload" << std::endl;
 
     ycsbc::CoreWorkload wl;
     wl.Init(props);
 
-    // std::cerr << "done workload" << std::endl;
-
     const int num_threads = stoi(props.GetProperty("threadcount", "1"));
 
-    // Loads data
     vector<future<int>> actual_ops;
     vector<ycsbc::DB*> dbs;
     int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
     int sum = 0;
 
-    for (uint64_t i = 0; i < num_threads; ++i) {
+    for (int i = 0; i < num_threads; ++i) {
       ycsbc::DB* db = ycsbc::DBFactory::CreateDB(props);
       if (!db) {
-        cout << "Unknown database name " << props["dbname"] << endl;
-        exit(0);
+        cerr << "Unknown database name " << props["dbname"] << endl;
+        for (auto created : dbs) {
+          delete created;
+        }
+        Aws::ShutdownAPI(options);
+        return 1;
       }
       dbs.push_back(db);
-      if (props.GetProperty("load", "true") == "true") {
-        actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
-                                      total_ops / num_threads, true, i));
+      if (auto stats = dynamic_cast<ycsbc::StatsDB*>(db)) {
+        stats->defer_stats = true;
       }
     }
 
+    // Loads data
     if (props.GetProperty("load", "true") == "true") {
-      assert((int)actual_ops.size() == num_threads);
+      for (auto db : dbs) {
+        db->Init();
+      }
+      for (int i = 0; i < num_threads; ++i) {
+        actual_ops.emplace_back(async(launch::async, DelegateClient, dbs[i],
+                                      &wl, OpsOfThread(total_ops, num_threads, i),
+                                      true, i));
+      }
+      for (auto& n : actual_ops) {
+        sum += n.get();
+      }
+      cerr << "# Loading records:\t" << sum << endl;
+      PrintStats(dbs);
     }
-
-    for (auto& n : actual_ops) {
-      assert(n.valid());
-      sum += n.get();
-    }
-    cerr << "# Loading records:\t" << sum << endl;
 
     // Peforms transactions
     if (props.GetProperty("run", "true") == "true") {
       actual_ops.clear();
       total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
+
+      // connection setup is not part of the measurement
+      for (auto db : dbs) {
+        db->Init();
+      }
+
       utils::Timer<double> timer;
       timer.Start();
-      for (uint64_t i = 0; i < num_threads; ++i) {
+      for (int i = 0; i < num_threads; ++i) {
         actual_ops.emplace_back(async(launch::async, DelegateClient, dbs[i],
-                                      &wl, total_ops / num_threads, false, i));
+                                      &wl, OpsOfThread(total_ops, num_threads, i),
+                                      false, i));
       }
-      assert((int)actual_ops.size() == num_threads);
 
       sum = 0;
       for (auto& n : actual_ops) {
-        assert(n.valid());
         sum += n.get();
       }
       double duration = timer.End();
@@ -125,11 +145,18 @@ int main(const int argc, const char* argv[]) {
       cerr << props["dbname"] << '\t' << file_name << '\t' << num_threads
            << '\t';
       cerr << total_ops / duration / 1000 << endl;
+      cerr << "# Successful operations:\t" << sum << "/" << total_ops << endl;
+      PrintStats(dbs);
     } else {
       cout << "skipping run" << endl;
     }
+
+    for (auto db : dbs) {
+      delete db;
+    }
   }
   Aws::ShutdownAPI(options);
+  return exit_code;
 }
 
 string ParseCommandLine(int argc, const char* argv[],

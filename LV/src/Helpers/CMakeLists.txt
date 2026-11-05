@@ -1,1 +1,1 @@
-target_sources(lakevilla-core PRIVATE Helper.cpp)
+target_sources(lakevilla-core PRIVATE Helper.cpp DeltaSchema.cpp DeltaConform.cpp)

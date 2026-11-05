@@ -37,6 +37,9 @@ bool LHTPCDS::TPCDSClient::executeAll(std::vector<bool>& levels,
     std::cout << i << ": " << time << std::endl;
   }
 
+  if (times9.empty()) {
+    return success;
+  }
   double max = times9[0];
   double min = times9[0];
   double avg = 0;
@@ -81,6 +84,9 @@ bool LHTPCDS::TPCDSClient::executeAll(std::vector<bool>& levels,
     std::cout << i << ": " << time << std::endl;
   }
 
+  if (times67.empty()) {
+    return success;
+  }
   max = times67[0];
   min = times67[0];
   avg = 0;
@@ -126,6 +132,9 @@ bool LHTPCDS::TPCDSClient::executeAll(std::vector<bool>& levels,
     std::cout << i << ": " << time << std::endl;
   }
 
+  if (times68.empty()) {
+    return success;
+  }
   max = times68[0];
   min = times68[0];
   avg = 0;
@@ -170,6 +179,9 @@ bool LHTPCDS::TPCDSClient::executeAll(std::vector<bool>& levels,
     std::cout << i << ": " << time << std::endl;
   }
 
+  if (times90.empty()) {
+    return success;
+  }
   max = times90[0];
   min = times90[0];
   avg = 0;
@@ -251,7 +263,7 @@ bool LHTPCDS::TPCDSClient::q9(std::vector<bool>& levels) {
  ;
 
  */
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       levels, paths.store_sales, this->connector.get(), 9);
 
   txnmanager.begin_transaction_ycsb();
@@ -307,7 +319,7 @@ sumsales , rk limit 100;
                  , date_dim
                  , store
                  , item*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       levels, paths.store_sales, this->connector.get(), 9);
 
   txnmanager.begin_transaction_ycsb();
@@ -378,7 +390,7 @@ limit 100;
         , household_demographics
         , customer_address*/
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       levels, paths.store_sales, this->connector.get(), 9);
 
   txnmanager.begin_transaction_ycsb();
@@ -447,7 +459,7 @@ limit 100;
 
   */
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       levels, paths.web_sales, this->connector.get(), 9);
 
   txnmanager.begin_transaction_ycsb();

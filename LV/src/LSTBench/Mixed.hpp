@@ -5,7 +5,7 @@ namespace LHLST {
 
 // Mixed phase of LSTBench
 struct Mixed : Phase {
-  std::unique_ptr<LHTransactions::TransactionManagerGeneric> txnmanager;
+  std::unique_ptr<LHTransactions::TransactionManagerDeltaLake> txnmanager;
 
   preparedLSTContent* content;
 

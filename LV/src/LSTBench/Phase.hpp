@@ -10,7 +10,7 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 
 namespace LHLST {
 
@@ -59,5 +59,7 @@ struct Phase {
         std::vector<bool> level_config = {false, false, false});
 
   virtual void run(std::vector<double>& times) = 0;
+
+  virtual ~Phase() = default;
 };
 };  // namespace LHLST

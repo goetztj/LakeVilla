@@ -8,8 +8,8 @@ LHCAB::CABClientWriteSwitching::CABClientWriteSwitching(
 }
 
 bool LHCAB::CABClientWriteSwitching::executeWriteStream(
-    std::vector<std::vector<bool>> levels, std::vector<bool>& triggers,
-    bool& end, std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
+    std::vector<std::vector<bool>> levels, Phases& phases,
+    std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
     double& reads_mb, double& writes_mb) {
   this->level_config = levels[0];
   this->read_mb_count = 0;
@@ -17,18 +17,14 @@ bool LHCAB::CABClientWriteSwitching::executeWriteStream(
   uint32_t next_stage = 1;
   uint32_t curr_stage = 0;
 
-  while (times.size() < triggers.size()) {
-    times.emplace_back();
-  }
+  times.resize(phases.size());
 
-  while (!(triggers[0])) {
-    // wait
-  }
+  phases.wait_for_start();
 
   auto begin = std::chrono::high_resolution_clock::now();
 
-  while (!end) {
-    if (next_stage < triggers.size() && triggers[next_stage]) {
+  while (!phases.end) {
+    if (next_stage < phases.size() && phases.started(next_stage)) {
       this->level_config = levels[next_stage];
       next_stage++;
       curr_stage++;
@@ -43,7 +39,8 @@ bool LHCAB::CABClientWriteSwitching::executeWriteStream(
 
     bool success = false;
 
-    while (true) {
+    // retry the operation until it commits (or the run ends)
+    while (!phases.end) {
       auto op_start = std::chrono::high_resolution_clock::now();
       // 20% updates and 80% updates per stream
 
@@ -151,36 +148,46 @@ bool LHCAB::CABClientWriteSwitching::executeWriteStream(
 }
 
 bool LHCAB::CABClientWriteSwitching::startAll(
-    std::vector<std::vector<bool>> levels, std::vector<bool>& triggers,
-    bool& end, std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
+    std::vector<std::vector<bool>> levels, Phases& phases,
+    std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
     double& reads_mb, double& writes_mb) {
-  std::vector<std::vector<std::vector<std::pair<int64_t, int64_t>>>> part_times;
-  std::vector<std::thread> threads;
+  // one client object per thread: level configuration, transaction ids and
+  // counters are per client
+  std::vector<std::unique_ptr<CABClientWriteSwitching>> clients;
+  // sized before the threads start (no reallocation while they write)
+  std::vector<std::vector<std::vector<std::pair<int64_t, int64_t>>>> part_times(
+      num_clients);
+  std::vector<double> part_reads(num_clients, 0), part_writes(num_clients, 0);
   for (uint32_t i = 0; i < num_clients; i++) {
-    part_times.emplace_back();
-
-    threads.emplace_back([this, &part_times, i, &levels, &end, &triggers,
-                          &reads_mb, &writes_mb] {
-      this->executeWriteStream(levels, triggers, end, part_times[i], reads_mb,
-                               writes_mb);
-    });
+    clients.push_back(std::make_unique<CABClientWriteSwitching>(
+        1, this->base_path, this->tendant, this->config, this->id,
+        this->content));
   }
 
-  std::cerr << "All threads started" << std::endl;
-
-  for (auto& ref : threads) {
-    ref.join();
+  {
+    std::vector<std::jthread> threads;
+    for (uint32_t i = 0; i < num_clients; i++) {
+      threads.emplace_back([&, i] {
+        clients[i]->executeWriteStream(levels, phases, part_times[i],
+                                       part_reads[i], part_writes[i]);
+      });
+    }
+    std::cerr << "All threads started" << std::endl;
   }
 
   std::cerr << "Benchmark stopped; merging results" << std::endl;
 
-  while (times.size() < triggers.size()) {
+  while (times.size() < phases.size()) {
     times.emplace_back();
   }
 
-  for (uint32_t step = 0; step < triggers.size(); step++) {
-    for (auto& part : part_times) {
-      for (auto& res : part[step]) {
+  reads_mb = 0;
+  writes_mb = 0;
+  for (uint32_t i = 0; i < num_clients; i++) {
+    reads_mb += part_reads[i];
+    writes_mb += part_writes[i];
+    for (uint32_t step = 0; step < part_times[i].size(); step++) {
+      for (auto& res : part_times[i][step]) {
         times[step].push_back(res);
       }
     }
@@ -190,13 +197,13 @@ bool LHCAB::CABClientWriteSwitching::startAll(
 }
 
 bool LHCAB::CABClientWriteSwitching::executeIngestionEnd() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       {false, false, true}, this->customer_path, this->connector.get(),
-      this->id);
+      LHTransactions::unique_transaction_id());
 
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
 
   txnmanager.open_new_table(this->lineitem_path);

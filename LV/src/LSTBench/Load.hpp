@@ -5,7 +5,7 @@ namespace LHLST {
 
 // Load phase of LSTBench
 struct Load : Phase {
-  std::unique_ptr<LHTransactions::TransactionManagerGeneric> txnmanager;
+  std::unique_ptr<LHTransactions::TransactionManagerDeltaLake> txnmanager;
 
   preparedLSTContent* content;
 

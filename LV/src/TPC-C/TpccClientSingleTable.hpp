@@ -9,7 +9,7 @@
 #include <utility>
 
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "TpccClient.hpp"
 
 namespace LHTPC {

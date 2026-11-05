@@ -16,17 +16,23 @@ bool LHTPC::TpccClientSingleTable::executeOne() {
 
   auto number = distr(generator);
 
+  bool success = false;
   if (number < 4) {
-    return this->stockLevel();
+    success = this->stockLevel();
   } else if (number < 9) {
-    return this->delivery();
+    success = this->delivery();
   } else if (number < 13) {
-    return this->orderStatus();
+    success = this->orderStatus();
   } else if (number < 56) {
-    return this->payment();
+    success = this->payment();
   } else {
-    return this->newOrder();
+    success = this->newOrder();
   }
+
+  if (!success) {
+    this->aborts++;
+  }
+  return success;
 }
 
 bool LHTPC::TpccClientSingleTable::stockLevel() {
@@ -51,8 +57,9 @@ error();
 }
   */
 
-  auto txnmanager_district = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.district, this->config, 0);
+  auto txnmanager_district = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.district, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_district.begin_transaction_ycsb();
 
@@ -60,11 +67,13 @@ error();
 
   auto district_table = txnmanager_district.read_table(0);
 
-  auto txnmanager_order_line = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order_line, this->config, 1);
+  auto txnmanager_order_line = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order_line, this->config,
+      LHTransactions::unique_transaction_id());
 
-  auto txnmanager_stock = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.stock, this->config, 2);
+  auto txnmanager_stock = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.stock, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order_line.begin_transaction_ycsb();
   txnmanager_stock.begin_transaction_ycsb();
@@ -74,8 +83,12 @@ error();
       txnmanager_order_line.read_random_file_as_table(0, tmp1);
   auto stock_table = txnmanager_stock.read_random_file_as_table(0, tmp2);
 
-  return txnmanager_district.commit(true) &&
-         txnmanager_order_line.commit(true) && txnmanager_stock.commit(true);
+  // commit every table (&& skipped the remaining commits)
+  bool committed = true;
+  committed &= txnmanager_district.commit(true);
+  committed &= txnmanager_order_line.commit(true);
+  committed &= txnmanager_stock.commit(true);
+  return committed;
 }
 
 bool LHTPC::TpccClientSingleTable::orderStatus() {
@@ -138,8 +151,9 @@ error();
 }
   */
 
-  auto txnmanager_customer = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 0);
+  auto txnmanager_customer = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_customer.begin_transaction_ycsb();
 
@@ -148,21 +162,27 @@ error();
   auto customer_table1 = txnmanager_customer.read_table(0);
   auto customer_table2 = txnmanager_customer.read_table(0);
 
-  auto txnmanager_order = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order, this->config, 1);
+  auto txnmanager_order = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order.begin_transaction_ycsb();
 
-  auto txnmanager_order_line = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order_line, this->config, 2);
+  auto txnmanager_order_line = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order_line, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order_line.begin_transaction_ycsb();
 
   auto order_table = txnmanager_order.read_table(0);
   auto order_line_table = txnmanager_order_line.read_table(0);
 
-  return txnmanager_customer.commit(true) && txnmanager_order.commit(true) &&
-         txnmanager_order_line.commit(true);
+  // commit every table (&& skipped the remaining commits)
+  bool committed = true;
+  committed &= txnmanager_customer.commit(true);
+  committed &= txnmanager_order.commit(true);
+  committed &= txnmanager_order_line.commit(true);
+  return committed;
 }
 
 bool LHTPC::TpccClientSingleTable::delivery() {
@@ -215,8 +235,9 @@ error();
 }
   */
 
-  auto txnmanager_new_order = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.new_order, this->config, 0);
+  auto txnmanager_new_order = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.new_order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_new_order.begin_transaction_ycsb();
 
@@ -228,18 +249,21 @@ error();
 
   auto number = distr(generator);
 
-  auto txnmanager_order = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order, this->config, 1);
+  auto txnmanager_order = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order.begin_transaction_ycsb();
 
-  auto txnmanager_order_line = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order_line, this->config, 2);
+  auto txnmanager_order_line = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order_line, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order_line.begin_transaction_ycsb();
 
-  auto txnmanager_customer = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 3);
+  auto txnmanager_customer = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_customer.begin_transaction_ycsb();
 
@@ -287,13 +311,19 @@ error();
     txnmanager_customer.remove_file(0, customer_path);
     txnmanager_customer.add_file(0, customer_path, true);
   }
-  return txnmanager_new_order.commit() && txnmanager_order.commit() &&
-         txnmanager_order_line.commit() && txnmanager_customer.commit();
+  // commit every table (&& skipped the remaining commits)
+  bool committed = true;
+  committed &= txnmanager_new_order.commit();
+  committed &= txnmanager_order.commit();
+  committed &= txnmanager_order_line.commit();
+  committed &= txnmanager_customer.commit();
+  return committed;
 }
 
 bool LHTPC::TpccClientSingleTable::payment() {
-  auto txnmanager_warehouse = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.warehouse, this->config, 0);
+  auto txnmanager_warehouse = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.warehouse, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_warehouse.begin_transaction_ycsb();
 
@@ -318,8 +348,9 @@ bool LHTPC::TpccClientSingleTable::payment() {
   auto warehouse_table2 =
       txnmanager_warehouse.read_random_file_as_table(0, path);
 
-  auto txnmanager_district = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.district, this->config, 1);
+  auto txnmanager_district = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.district, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_district.begin_transaction_ycsb();
 
@@ -346,8 +377,9 @@ bool LHTPC::TpccClientSingleTable::payment() {
 
   auto number = distr(generator);
 
-  auto txnmanager_customer = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 2);
+  auto txnmanager_customer = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_customer.begin_transaction_ycsb();
 
@@ -412,8 +444,9 @@ c_id = :c_id;*/
     txnmanager_customer.add_file(0, customer_path, true);
   }
 
-  auto txnmanager_history = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.history, this->config, 3);
+  auto txnmanager_history = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.history, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_history.begin_transaction_ycsb();
 
@@ -426,13 +459,19 @@ VALUES (:c_d_id, :c_w_id, :c_id, :d_id,
   auto history_table = generateHistory();
   txnmanager_history.add_file(0, history_table, his_key, true);
 
-  return txnmanager_warehouse.commit() && txnmanager_district.commit() &&
-         txnmanager_customer.commit() && txnmanager_history.commit();
+  // commit every table (&& skipped the remaining commits)
+  bool committed = true;
+  committed &= txnmanager_warehouse.commit();
+  committed &= txnmanager_district.commit();
+  committed &= txnmanager_customer.commit();
+  committed &= txnmanager_history.commit();
+  return committed;
 }
 
 bool LHTPC::TpccClientSingleTable::newOrder() {
-  auto txnmanager_customer = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 0);
+  auto txnmanager_customer = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_customer.begin_transaction_ycsb();
 
@@ -449,8 +488,9 @@ bool LHTPC::TpccClientSingleTable::newOrder() {
 
   std::string path, warehouse_path;
 
-  auto txnmanager_warehouse = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.warehouse, this->config, 1);
+  auto txnmanager_warehouse = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.warehouse, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_warehouse.begin_transaction_ycsb();
   /*EXEC SQL SELECT c_discount, c_last, c_credit, w_tax
@@ -463,8 +503,9 @@ c_d_id = :d_id AND c_id = :c_id;*/
   auto warehouse_table = txnmanager_warehouse.read_table(0);
 
   std::string district_path;
-  auto txnmanager_district = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.district, this->config, 2);
+  auto txnmanager_district = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.district, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_district.begin_transaction_ycsb();
   /*EXEC SQL SELECT d_next_o_id, d_tax INTO :d_next_o_id, :d_tax
@@ -480,8 +521,9 @@ WHERE d_id = :d_id AND d_w_id = :w_id;*/
   txnmanager_district.add_file(0, district_path, true);
 
   std::string order_path;
-  auto txnmanager_order = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order, this->config, 3);
+  auto txnmanager_order = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order.begin_transaction_ycsb();
   /*EXEC SQL INSERT INTO ORDERS (o_id, o_d_id, o_w_id, o_c_id,
@@ -493,8 +535,9 @@ WHERE d_id = :d_id AND d_w_id = :w_id;*/
   txnmanager_order.add_file(0, order_table, order_key, true);
 
   std::string new_order_path;
-  auto txnmanager_new_order = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.new_order, this->config, 4);
+  auto txnmanager_new_order = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.new_order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_new_order.begin_transaction_ycsb();
 
@@ -511,18 +554,21 @@ WHERE d_id = :d_id AND d_w_id = :w_id;*/
   std::uniform_int_distribution<> distr{1, 10};
 
   auto number = distr(generator);
-  auto txnmanager_item = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.item, this->config, 5);
+  auto txnmanager_item = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.item, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_item.begin_transaction_ycsb();
 
-  auto txnmanager_stock = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.stock, this->config, 6);
+  auto txnmanager_stock = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.stock, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_stock.begin_transaction_ycsb();
 
-  auto txnmanager_order_line = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.order_line, this->config, 7);
+  auto txnmanager_order_line = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.order_line, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager_order_line.begin_transaction_ycsb();
 
@@ -572,9 +618,15 @@ strncpy(iname[ol_number-1],i_name,24);*/
     txnmanager_order_line.add_file(0, order_line_table, order_line_key, true);
   }
 
-  return txnmanager_customer.commit(true) &&
-         txnmanager_warehouse.commit(true) && txnmanager_district.commit() &&
-         txnmanager_order.commit() && txnmanager_new_order.commit() &&
-         txnmanager_item.commit(true) && txnmanager_stock.commit() &&
-         txnmanager_order_line.commit();
+  // commit every table (&& skipped the remaining commits)
+  bool committed = true;
+  committed &= txnmanager_customer.commit(true);
+  committed &= txnmanager_warehouse.commit(true);
+  committed &= txnmanager_district.commit();
+  committed &= txnmanager_order.commit();
+  committed &= txnmanager_new_order.commit();
+  committed &= txnmanager_item.commit(true);
+  committed &= txnmanager_stock.commit();
+  committed &= txnmanager_order_line.commit();
+  return committed;
 }

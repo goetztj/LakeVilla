@@ -58,8 +58,9 @@ error();
 }
   */
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.district, this->config, 0);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.district, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager.begin_transaction_ycsb();
 
@@ -140,8 +141,9 @@ error();
 }
   */
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 0);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager.begin_transaction_ycsb();
 
@@ -212,8 +214,9 @@ error();
 }
   */
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.new_order, this->config, 0);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.new_order, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager.begin_transaction_ycsb();
 
@@ -285,8 +288,9 @@ error();
 }
 
 bool LHTPC::TpccClientMultiTable::payment() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.warehouse, this->config, 0);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.warehouse, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager.begin_transaction_ycsb();
 
@@ -420,8 +424,9 @@ VALUES (:c_d_id, :c_w_id, :c_id, :d_id,
 }
 
 bool LHTPC::TpccClientMultiTable::newOrder() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->levels, paths.customer, this->config, 0);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->levels, paths.customer, this->config,
+      LHTransactions::unique_transaction_id());
 
   txnmanager.begin_transaction_ycsb();
   std::vector<std::pair<std::string, std::string>> vals;

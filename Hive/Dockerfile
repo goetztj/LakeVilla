@@ -10,11 +10,13 @@ WORKDIR /etc/metastore
 
 RUN apt-get update && apt-get install -y ssh pdsh netcat
 
-RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz
+# the CDN only hosts current releases; archive.apache.org keeps all (slow)
+RUN wget -q https://dlcdn.apache.org/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz || wget -q https://archive.apache.org/dist/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz
 
 RUN tar xfv ./hadoop-3.3.5.tar.gz
 
-RUN wget https://dlcdn.apache.org/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
+# the CDN only hosts current releases; archive.apache.org keeps all (slow)
+RUN wget -q https://dlcdn.apache.org/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz || wget -q https://archive.apache.org/dist/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz
 
 RUN tar xfv ./hive-standalone-metastore-3.0.0-bin.tar.gz
 

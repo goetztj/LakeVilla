@@ -9,13 +9,11 @@ void LHLST::MultiUser::add_phase(std::unique_ptr<Phase>&& p) {
 }
 
 void LHLST::MultiUser::run(std::vector<double>& times) {
-  std::vector<std::vector<double>> all_times;
+  // sized before the threads start: they keep references to their element
+  std::vector<std::vector<double>> all_times(this->con_phases.size());
   std::vector<std::thread> threads;
 
-  for (int i = 0; i < this->con_phases.size(); i++) {
-    std::vector<double> tmp = {};
-    all_times.push_back(std::move(tmp));
-
+  for (size_t i = 0; i < this->con_phases.size(); i++) {
     threads.emplace_back(
         [i, &all_times, this] { this->con_phases[i]->run(all_times[i]); });
     std::cerr << "thread " << i << " started" << std::endl;

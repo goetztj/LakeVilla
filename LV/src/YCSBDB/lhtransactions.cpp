@@ -1,24 +1,18 @@
 #include "lhtransactions.hpp"
 
-std::atomic<uint32_t> ycsbc::LHTransactionsDB::next_id(0);
+#include <strings.h>
 
 ycsbc::LHTransactionsDB::LHTransactionsDB(std::string& config_path, std::vector<bool> config, bool single) : config(std::move(config)), single_txn(single) {
   this->settings = std::make_unique<LHConfig::LvSettings>(config_path);
 
   this->settings->parse();
+  this->settings->apply_defaults();
 
   this->read_only = true;
 }
 
 void ycsbc::LHTransactionsDB::Init() {
-  StorageConnector::MinIOConfig config2;
-  config2.endpointURI = this->settings->host;
-  config2.user = this->settings->user;
-  config2.passwd = this->settings->passwd;
-  config2.region = "";
-  config2.connectTimeout = 60000;
-  config2.requestTimeout = 10000;
-  config2.default_bucket = "warehouse";
+  StorageConnector::MinIOConfig config2 = this->settings->minio_config();
 
   this->read_only = true;
 
@@ -46,14 +40,13 @@ void ycsbc::LHTransactionsDB::Init() {
 
   std::string path = this->settings->pathToYCSBTable;
 
-  uint32_t t_id = ycsbc::LHTransactionsDB::next_id.fetch_add(1);
+  uint32_t t_id = LHTransactions::unique_transaction_id();
 
   //std::vector<bool> config = {false, true, false};
-  this->manager = std::make_unique<LHTransactions::TransactionManagerGeneric>(
+  this->manager = std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
       config, path, config2, t_id);
 
   if(single_txn){
-    std::cerr << "<<<< begin once " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto init_end = std::chrono::high_resolution_clock::now();
@@ -66,7 +59,6 @@ void ycsbc::LHTransactionsDB::Close() {
   std::cerr << "<<<<< redos: " << this->manager->times_redo << " >>>>>"
             << std::endl;
   if(single_txn){
-    std::cerr << "<<<< commit once " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->commit(this->read_only);
     auto commit_end = std::chrono::high_resolution_clock::now();
@@ -76,7 +68,18 @@ void ycsbc::LHTransactionsDB::Close() {
 
   this->manager = nullptr;
 
-  this->print_stats();
+  if (!this->defer_stats) {
+    this->print_stats();
+  }
+}
+
+bool ycsbc::LHTransactionsDB::commit_operation(bool read_only) {
+  auto op_end = std::chrono::high_resolution_clock::now();
+  bool committed = this->manager->commit(read_only);
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double, std::milli> duration_c = end - op_end;
+  this->commit_perf.push_back(duration_c.count());
+  return committed;
 }
 
 int ycsbc::LHTransactionsDB::Read(const std::string& table,
@@ -86,7 +89,6 @@ int ycsbc::LHTransactionsDB::Read(const std::string& table,
   std::string path = "";
 
   if(!single_txn){
-    std::cerr << "<<<< begin multi " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto b_end = std::chrono::high_resolution_clock::now();
@@ -98,12 +100,8 @@ int ycsbc::LHTransactionsDB::Read(const std::string& table,
   auto success = this->manager->read_file(0, key, fields, result, path);
   auto op_end = std::chrono::high_resolution_clock::now();
 
-  if(!single_txn){
-    std::cerr << "<<<< commit multi " <<std::endl;
-    this->manager->commit(true);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration_c = end - op_end;
-    this->commit_perf.push_back(duration_c.count());
+  if (!single_txn) {
+    this->commit_operation(true);
   }
 
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
@@ -123,7 +121,6 @@ int ycsbc::LHTransactionsDB::Scan(
   std::string path = "";
 
   if(!single_txn){
-    std::cerr << "<<<< begin multi " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto b_end = std::chrono::high_resolution_clock::now();
@@ -136,12 +133,8 @@ int ycsbc::LHTransactionsDB::Scan(
   auto result_ptr = this->manager->read_table(0);
   auto op_end = std::chrono::high_resolution_clock::now();
 
-  if(!single_txn){
-    std::cerr << "<<<< commit multi " <<std::endl;
-    this->manager->commit(true);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration_c = end - op_end;
-    this->commit_perf.push_back(duration_c.count());
+  if (!single_txn) {
+    this->commit_operation(true);
   }
 
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
@@ -162,7 +155,6 @@ int ycsbc::LHTransactionsDB::Update(
   std::string path = "";
 
   if(!single_txn){
-    std::cerr << "<<<< begin multi " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto b_end = std::chrono::high_resolution_clock::now();
@@ -173,6 +165,10 @@ int ycsbc::LHTransactionsDB::Update(
   auto arrowBaseTable = this->manager->read_file_as_table(0, key, path);
 
   if (!arrowBaseTable) {
+    if (!single_txn) {
+      // close the transaction of this operation
+      this->commit_operation(true);
+    }
     return 1;
   }
 
@@ -186,8 +182,11 @@ int ycsbc::LHTransactionsDB::Update(
   for (auto& ref : values) {
     auto col_names = arrowBaseTable->ColumnNames();
     for (int i = 0; i < col_names.size(); i++) {
-      if (col_names[i].compare(ref.first) == 0) {
-        auto field = std::make_shared<arrow::Field>(ref.first, arrow::utf8());
+      // the file has the column names of the table schema (Spark: FIELD0),
+      // Delta column names are case-insensitive
+      if (strcasecmp(col_names[i].c_str(), ref.first.c_str()) == 0) {
+        auto field =
+            std::make_shared<arrow::Field>(col_names[i], arrow::utf8());
 
         arrow::StringBuilder builder;
         PARQUET_THROW_NOT_OK(builder.Append(ref.second));
@@ -208,21 +207,17 @@ int ycsbc::LHTransactionsDB::Update(
   bool add_success = this->manager->add_file(0, arrowBaseTable, key, prev_id);
   sub_remove_thread.join();
   auto op_end = std::chrono::high_resolution_clock::now();
-  if(!single_txn){
-    std::cerr << "<<<< commit multi " <<std::endl;
-    this->manager->commit(false);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration_c = end - op_end;
-    this->commit_perf.push_back(duration_c.count());
+  bool committed = true;
+  if (!single_txn) {
+    committed = this->commit_operation(false);
   }
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
   this->update_perf.push_back(duration.count());
 
-  if (add_success) {
+  if (add_success && committed) {
     return 0;
   }
 
-  std::cout << "error!" << std::endl;
   return 1;
 }
 
@@ -231,7 +226,6 @@ int ycsbc::LHTransactionsDB::Insert(
     std::vector<ycsbc::DB::KVPair>& values) {
   this->read_only = false;
   if(!single_txn){
-    std::cerr << "<<<< begin multi " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto b_end = std::chrono::high_resolution_clock::now();
@@ -243,28 +237,23 @@ int ycsbc::LHTransactionsDB::Insert(
 
   bool add_success = this->manager->add_file(0, arrowTable, key);
   auto op_end = std::chrono::high_resolution_clock::now();
-  if(!single_txn){
-    std::cerr << "<<<< commit multi " <<std::endl;
-    this->manager->commit(false);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration_c = end - op_end;
-    this->commit_perf.push_back(duration_c.count());
+  bool committed = true;
+  if (!single_txn) {
+    committed = this->commit_operation(false);
   }
   std::chrono::duration<double, std::milli> duration = op_end - init_end;
   this->insert_perf.push_back(duration.count());
 
-  if (add_success) {
+  if (add_success && committed) {
     return 0;
-  } else {
-    return 1;
   }
+  return 1;
 }
 
 int ycsbc::LHTransactionsDB::Delete(const std::string& table,
                                         const std::string& key) {
   this->read_only = false;
   if(!single_txn){
-    std::cerr << "<<<< begin multi " <<std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     this->manager->begin_transaction_ycsb();
     auto b_end = std::chrono::high_resolution_clock::now();
@@ -273,14 +262,11 @@ int ycsbc::LHTransactionsDB::Delete(const std::string& table,
   }
   auto success = this->manager->remove_file(0, key);
   auto op_end = std::chrono::high_resolution_clock::now();
-  if(!single_txn){
-    std::cerr << "<<<< commit multi " <<std::endl;
-    this->manager->commit(false);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration_c = end - op_end;
-    this->commit_perf.push_back(duration_c.count());
+  bool committed = true;
+  if (!single_txn) {
+    committed = this->commit_operation(false);
   }
-  if (!success) {
+  if (!success || !committed) {
     return 1;
   }
   return 0;

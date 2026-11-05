@@ -76,7 +76,7 @@ void LHLST::Load::run(std::vector<double>& times) {
 
     if (!this->txnmanager) {
       this->txnmanager =
-          std::make_unique<LHTransactions::TransactionManagerGeneric>(
+          std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
               level_config, table, connector, id);
       this->txnmanager->begin_transaction_ycsb();
     }

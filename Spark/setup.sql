@@ -55,7 +55,9 @@ CREATE TABLE spark_catalog.ycsbsparkdl.usertable (YCSB_KEY VARCHAR(255),FIELD0 S
 CREATE NAMESPACE banking;
 CREATE TABLE spark_catalog.banking.banking0 (Banking_ID string, balance string) USING delta;
 
-INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "0.0"), ("1", "0.0");
+-- one file per account: LakeVilla replaces the file of an account on update
+INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "0.0");
+INSERT INTO spark_catalog.banking.banking0 VALUES ("1", "0.0");
 
 CREATE TABLE spark_catalog.banking.banking1 (Banking_ID string, balance string) USING delta;
 
@@ -160,3 +162,22 @@ CREATE TABLE IF NOT EXISTS spark_catalog.tpcds1000.customer60 (c_customer_sk INT
 CREATE TABLE IF NOT EXISTS spark_catalog.tpcds1000.customer61 (c_customer_sk INT, c_customer_id STRING, c_current_cdemo_sk INT, c_current_hdemo_sk INT, c_current_addr_sk INT, c_first_shipto_date_sk INT, c_first_sales_date_sk INT, c_salutation STRING, c_first_name STRING, c_last_name STRING, c_preferred_cust_flag STRING, c_birth_day INT, c_birth_month INT, c_birth_year INT, c_birth_country STRING, c_login STRING, c_email_address STRING, c_last_review_date STRING) USING delta;
 CREATE TABLE IF NOT EXISTS spark_catalog.tpcds1000.customer62 (c_customer_sk INT, c_customer_id STRING, c_current_cdemo_sk INT, c_current_hdemo_sk INT, c_current_addr_sk INT, c_first_shipto_date_sk INT, c_first_sales_date_sk INT, c_salutation STRING, c_first_name STRING, c_last_name STRING, c_preferred_cust_flag STRING, c_birth_day INT, c_birth_month INT, c_birth_year INT, c_birth_country STRING, c_login STRING, c_email_address STRING, c_last_review_date STRING) USING delta;
 CREATE TABLE IF NOT EXISTS spark_catalog.tpcds1000.customer63 (c_customer_sk INT, c_customer_id STRING, c_current_cdemo_sk INT, c_current_hdemo_sk INT, c_current_addr_sk INT, c_first_shipto_date_sk INT, c_first_sales_date_sk INT, c_salutation STRING, c_first_name STRING, c_last_name STRING, c_preferred_cust_flag STRING, c_birth_day INT, c_birth_month INT, c_birth_year INT, c_birth_country STRING, c_login STRING, c_email_address STRING, c_last_review_date STRING) USING delta;
+
+-- Hermitage (hermitage-lv): one file per row, the scenarios run in sequence
+-- on the same tables (reset before every hermitage-lv run)
+CREATE NAMESPACE IF NOT EXISTS tmp;
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.lock (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.lock VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.lock VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.lock2 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.lock2 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.lock2 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap1 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap1 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap1 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap2 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap2 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap2 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap3 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap3 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap3 VALUES (2, 20);

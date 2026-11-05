@@ -27,36 +27,31 @@ void LHLST::Optimize::run(std::vector<double>& times) {
 
   uint32_t counter = 0;
 
-  this->txnmanager =
-      std::make_unique<LHTransactions::TransactionManagerGeneric>(
-          level_config, this->paths.customer_address, connector, id);
-  this->txnmanager->begin_transaction_ycsb();
-  this->txnmanager->open_new_table(this->paths.date_dim);
-  this->txnmanager->open_new_table(this->paths.household_demographics);
-  this->txnmanager->open_new_table(this->paths.item);
-  this->txnmanager->open_new_table(this->paths.reason);
-  this->txnmanager->open_new_table(this->paths.store);
-  this->txnmanager->open_new_table(this->paths.store_sales);
-  this->txnmanager->open_new_table(this->paths.time_dim);
-  this->txnmanager->open_new_table(this->paths.web_page);
-  this->txnmanager->open_new_table(this->paths.web_sales);
-
+  // every table is opened once (opening it again reserved a second version
+  // per table with markers)
   for (auto& t : tbls) {
+    if (counter >= this->num_queries) {
+      break;
+    }
     if (!this->txnmanager) {
       this->txnmanager =
-          std::make_unique<LHTransactions::TransactionManagerGeneric>(
+          std::make_unique<LHTransactions::TransactionManagerDeltaLake>(
               level_config, t, connector, id);
-      this->txnmanager->begin_transaction_ycsb();
-    } else {
-      this->txnmanager->open_new_table(t);
+      if (!this->txnmanager->begin_transaction_ycsb()) {
+        std::cerr << "unable to open " << t << std::endl;
+        this->txnmanager = nullptr;
+        return;
+      }
+    } else if (!this->txnmanager->open_new_table(t)) {
+      std::cerr << "unable to open " << t << std::endl;
+      continue;
     }
     auto tbl_id = this->txnmanager->get_table_id(t);
 
-    this->txnmanager->create_checkpoint(tbl_id);
-    counter++;
-    if (counter > this->num_queries) {
-      break;
+    if (!this->txnmanager->create_checkpoint(tbl_id)) {
+      std::cerr << "no checkpoint written for " << t << std::endl;
     }
+    counter++;
   }
 
   if (this->txnmanager) {

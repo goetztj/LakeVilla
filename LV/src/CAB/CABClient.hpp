@@ -10,11 +10,15 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 
 #define CAB_READ_PATH "./../src/CAB/cab/benchmark-query-streams/small_1tb_10cpu/streamssf1/"
 
 namespace LHCAB {
+
+// directory of the CAB query streams: $LV_CAB_STREAMS, CAB/streams/ (docker
+// container) or CAB_READ_PATH (relative to the build directory)
+std::string query_stream_dir();
 
 struct preparedContent {
   std::string customer;
@@ -130,7 +134,7 @@ struct CABClient {
 
   bool iSupplier();
 
-  bool iRow(LHTransactions::TransactionManagerGeneric* manager,
+  bool iRow(LHTransactions::TransactionManagerDeltaLake* manager,
             std::string& table, std::string& content);
 
   bool uTable(std::string& tbl_path);

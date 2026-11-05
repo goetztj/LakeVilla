@@ -12,12 +12,7 @@
 #include <string>
 #include "basic_db.h"
 #include "lhtransactions.hpp"
-#include "lhtransactionsBankingTableLvl0.hpp"
-#include "lhtransactionsBankingTableLvl1.hpp"
-#include "lhtransactionsBankingQueryLvl0.hpp"
-#include "lhtransactionsBankingQueryLvl1.hpp"
-#include "lhtransactionsBankingTableLvl2.hpp"
-#include "lhtransactionsBankingQueryLvl2.hpp"
+#include "lhtransactionsBanking.hpp"
 
 using namespace std;
 using ycsbc::DB;
@@ -40,17 +35,24 @@ DB* DBFactory::CreateDB(utils::Properties &props) {
   } else if (props["dbname"] == "LakeVillaMulti") {
     return new LHTransactionsDB(config_path, {true, true, true}, true);
   } else if (props["dbname"] == "LakeVillaBankingQuerylvl0") {
-    return new LHTransactionsBankingQueryDBLvl0(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, false, false}, LHTransactionsBankingDB::Layout::Query);
   } else if (props["dbname"] == "LakeVillaBankingTablelvl0") {
-    return new LHTransactionsBankingTableDBLvl0(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, false, false}, LHTransactionsBankingDB::Layout::SeparateTables);
   } else if (props["dbname"] == "LakeVillaBankingQuerylvl1") {
-    return new LHTransactionsBankingQueryDBLvl1(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, true, false}, LHTransactionsBankingDB::Layout::Query);
   }else if (props["dbname"] == "LakeVillaBankingTablelvl1") {
-    return new LHTransactionsBankingTableDBLvl1(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, true, false}, LHTransactionsBankingDB::Layout::MultiTable);
   } else if (props["dbname"] == "LakeVillaBankingQuerylvl2") {
-    return new LHTransactionsBankingQueryDBLvl2(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, true, true}, LHTransactionsBankingDB::Layout::Query);
   }else if (props["dbname"] == "LakeVillaBankingTablelvl2") {
-    return new LHTransactionsBankingTableDBLvl2(config_path);
+    return new LHTransactionsBankingDB(config_path, {true, true, true}, LHTransactionsBankingDB::Layout::MultiTable, /*init_global_log=*/true);
+  } else if (props["dbname"] == "LakeVillalvl0") {
+    // single levels (used by run_bench.sh)
+    return new LHTransactionsDB(config_path, {true, false, false}, false);
+  } else if (props["dbname"] == "LakeVillalvl1") {
+    return new LHTransactionsDB(config_path, {false, true, false}, false);
+  } else if (props["dbname"] == "LakeVillalvl2") {
+    return new LHTransactionsDB(config_path, {false, false, true}, false);
   }else if (props["dbname"] == "LakeVillaDL") {
     return new LHTransactionsDB(config_path, {false, false, false}, false);
   } else return NULL;

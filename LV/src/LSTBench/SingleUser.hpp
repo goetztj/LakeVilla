@@ -5,7 +5,7 @@ namespace LHLST {
 
 // SingleUser phase of LSTBench
 struct SingleUser : Phase {
-  std::unique_ptr<LHTransactions::TransactionManagerGeneric> txnmanager;
+  std::unique_ptr<LHTransactions::TransactionManagerDeltaLake> txnmanager;
   uint32_t threads;
   
   SingleUser(TpcdsPaths paths, StorageConnector::MinIOConnector* connector,

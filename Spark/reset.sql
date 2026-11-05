@@ -17,7 +17,9 @@ DROP NAMESPACE banking CASCADE;
 CREATE NAMESPACE banking;
 CREATE TABLE spark_catalog.banking.banking0 (Banking_ID string, balance string) USING delta;
 
-INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "0.0"), ("1", "0.0");
+-- one file per account: LakeVilla replaces the file of an account on update
+INSERT INTO spark_catalog.banking.banking0 VALUES ("0", "0.0");
+INSERT INTO spark_catalog.banking.banking0 VALUES ("1", "0.0");
 
 CREATE TABLE spark_catalog.banking.banking1 (Banking_ID string, balance string) USING delta;
 
@@ -72,4 +74,22 @@ CREATE NAMESPACE t16;
 
 -- Generate and import TPC-H data!
 
-
+DROP NAMESPACE IF EXISTS tmp CASCADE;
+-- Hermitage (hermitage-lv): one file per row, the scenarios run in sequence
+-- on the same tables (reset before every hermitage-lv run)
+CREATE NAMESPACE IF NOT EXISTS tmp;
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.lock (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.lock VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.lock VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.lock2 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.lock2 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.lock2 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap1 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap1 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap1 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap2 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap2 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap2 VALUES (2, 20);
+CREATE TABLE IF NOT EXISTS spark_catalog.tmp.snap3 (id INT, value INT) USING delta;
+INSERT INTO spark_catalog.tmp.snap3 VALUES (1, 10);
+INSERT INTO spark_catalog.tmp.snap3 VALUES (2, 20);

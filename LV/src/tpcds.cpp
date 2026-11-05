@@ -27,6 +27,7 @@
 using namespace std;
 
 int main(const int argc, const char* argv[]) {
+  int exit_code = 0;
   if (argc != 5) {
     std::cerr << "Please provide a config file, the level combination, the "
                  "number of threads, and the number of runs per query you "
@@ -42,6 +43,7 @@ int main(const int argc, const char* argv[]) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   std::vector<bool> levels = {false, false, false};
 
@@ -77,14 +79,7 @@ int main(const int argc, const char* argv[]) {
   {
   StorageConnector:
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = Aws::Region::EU_CENTRAL_1;
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     LHTPCDS::TpcdsPaths paths;
     paths.customer_address = TPCDS_customer_address;
@@ -100,9 +95,12 @@ int main(const int argc, const char* argv[]) {
 
     LHTPCDS::TPCDSClient client(paths, config2, threads);
 
-    client.executeAll(levels, runs);
+    if (!client.executeAll(levels, runs)) {
+      std::cerr << "some queries failed" << std::endl;
+      exit_code = 1;
+    }
   }
   Aws::ShutdownAPI(options);
 
-  return 0;
+  return exit_code;
 }

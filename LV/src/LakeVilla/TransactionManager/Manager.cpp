@@ -1,5 +1,70 @@
 #include "Manager.hpp"
 
+#include <atomic>
+#include <mutex>
+
+namespace {
+std::mutex default_paths_mutex;
+std::string default_global_log = LV_DEFAULT_GLOBAL_LOG;
+std::string default_global_tmp_log = LV_DEFAULT_GLOBAL_TMP_LOG;
+}  // namespace
+
+void LHTransactions::set_default_global_log_paths(
+    const std::string& log_path, const std::string& tmp_log_path) {
+  std::lock_guard<std::mutex> guard(default_paths_mutex);
+  default_global_log = log_path;
+  default_global_tmp_log = tmp_log_path;
+}
+
+namespace {
+std::mutex default_options_mutex;
+LHTransactions::ProtocolOptions default_options;
+}  // namespace
+
+void LHTransactions::set_default_protocol_options(
+    const ProtocolOptions& options) {
+  std::lock_guard<std::mutex> guard(default_options_mutex);
+  default_options = options;
+}
+
+LHTransactions::ProtocolOptions LHTransactions::default_protocol_options() {
+  std::lock_guard<std::mutex> guard(default_options_mutex);
+  return default_options;
+}
+
+std::pair<std::string, std::string>
+LHTransactions::default_global_log_paths() {
+  std::lock_guard<std::mutex> guard(default_paths_mutex);
+  return {default_global_log, default_global_tmp_log};
+}
+
+uint32_t LHTransactions::unique_transaction_id() {
+  static std::atomic<uint32_t> next{std::random_device{}()};
+  uint32_t id = next.fetch_add(1);
+  // UINT32_MAX means "no transaction" in the marker handling
+  return id == UINT32_MAX ? next.fetch_add(1) : id;
+}
+
+std::vector<std::string> LHTransactions::FileStats::min_values() const {
+  std::vector<std::string> result;
+  for (auto& column : this->stats.columns) {
+    if (column.has_min_max) {
+      result.push_back(column.min);
+    }
+  }
+  return result;
+}
+
+std::vector<std::string> LHTransactions::FileStats::max_values() const {
+  std::vector<std::string> result;
+  for (auto& column : this->stats.columns) {
+    if (column.has_min_max) {
+      result.push_back(column.max);
+    }
+  }
+  return result;
+}
+
 LHTransactions::TableStats::TableStats(std::string&& base_path) {
   this->base_path = base_path;
   this->delta_log =
@@ -19,21 +84,7 @@ LHTransactions::TableStats::~TableStats() {
 };
 
 LHTransactions::TransactionManager::TransactionManager(
-    std::string& path_to_table, StorageConnector::MinIOConfig config,
-    uint32_t transaction_id)
-    : base_path(path_to_table), transaction_id(transaction_id) {
-  this->connector = std::make_unique<StorageConnector::MinIOConnector>(&config);
-  this->working_dir = "";
-  this->tables.clear();
-  this->next_step = 0;
-  this->explicit_log = true;
-
-  this->times_redo = 0;
-  this->connector_ptr = this->connector.get();
-};
-
-LHTransactions::TransactionManager::TransactionManager(
-    std::string& path_to_table, StorageConnector::MinIOConnector* ptr,
+    std::string& path_to_table, StorageConnector::Connector* ptr,
     uint32_t transaction_id)
     : base_path(path_to_table), transaction_id(transaction_id) {
   this->connector = nullptr;

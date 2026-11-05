@@ -1,8 +1,12 @@
+#pragma once
+#include <atomic>
 #include <chrono>
 
 namespace LHTimer {
+// start() and end() may be called from different threads (freshness
+// benchmark: the writer starts, the reader stops)
 struct Timer {
-  std::chrono::time_point<std::chrono::high_resolution_clock> timestamp;
+  std::atomic<std::chrono::high_resolution_clock::rep> timestamp;
 
   Timer();
 

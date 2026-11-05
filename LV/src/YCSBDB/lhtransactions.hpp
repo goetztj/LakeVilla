@@ -23,18 +23,18 @@
 #include <string>
 
 #include "Connectors/MinIOConnector.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "Settings/LvSettings.hpp"
 #include "YCSB-C/core/db.h"
 #include "YCSB-C/core/properties.h"
-#include "settings.hpp"
+#include "YCSBDB/stats_db.hpp"
 
 using std::cout;
 using std::endl;
 
 namespace ycsbc {
 
-class LHTransactionsDB : public DB {
+class LHTransactionsDB : public DB, public StatsDB {
  public:
   LHTransactionsDB(std::string& config_path, std::vector<bool> config,
                        bool single = false);
@@ -57,9 +57,11 @@ class LHTransactionsDB : public DB {
 
   int Delete(const std::string& table, const std::string& key);
 
-  void print_stats();
+  void print_stats() override;
 
-  static std::atomic<uint32_t> next_id;
+  // commits a transaction of a single operation (multi mode); false if the
+  // transaction aborted
+  bool commit_operation(bool read_only);
 
  private:
   bool read_only;

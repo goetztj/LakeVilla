@@ -14,7 +14,7 @@
 #include "CAB/CABClientTableScaling.hpp"
 #include "CAB/CABClientWriteSwitching.hpp"
 #include "Settings/LvSettings.hpp"
-#include "settings.hpp"
+#include "CAB/Phases.hpp"
 
 #define CAB_PATH "wh/"
 #define CAB_CLEANUP_TIME 1800
@@ -26,19 +26,7 @@ int table_scaling(LHConfig::LvSettings& settings, std::string& sample_path,
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
-
-    bool mainStart2 = false;
-    bool mainStart4 = false;
-    bool mainStart6 = false;
-    bool mainStart8 = false;
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string base_path = settings.cab_path;
 
@@ -46,25 +34,18 @@ int table_scaling(LHConfig::LvSettings& settings, std::string& sample_path,
 
     std::vector<std::vector<std::pair<int64_t, int64_t>>> times;
 
-    double reads_2_w;
-    double writes_2_w;
+    double reads_2_w = 0;
+    double writes_2_w = 0;
 
     std::vector<std::vector<bool>> levels;
     levels.push_back({false, false, true});
 
-    std::vector<bool> triggers;
-    triggers.reserve(1);
-    for (size_t i = 0; i < 1; i++) {
-      triggers.push_back(false);
-    }
-
-    bool end_bench = false;
+    LHCAB::Phases phases(1);
 
     auto table_client = std::make_unique<LHCAB::CABClientTableScaling>(
         num_tables, scale_table, base_path, 1, config2, 1, prepCont.get());
 
-    table_client->startAll(levels, triggers, end_bench, times, reads_2_w,
-                           writes_2_w);
+    table_client->startAll(levels, phases, times, reads_2_w, writes_2_w);
   }
   Aws::ShutdownAPI(options);
   return 0;
@@ -77,14 +58,7 @@ int level_switching_workload(LHConfig::LvSettings& settings,
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string base_path = settings.cab_path;
 
@@ -99,8 +73,8 @@ int level_switching_workload(LHConfig::LvSettings& settings,
     std::vector<std::vector<std::pair<int64_t, int64_t>>> times_read,
         times_write;
 
-    double reads_2_w;
-    double writes_2_w;
+    double reads_2_w = 0;
+    double writes_2_w = 0;
 
     std::vector<std::vector<bool>> levels_write, levels_read;
     levels_write.reserve(3);
@@ -112,38 +86,30 @@ int level_switching_workload(LHConfig::LvSettings& settings,
     levels_read.push_back({false, false, true});
     levels_read.push_back({false, true, true});
 
-    std::vector<bool> triggers;
-    triggers.reserve(3);
-    for (size_t i = 0; i < 3; i++) {
-      triggers.push_back(false);
-    }
-
-    bool end_bench = false;
+    LHCAB::Phases phases(3);
 
     std::thread read_thread([&] {
       auto read_client = std::make_unique<LHCAB::CABClientReadSwitching>(
           num_read_clients, base_path, 1, config2, 0, prepCont.get());
-      read_client->startAll(levels_read, triggers, end_bench, times_read,
-                            reads_2_w, reads_2_w);
+      read_client->startAll(levels_read, phases, times_read, reads_2_w, writes_2_w);
     });
 
     std::thread write_thread([&] {
       auto write_client = std::make_unique<LHCAB::CABClientWriteSwitching>(
           num_write_clients, base_path, 1, config2, 0, prepCont.get());
-      write_client->startAll(levels_write, triggers, end_bench, times_write,
-                             reads_2_w, reads_2_w);
+      write_client->startAll(levels_write, phases, times_write, reads_2_w, writes_2_w);
     });
 
     std::cerr << "waiting 2min for all threads" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(60 * 2));
 
-    for (uint32_t p = 0; p < triggers.size(); p++) {
-      triggers[p] = true;
+    for (uint32_t p = 0; p < phases.size(); p++) {
+      phases.start(p);
       std::cerr << "----- Phase " << p << " -----" << std::endl;
       std::this_thread::sleep_for(std::chrono::seconds(60 * 20));
     }
 
-    end_bench = true;
+    phases.end = true;
 
     std::cerr << "workload stopped; waiting until all threads are done"
               << std::endl;
@@ -151,7 +117,7 @@ int level_switching_workload(LHConfig::LvSettings& settings,
     write_thread.join();
 
     std::cout << "<<<<< Reads >>>>>" << std::endl;
-    for (uint32_t p = 0; p < triggers.size(); p++) {
+    for (uint32_t p = 0; p < phases.size(); p++) {
       std::cout << "----- Phase " << p << " -----" << std::endl;
       for (auto& res : times_read[p]) {
         std::cout << res.first << ";" << res.second << std::endl;
@@ -160,7 +126,7 @@ int level_switching_workload(LHConfig::LvSettings& settings,
     }
 
     std::cout << "<<<<< Writes >>>>>" << std::endl;
-    for (uint32_t p = 0; p < triggers.size(); p++) {
+    for (uint32_t p = 0; p < phases.size(); p++) {
       std::cout << "----- Phase " << p << " -----" << std::endl;
       for (auto& res : times_write[p]) {
         std::cout << res.first << ";" << res.second << std::endl;
@@ -178,19 +144,7 @@ int level_switching_workload_write(LHConfig::LvSettings& settings,
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
-
-    bool mainStart2 = false;
-    bool mainStart4 = false;
-    bool mainStart6 = false;
-    bool mainStart8 = false;
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string base_path = settings.cab_path;
 
@@ -204,8 +158,8 @@ int level_switching_workload_write(LHConfig::LvSettings& settings,
 
     std::vector<std::vector<std::pair<int64_t, int64_t>>> times;
 
-    double reads_2_w;
-    double writes_2_w;
+    double reads_2_w = 0;
+    double writes_2_w = 0;
 
     std::vector<std::vector<bool>> levels;
     levels.reserve(1);
@@ -217,37 +171,30 @@ int level_switching_workload_write(LHConfig::LvSettings& settings,
     // levels.push_back({false, true, true});
     levels.push_back({false, false, true});
 
-    std::vector<bool> triggers;
-    triggers.reserve(1);
-    for (size_t i = 0; i < 1; i++) {
-      triggers.push_back(false);
-    }
-
-    bool end_bench = false;
+    LHCAB::Phases phases(1);
 
     std::thread write_thread([&] {
       auto write_client = std::make_unique<LHCAB::CABClientWriteSwitching>(
           1, base_path, 1, config2, 0, prepCont.get());
-      write_client->startAll(levels, triggers, end_bench, times, reads_2_w,
-                             reads_2_w);
+      write_client->startAll(levels, phases, times, reads_2_w, writes_2_w);
     });
 
     std::cerr << "waiting 2min for all threads" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(30));
 
-    for (uint32_t p = 0; p < triggers.size(); p++) {
-      triggers[p] = true;
+    for (uint32_t p = 0; p < phases.size(); p++) {
+      phases.start(p);
       std::cerr << "----- Phase " << p << " -----" << std::endl;
       std::this_thread::sleep_for(std::chrono::seconds(60 * 10));
     }
 
-    end_bench = true;
+    phases.end = true;
 
     std::cerr << "workload stopped; waiting until all threads are done"
               << std::endl;
     write_thread.join();
 
-    for (uint32_t p = 0; p < triggers.size(); p++) {
+    for (uint32_t p = 0; p < phases.size(); p++) {
       std::cout << "----- Phase " << p << " -----" << std::endl;
       for (auto& res : times[p]) {
         std::cout << res.first << ";" << res.second << std::endl;
@@ -265,19 +212,7 @@ int level_switching_workload_read(LHConfig::LvSettings& settings,
   Aws::SDKOptions options;
   Aws::InitAPI(options);
   {
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
-
-    bool mainStart2 = false;
-    bool mainStart4 = false;
-    bool mainStart6 = false;
-    bool mainStart8 = false;
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string base_path = settings.cab_path;
 
@@ -291,8 +226,8 @@ int level_switching_workload_read(LHConfig::LvSettings& settings,
 
     std::vector<std::vector<std::pair<int64_t, int64_t>>> times;
 
-    double reads_2_w;
-    double writes_2_w;
+    double reads_2_w = 0;
+    double writes_2_w = 0;
 
     std::vector<std::vector<bool>> levels;
     levels.reserve(7);
@@ -304,26 +239,19 @@ int level_switching_workload_read(LHConfig::LvSettings& settings,
     levels.push_back({false, true, true});
     levels.push_back({false, false, true});
 
-    std::vector<bool> triggers;
-    triggers.reserve(7);
-    for (size_t i = 0; i < 7; i++) {
-      triggers.push_back(false);
-    }
-
-    bool end_bench = false;
+    LHCAB::Phases phases(7);
 
     std::thread read_thread([&] {
       auto read_client = std::make_unique<LHCAB::CABClientReadSwitching>(
           num_clients, base_path, 1, config2, 0, prepCont.get());
-      read_client->startAll(levels, triggers, end_bench, times, reads_2_w,
-                            reads_2_w);
+      read_client->startAll(levels, phases, times, reads_2_w, writes_2_w);
     });
 
     std::cerr << "waiting 2min for all threads" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(60 * 2));
 
-    for (uint32_t p = 0; p < triggers.size(); p++) {
-      triggers[p] = true;
+    for (uint32_t p = 0; p < phases.size(); p++) {
+      phases.start(p);
       std::cerr << "----- Phase " << p << " -----" << std::endl;
       std::this_thread::sleep_for(std::chrono::seconds(60 * 10));
       std::cerr << "----- Phase " << p << " end -----" << std::endl;
@@ -331,13 +259,13 @@ int level_switching_workload_read(LHConfig::LvSettings& settings,
 
     std::cerr << "stopping workload" << std::endl;
 
-    end_bench = true;
+    phases.end = true;
 
     std::cerr << "workload stopped; waiting until all threads are done"
               << std::endl;
     read_thread.join();
 
-    for (uint32_t p = 0; p < triggers.size(); p++) {
+    for (uint32_t p = 0; p < phases.size(); p++) {
       std::cout << "----- Phase " << p << " -----" << std::endl;
       for (auto& res : times[p]) {
         std::cout << res.first << ";" << res.second << std::endl;
@@ -371,6 +299,7 @@ int main(const int argc, const char* argv[]) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   if (type.compare("read") == 0) {
     std::cerr << "executing levels switiching workload (reads)" << std::endl;
@@ -380,6 +309,12 @@ int main(const int argc, const char* argv[]) {
   if (type.compare("write") == 0) {
     std::cerr << "executing levels switiching workload (writes)" << std::endl;
     return level_switching_workload_write(settings, sample_path, 1);
+  }
+
+  if ((type == "table" || type == "mixed") && argc != 6) {
+    std::cerr << "'" << type << "' requires two additional arguments"
+              << std::endl;
+    return 1;
   }
 
   if (type.compare("table") == 0) {
@@ -397,5 +332,7 @@ int main(const int argc, const char* argv[]) {
                                     write_clients);
   }
 
-  return 0;
+  std::cerr << "unknown type '" << type << "' (read, write, mixed, table)"
+            << std::endl;
+  return 1;
 }

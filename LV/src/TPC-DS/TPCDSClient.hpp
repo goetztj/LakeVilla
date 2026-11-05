@@ -10,7 +10,7 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 
 namespace LHTPCDS {
 struct TpcdsPaths {

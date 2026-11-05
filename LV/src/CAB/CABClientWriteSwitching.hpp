@@ -9,9 +9,10 @@
 #include <utility>
 
 #include "CABClient.hpp"
+#include "CAB/Phases.hpp"
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "rapidjson/include/rapidjson/document.h"
 #include "rapidjson/include/rapidjson/stringbuffer.h"
 #include "rapidjson/include/rapidjson/writer.h"
@@ -30,13 +31,13 @@ struct CABClientWriteSwitching : CABClient {
                           preparedContent* content);
 
   bool startAll(std::vector<std::vector<bool>> levels,
-                std::vector<bool>& triggers, bool& end,
+                Phases& phases,
                 std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
                 double& reads_mb, double& writes_mb);
 
   bool executeWriteStream(
-      std::vector<std::vector<bool>> levels, std::vector<bool>& triggers,
-      bool& end, std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
+      std::vector<std::vector<bool>> levels, Phases& phases,
+      std::vector<std::vector<std::pair<int64_t, int64_t>>>& times,
       double& reads_mb, double& writes_mb);
 
   bool executeIngestionEnd();

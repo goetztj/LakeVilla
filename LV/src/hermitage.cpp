@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <aws/core/Aws.h>
 #include <aws/core/auth/AWSCredentialsProviderChain.h>
 #include <aws/s3/S3Client.h>
@@ -10,7 +11,7 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "Helpers/Helper.hpp"
-#include "LakeVilla/TransactionManager/ManagerGeneric.hpp"
+#include "LakeVilla/TransactionManager/ManagerDeltaLake.hpp"
 #include "Settings/LvSettings.hpp"
 #include "Timer/Timer.hpp"
 #include "settings.hpp"
@@ -37,8 +38,8 @@ std::vector<uint32_t> check_consistency(StorageConnector::MinIOConfig& config,
   std::vector<bool> levels_adapted = {false, false, levels[2]};
 
   // T1
-  LHTransactions::TransactionManagerGeneric t1(levels_adapted, path_lock,
-                                               config, 42);
+  LHTransactions::TransactionManagerDeltaLake t1(levels_adapted, path_lock,
+                                                 config, 42);
   t1.begin_transaction_ycsb();
 
   t1.open_new_table(path_snap1);
@@ -90,85 +91,79 @@ std::shared_ptr<arrow::Table> createTable(
   return arrow::Table::Make(table_schema, value_vec, columns[0].size());
 }
 
+// (id, value) rows of a table, sorted by id; files of a table are read in
+// no particular order
+std::vector<std::pair<int, int>> sorted_rows(
+    const std::shared_ptr<arrow::Table>& table) {
+  std::vector<std::pair<int, int>> rows;
+  if (!table) {
+    return rows;
+  }
+  auto id = table->GetColumnByName("id");
+  auto value = table->GetColumnByName("value");
+  if (!id || !value || id->type()->id() != arrow::Type::INT32 ||
+      value->type()->id() != arrow::Type::INT32) {
+    return rows;
+  }
+  for (int64_t i = 0; i < table->num_rows(); i++) {
+    auto id_scalar = id->GetScalar(i);
+    auto value_scalar = value->GetScalar(i);
+    if (!id_scalar.ok() || !value_scalar.ok()) {
+      continue;
+    }
+    rows.emplace_back(
+        std::static_pointer_cast<arrow::Int32Scalar>(*id_scalar)->value,
+        std::static_pointer_cast<arrow::Int32Scalar>(*value_scalar)->value);
+  }
+  std::sort(rows.begin(), rows.end());
+  return rows;
+}
+
+// expected_columns: {ids, values}
+bool check_table(std::shared_ptr<arrow::Table> tbl,
+                 std::vector<std::vector<int>> expected_columns) {
+  std::vector<std::pair<int, int>> expected;
+  for (size_t i = 0; i < expected_columns[0].size(); i++) {
+    expected.emplace_back(expected_columns[0][i], expected_columns[1][i]);
+  }
+  std::sort(expected.begin(), expected.end());
+
+  auto rows = sorted_rows(tbl);
+  if (rows != expected) {
+    auto print = [](const std::vector<std::pair<int, int>>& values) {
+      std::stringstream out;
+      for (auto& row : values) {
+        out << "(" << row.first << ", " << row.second << ") ";
+      }
+      return out.str();
+    };
+    std::cerr << "tables did not match!" << std::endl
+              << "--- Got: " << (tbl ? print(rows) : "no table") << std::endl
+              << "--- Expected: " << print(expected) << std::endl;
+    return false;
+  }
+  return true;
+}
+
 bool check_table(StorageConnector::MinIOConfig& config, std::string& table_path,
                  std::vector<std::vector<int>> expected_columns) {
   // read_transaction: read the requested table using the original Delta Lake
-  LHTransactions::TransactionManagerGeneric read_txn({false, false, false},
-                                                     table_path, config, 99);
-  read_txn.begin_transaction_ycsb();
+  LHTransactions::TransactionManagerDeltaLake read_txn({false, false, false},
+                                                       table_path, config, 99);
+  if (!read_txn.begin_transaction_ycsb()) {
+    std::cerr << "unable to open " << table_path << std::endl;
+    return false;
+  }
 
   auto table_id = read_txn.get_table_id(table_path);
 
   auto result = read_txn.read_table(table_id);
-  read_txn.commit();
+  read_txn.commit(true);
 
-  // build an arrow table from the given expected rows
-  auto schema = result->schema();
-
-  arrow::ArrayVector value_vec;
-
-  for (auto& col : expected_columns) {
-    std::shared_ptr<arrow::Array> arrow_array;
-
-    auto values_builder = std::make_shared<arrow::Int32Builder>();
-
-    for (auto& ref : col) {
-      PARQUET_THROW_NOT_OK(values_builder->Append(ref));
-    }
-    PARQUET_THROW_NOT_OK(values_builder->Finish(&arrow_array));
-    value_vec.push_back(arrow_array);
-  }
-
-  auto expected_table =
-      arrow::Table::Make(schema, value_vec, expected_columns.size());
-
-  // compare the result and the expected table
-  if (!expected_table->Equals(*result)) {
-    std::cerr << "tables did not match!" << std::endl
-              << "--- Got: " << std::endl
-              << result->ToString() << std::endl
-              << "--- Expected:" << std::endl
-              << expected_table->ToString() << std::endl;
-    return false;
-  }
-  return true;
+  return check_table(result, expected_columns);
 }
 
-bool check_table(std::shared_ptr<arrow::Table> tbl,
-                 std::vector<std::vector<int>> expected_columns) {
-  // build an arrow table from the given expected rows
-  auto schema = tbl->schema();
-
-  arrow::ArrayVector value_vec;
-
-  for (auto& col : expected_columns) {
-    std::shared_ptr<arrow::Array> arrow_array;
-
-    auto values_builder = std::make_shared<arrow::Int32Builder>();
-
-    for (auto& ref : col) {
-      PARQUET_THROW_NOT_OK(values_builder->Append(ref));
-    }
-    PARQUET_THROW_NOT_OK(values_builder->Finish(&arrow_array));
-    value_vec.push_back(arrow_array);
-  }
-
-  auto expected_table =
-      arrow::Table::Make(schema, value_vec, expected_columns.size());
-
-  // compare the tbl and the expected table
-  if (!expected_table->Equals(*tbl)) {
-    std::cerr << "tables did not match!" << std::endl
-              << "--- Got: " << std::endl
-              << tbl->ToString() << std::endl
-              << "--- Expected:" << std::endl
-              << expected_table->ToString() << std::endl;
-    return false;
-  }
-  return true;
-}
-
-bool update(LHTransactions::TransactionManagerGeneric& manager,
+bool update(LHTransactions::TransactionManagerDeltaLake& manager,
             std::string& table, uint32_t key, uint32_t val) {
   std::string path = "";
 
@@ -225,20 +220,10 @@ bool update(LHTransactions::TransactionManagerGeneric& manager,
 
 bool hermitage_g0(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ Q0 ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -247,10 +232,12 @@ bool hermitage_g0(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     auto versions = check_consistency(config2, levels, {}, true);
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     versions[0] += 2;
@@ -265,7 +252,7 @@ bool hermitage_g0(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 21 where id = 2; -- T1
     update(t1, path_lock, 2, 21);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test;
@@ -275,34 +262,23 @@ bool hermitage_g0(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 22 where id = 2;
     update(t2, path_lock, 2, 22);
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test;
     success =
         check_table(config2, path_lock, {{1, 2}, {12, 22}}) ? success : false;
   }
-  Aws::ShutdownAPI(options);
 
   return success;
 }
 
 bool hermitage_g0_mt(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ Q0-MT ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK2;
     std::string path_snap1 = TEST_SNAP1;
@@ -312,11 +288,12 @@ bool hermitage_g0_mt(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     auto versions = check_consistency(config2, levels, {}, true);
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_snap3, config2,
-                                                 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_snap3, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     t1.open_new_table(path_lock);
@@ -334,7 +311,7 @@ bool hermitage_g0_mt(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 21 where id = 2; -- T1
     update(t1, path_lock, 2, 21);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test;
@@ -344,34 +321,23 @@ bool hermitage_g0_mt(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 22 where id = 2;
     update(t2, path_lock, 2, 22);
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test;
     success =
         check_table(config2, path_lock, {{1, 2}, {12, 22}}) ? success : false;
   }
-  Aws::ShutdownAPI(options);
 
   return success;
 }
 
 bool hermitage_g1a(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G1a ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -381,10 +347,12 @@ bool hermitage_g1a(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[0] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
     versions = check_consistency(config2, levels, versions);
 
@@ -407,25 +375,15 @@ bool hermitage_g1a(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     t2.commit(true);
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_g1b(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G1b ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -435,10 +393,12 @@ bool hermitage_g1b(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[0] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     // update test_lock.dbo.test set value = 101 where id = 1;
@@ -452,7 +412,7 @@ bool hermitage_g1b(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 11 where id = 1; -- T1
     update(t1, path_lock, 1, 11);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test;
@@ -463,25 +423,15 @@ bool hermitage_g1b(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     t2.commit(true);
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_g1c(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G1c ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -491,10 +441,12 @@ bool hermitage_g1c(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[0] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     // update test_lock.dbo.test set value = 11 where id = 1; -- T1
@@ -514,31 +466,21 @@ bool hermitage_g1c(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     auto table_t2_1 = t2.read_file_as_table(tbl_id2, "1", tmp_string);
     success = check_table(table_t2_1, {{1}, {11}}) ? success : false;
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_g1c_mt(std::vector<bool> levels,
                       LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G1c-MT ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_lock2 = TEST_LOCK2;
@@ -550,10 +492,12 @@ bool hermitage_g1c_mt(std::vector<bool> levels,
     versions[0] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     // update test_lock.dbo.test set value = 11 where id = 1; -- T1
@@ -573,30 +517,20 @@ bool hermitage_g1c_mt(std::vector<bool> levels,
     auto table_t2_1 = t2.read_file_as_table(tbl_id2, "1", tmp_string);
     success = check_table(table_t2_1, {{1}, {11}}) ? success : false;
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_otv(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ OTV ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -605,13 +539,16 @@ bool hermitage_otv(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[0] += 3;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
     // T3
-    LHTransactions::TransactionManagerGeneric t3(levels, path_lock, config2, 3);
+    LHTransactions::TransactionManagerDeltaLake t3(levels, path_lock, config2,
+                                                   3);
     t3.begin_transaction_ycsb();
     versions = check_consistency(config2, levels, versions);
 
@@ -624,7 +561,7 @@ bool hermitage_otv(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update spark_catalog.hermitage.lock set value = 12 where id = 1; -- T2
     update(t2, path_lock, 1, 12);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     std::string tmp_string = "";
@@ -636,7 +573,7 @@ bool hermitage_otv(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update spark_catalog.hermitage.lock set value = 18 where id = 2; -- T2
     update(t2, path_lock, 2, 18);
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
     t3.commit(true);
     versions = check_consistency(config2, levels, versions);
@@ -645,25 +582,15 @@ bool hermitage_otv(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     success =
         check_table(config2, path_lock, {{1, 2}, {12, 18}}) ? success : false;
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_pmp(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ PMP ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -673,10 +600,12 @@ bool hermitage_pmp(std::vector<bool> levels, LHConfig::LvSettings& settings) {
 
     // changed order due to non-concurrency
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_lock, config2, 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_lock, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_lock, config2, 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_lock, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
 
     versions = check_consistency(config2, levels, versions);
@@ -694,7 +623,7 @@ bool hermitage_pmp(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     auto partial_table = createTable({{3}, {30}});
     t2.add_file(tbl_id_t2, partial_table, "3");
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test where value % 3 = 0; -- T1.
@@ -704,25 +633,15 @@ bool hermitage_pmp(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     t1.commit(true);
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_p4(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ P4 ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -731,12 +650,12 @@ bool hermitage_p4(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[1] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_snap1, config2,
-                                                 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_snap1, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_snap1, config2,
-                                                 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_snap1, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
     versions = check_consistency(config2, levels, versions);
 
@@ -757,9 +676,9 @@ bool hermitage_p4(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 11 where id = 1; -- T2
     update(t2, path_snap1, 1, 11);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     success =
@@ -767,26 +686,16 @@ bool hermitage_p4(std::vector<bool> levels, LHConfig::LvSettings& settings) {
 
     // t1.commit(true);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_gsingle(std::vector<bool> levels,
                        LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G-single ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -797,12 +706,12 @@ bool hermitage_gsingle(std::vector<bool> levels,
 
     // changed order because transactions are not really concurrent
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_snap1, config2,
-                                                 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_snap1, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_snap1, config2,
-                                                 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_snap1, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
 
     versions = check_consistency(config2, levels, versions);
@@ -828,7 +737,7 @@ bool hermitage_gsingle(std::vector<bool> levels,
     // update test_lock.dbo.test set value = 18 where id = 2; -- T2
     update(t2, path_snap1, 2, 18);
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test where id = 2; -- T1. Shows 2 => 18
@@ -838,25 +747,15 @@ bool hermitage_gsingle(std::vector<bool> levels,
     t1.commit(true);
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_gitem(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G-item ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -866,12 +765,12 @@ bool hermitage_gitem(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[2] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_snap2, config2,
-                                                 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_snap2, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_snap2, config2,
-                                                 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_snap2, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     std::string tmp_string = "";
@@ -891,31 +790,21 @@ bool hermitage_gitem(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     // update test_lock.dbo.test set value = 21 where id = 2; -- T2.
     update(t2, path_snap2, 2, 21);
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 bool hermitage_g2(std::vector<bool> levels, LHConfig::LvSettings& settings) {
   bool success = true;
-  Aws::SDKOptions options;
-  Aws::InitAPI(options);
   {
     std::cout << "------ G2 ------" << std::endl;
 
-    StorageConnector::MinIOConfig config2;
-    config2.endpointURI = settings.host;
-    config2.user = settings.user;
-    config2.passwd = settings.passwd;
-    config2.region = "";
-    config2.connectTimeout = 60000;
-    config2.requestTimeout = 10000;
-    config2.default_bucket = "warehouse";
+    StorageConnector::MinIOConfig config2 = settings.minio_config();
 
     std::string path_lock = TEST_LOCK;
     std::string path_snap1 = TEST_SNAP1;
@@ -925,12 +814,12 @@ bool hermitage_g2(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     versions[2] += 2;
 
     // T1
-    LHTransactions::TransactionManagerGeneric t1(levels, path_snap2, config2,
-                                                 1);
+    LHTransactions::TransactionManagerDeltaLake t1(levels, path_snap2, config2,
+                                                   1);
     t1.begin_transaction_ycsb();
     // T2
-    LHTransactions::TransactionManagerGeneric t2(levels, path_snap2, config2,
-                                                 2);
+    LHTransactions::TransactionManagerDeltaLake t2(levels, path_snap2, config2,
+                                                   2);
     t2.begin_transaction_ycsb();
 
     std::string tmp_string = "";
@@ -948,17 +837,17 @@ bool hermitage_g2(std::vector<bool> levels, LHConfig::LvSettings& settings) {
     auto tmp = LHHelpers::encodeAsParquet({"id", "value"}, {3, 30});
     auto parquet_str = std::string(tmp->first, tmp->second);
     t1.add_file(tbl_id, parquet_str, "3");
-    std::free(tmp->first);
+    // tmp owns its buffer (freed by ~ParquetPair)
 
     // insert into test_lock.dbo.test (id, value) values(4, 42); -- T2
     auto tmp2 = LHHelpers::encodeAsParquet({"id", "value"}, {4, 42});
     auto parquet_str2 = std::string(tmp2->first, tmp2->second);
     t2.add_file(tbl_id_t2, parquet_str2, "4");
-    // std::free(tmp2.first);
+    // tmp2 owns its buffer (freed by ~ParquetPair)
 
-    t1.commit();
+    std::cout << "t1 commit: " << (t1.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
-    t2.commit();
+    std::cout << "t2 commit: " << (t2.commit() ? "committed" : "aborted") << std::endl;
     versions = check_consistency(config2, levels, versions);
 
     // select * from test_lock.dbo.test where value % 3 = 0;
@@ -966,11 +855,11 @@ bool hermitage_g2(std::vector<bool> levels, LHConfig::LvSettings& settings) {
                   ? success
                   : false;
   }
-  Aws::ShutdownAPI(options);
   return success;
 }
 
 int main(int argc, char** argv) {
+  // the AWS SDK is initialised once per process
   if (argc != 3) {
     std::cerr << "Please provide a config file and the level combination you "
                  "want to use"
@@ -984,6 +873,7 @@ int main(int argc, char** argv) {
     std::cerr << "invalid config" << std::endl;
     return 1;
   }
+  settings.apply_defaults();
 
   std::vector<bool> levels = {false, false, false};
 
@@ -1011,6 +901,9 @@ int main(int argc, char** argv) {
   }
   std::cout << std::endl;
 
+  Aws::SDKOptions options;
+  Aws::InitAPI(options);
+
   std::vector<bool (*)(LHTransactions::LakeVillaConf, LHConfig::LvSettings&)>
       funcs = {hermitage_g0,    hermitage_g1a, hermitage_g1b, hermitage_g1c,
                hermitage_otv,   hermitage_pmp, hermitage_p4,  hermitage_gsingle,
@@ -1024,5 +917,6 @@ int main(int argc, char** argv) {
     }
   }
 
+  Aws::ShutdownAPI(options);
   return 0;
 }

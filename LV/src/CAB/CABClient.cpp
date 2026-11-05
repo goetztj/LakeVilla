@@ -1,5 +1,20 @@
 #include "CABClient.hpp"
 
+#include <cstdlib>
+#include <filesystem>
+
+std::string LHCAB::query_stream_dir() {
+  if (auto dir = std::getenv("LV_CAB_STREAMS")) {
+    std::string path = dir;
+    return path.empty() || path.back() == '/' ? path : path + "/";
+  }
+  // layout of the lakevilla container (working directory /LakeVilla)
+  if (std::filesystem::is_directory("CAB/streams")) {
+    return "CAB/streams/";
+  }
+  return CAB_READ_PATH;
+}
+
 LHCAB::CABClient::CABClient(std::string& base_path, uint64_t tendant,
                             StorageConnector::MinIOConfig config,
                             uint32_t stream_id,
@@ -14,7 +29,7 @@ LHCAB::CABClient::CABClient(std::string& base_path, uint64_t tendant,
       std::make_unique<StorageConnector::MinIOConnector>(&(this->config));
 
   std::stringstream s;
-  s << CAB_READ_PATH << "query_stream_" << id << ".json";
+  s << LHCAB::query_stream_dir() << "query_stream_" << id << ".json";
   this->query_file = s.str();
 
   std::cerr << s.str() << std::endl;
@@ -332,13 +347,14 @@ order by
     l_returnflag,
     l_linestatus;*/
 bool LHCAB::CABClient::q1() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
 
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
 
     auto lineitem_id = txnmanager.get_table_id(this->lineitem_path);
@@ -400,13 +416,14 @@ order by
     s_name,
     p_partkey
 limit 100;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->partsupp_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->partsupp_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
 
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(supplier_path);
     txnmanager.open_new_table(nation_path);
@@ -465,12 +482,13 @@ order by
     revenue desc,
     o_orderdate
 limit 10;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->customer_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->customer_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(orders_path);
     txnmanager.open_new_table(lineitem_path);
@@ -514,12 +532,13 @@ group by
     o_orderpriority
 order by
     o_orderpriority;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -564,12 +583,13 @@ group by
     n_name
 order by
     revenue desc;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->customer_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->customer_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(orders_path);
     txnmanager.open_new_table(lineitem_path);
@@ -610,12 +630,13 @@ where
   and l_shipdate < dateadd(year, 1, :1::date)
   and l_discount between (:2::number(12,2) / 100) - 0.01 and (:2::number(12,2) /
 100) + 0.01 and l_quantity < :3;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -669,12 +690,13 @@ order by
     supp_nation,
     cust_nation,
     l_year;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->supplier_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->supplier_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(lineitem_path);
     txnmanager.open_new_table(orders_path);
@@ -741,12 +763,13 @@ group by
     o_year
 order by
     o_year;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->part_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->part_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
 
     txnmanager.open_new_table(supplier_path);
@@ -807,12 +830,13 @@ group by
 order by
     nation,
     o_year desc;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->part_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->part_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(supplier_path);
     txnmanager.open_new_table(lineitem_path);
@@ -876,12 +900,13 @@ order by
     revenue desc
 limit 20;*/
 
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->customer_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->customer_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(orders_path);
     txnmanager.open_new_table(lineitem_path);
@@ -933,12 +958,13 @@ group by
     )
 order by
     "value" desc;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->partsupp_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->partsupp_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(supplier_path);
     txnmanager.open_new_table(nation_path);
@@ -992,12 +1018,13 @@ group by
 order by
     l_shipmode;
 */
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->orders_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->orders_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(lineitem_path);
 
@@ -1038,12 +1065,13 @@ order by
     custdist desc,
     c_count desc;
 */
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->customer_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->customer_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(orders_path);
 
@@ -1074,12 +1102,13 @@ where
         l_partkey = p_partkey
   and l_shipdate >= :1::date
   and l_shipdate < add_months(:1::date, 1);*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(part_path);
 
@@ -1127,12 +1156,13 @@ where
 )
 order by
     s_suppkey;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -1182,12 +1212,13 @@ order by
     p_brand,
     p_type,
     p_size;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->supplier_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->supplier_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto supplier_id = txnmanager.get_table_id(supplier_path);
 
@@ -1226,12 +1257,13 @@ where
     where
             l_partkey = p_partkey
 );*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -1285,12 +1317,13 @@ order by
     o_totalprice desc,
     o_orderdate
 limit 100;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -1349,12 +1382,13 @@ where
             and l_shipmode in ('AIR', 'AIR REG')
             and l_shipinstruct = 'DELIVER IN PERSON'
         );*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     txnmanager.open_new_table(part_path);
 
@@ -1410,12 +1444,13 @@ where
   and n_name = :3
 order by
     s_name;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
     std::string tmp;
@@ -1489,13 +1524,14 @@ order by
     numwait desc,
     s_name
 limit 100;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
 
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
 
     auto lineitem_id = txnmanager.get_table_id(lineitem_path);
@@ -1561,12 +1597,13 @@ group by
     cntrycode
 order by
     cntrycode;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->orders_path, this->connector.get(), this->id);
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->orders_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
   while (true) {
-    bool started = false;
-    while (!started) {
-      started = txnmanager.begin_transaction_ycsb();
+    // begin_transaction_ycsb() retries internally
+    if (!txnmanager.begin_transaction_ycsb()) {
+      return false;
     }
 
     auto orders_id = txnmanager.get_table_id(orders_path);
@@ -1610,11 +1647,12 @@ mod(o_orderkey, 32) between :3 and :4;
 :split:
 
 commit;*/
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      {true, true, true}, this->lineitem_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      {true, true, true}, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
 
   txnmanager.open_new_table(this->part_path);
@@ -1642,14 +1680,17 @@ commit;*/
   }
 
   if (commit) {
-    return txnmanager.commit(true);
+    // q23 removes and re-adds an orders file: a write (commit(true) is a
+    // read-only commit, i.e. an abort)
+    return txnmanager.commit(false);
   } else {
     return txnmanager.abort();
   }
 }
 
-bool LHCAB::CABClient::iRow(LHTransactions::TransactionManagerGeneric* manager,
-                            std::string& table, std::string& content) {
+bool LHCAB::CABClient::iRow(
+    LHTransactions::TransactionManagerDeltaLake* manager, std::string& table,
+    std::string& content) {
   if (!manager) {
     return false;
   }
@@ -1659,120 +1700,137 @@ bool LHCAB::CABClient::iRow(LHTransactions::TransactionManagerGeneric* manager,
 }
 
 bool LHCAB::CABClient::iCustomer() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->customer_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->customer_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->customer_path);
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->customer, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iLineitem() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->lineitem_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->lineitem_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->lineitem_path);
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->lineitem, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iNation() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->nation_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->nation_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->nation_path);
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->nation, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iOrders() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->orders_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->orders_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->orders_path);
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->orders, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iPart() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->part_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->part_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->part_path);
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->part, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iPartsupp() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->partsupp_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->partsupp_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->partsupp_path);
 
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->partsupp, key);
 
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iRegion() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->region_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->region_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->region_path);
 
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->region, key);
 
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::iSupplier() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, this->supplier_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, this->supplier_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(this->supplier_path);
 
   std::string key = "key";
   txnmanager.add_file(tbl_id, this->content->supplier, key);
-  return txnmanager.commit() ? true : txnmanager.abort();
+  // commit() aborts on failure
+  return txnmanager.commit();
 }
 
 bool LHCAB::CABClient::uTable(std::string& tbl_path) {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
-      this->level_config, tbl_path, this->connector.get(), this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
+      this->level_config, tbl_path, this->connector.get(),
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
   auto tbl_id = txnmanager.get_table_id(tbl_path);
   std::string path;
@@ -1791,12 +1849,12 @@ bool LHCAB::CABClient::uTable(std::string& tbl_path) {
 }
 
 bool LHCAB::CABClient::cleanup() {
-  auto txnmanager = LHTransactions::TransactionManagerGeneric(
+  auto txnmanager = LHTransactions::TransactionManagerDeltaLake(
       {true, true, false}, this->partsupp_path, this->connector.get(),
-      this->id);
-  bool started = false;
-  while (!started) {
-    started = txnmanager.begin_transaction_ycsb();
+      LHTransactions::unique_transaction_id());
+  // begin_transaction_ycsb() retries internally
+  if (!txnmanager.begin_transaction_ycsb()) {
+    return false;
   }
 
   txnmanager.open_new_table(this->customer_path);

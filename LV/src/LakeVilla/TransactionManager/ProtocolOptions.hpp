@@ -20,6 +20,11 @@ struct ProtocolOptions {
   uint32_t marker_grace_ms = 100;
   // validation rounds with redo before a transaction aborts
   uint32_t max_redos = 3;
+  // level 0: a transaction that sees a concurrent marker logs its operations
+  // implicitly and redoes them against the newest snapshot at commit; false:
+  // the operations stay explicit and a conflict aborts the transaction (for
+  // clients whose writes depend on their reads, e.g. SQL engines)
+  bool redo = true;
   // LV[Read]: repair the global log after repeated validation failures
   bool global_log_repair = false;
   uint32_t global_log_repair_after = 3;

@@ -11,45 +11,20 @@
 
 #include "Connectors/MinIOConnector.hpp"
 #include "ManagerDeltaLake.hpp"
+#include "jni_common.hpp"
+
+// JNI binding of the YCSB-LH LakeVilla client (site.ycsb.db.
+// LakeVillaTransactionManager); the Trino connector uses jni_trino.cpp
 
 using namespace LHTransactions;
 
 namespace {
 
-// The AWS SDK must be initialised once per process and shut down only after
-// the last client is gone: reference count the managers.
-std::mutex sdk_mutex;
-uint32_t sdk_users = 0;
-Aws::SDKOptions options;
-
-void acquire_sdk() {
-  std::lock_guard<std::mutex> guard(sdk_mutex);
-  if (sdk_users++ == 0) {
-    Aws::InitAPI(options);
-  }
-}
-
-void release_sdk() {
-  std::lock_guard<std::mutex> guard(sdk_mutex);
-  if (sdk_users > 0 && --sdk_users == 0) {
-    Aws::ShutdownAPI(options);
-  }
-}
-
-// C++ exceptions must not cross the JNI boundary
-void throw_java(JNIEnv* env, const char* message) {
-  jclass exception = env->FindClass("java/lang/RuntimeException");
-  if (exception) {
-    env->ThrowNew(exception, message);
-  }
-}
-
-std::string to_string(JNIEnv* env, jstring value) {
-  const char* chars = env->GetStringUTFChars(value, nullptr);
-  std::string result(chars);
-  env->ReleaseStringUTFChars(value, chars);
-  return result;
-}
+// shared with jni_trino.cpp: one reference count of the AWS SDK
+using LHJni::acquire_sdk;
+using LHJni::release_sdk;
+using LHJni::throw_java;
+using LHJni::to_string;
 
 TransactionManagerDeltaLake* manager(jlong handle) {
   return reinterpret_cast<TransactionManagerDeltaLake*>(handle);
@@ -95,6 +70,8 @@ extern "C" JNIEXPORT jlong JNICALL Java_site_ycsb_db_LakeVillaTransactionManager
       tm->set_global_log_paths(settings->pathToGlobalLog,
                                settings->pathToGlobalTmpLog);
     }
+    // ISOLATION, MARKER_LEASE_MS, ... of the config
+    tm->set_protocol_options(settings->protocol);
 
     return reinterpret_cast<jlong>(tm.release());
   } catch (const std::exception& e) {

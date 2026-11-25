@@ -177,6 +177,52 @@ struct TransactionManagerDeltaLake : public TransactionManager {
   // checkpoints automatically (CHECKPOINTS, CHECKPOINT_INTERVAL).
   bool create_checkpoint(uint32_t tbl_id);
 
+  // Arrow schema of an opened table (the table schema of its snapshot, see
+  // Helpers/DeltaSchema.hpp); the table does not count as read. nullptr for
+  // tables without metaData and unknown tables, *error says why if the
+  // schema cannot be parsed.
+  std::shared_ptr<arrow::Schema> get_table_schema(uint32_t table_id,
+                                                  std::string* error = nullptr);
+
+  // number of rows of the key (first column, see remove_file(key)) in the
+  // snapshot; the table counts as read. std::nullopt on errors (unknown
+  // table, unreadable files), 0 if no row has the key.
+  std::optional<int64_t> count_key_rows(uint32_t table_id,
+                                        const std::string& key);
+
+  // removes all data files of the snapshot (DELETE without a condition,
+  // TRUNCATE); the table counts as read. Returns the number of removed rows
+  // (-1 if a removed file has no row count in its statistics) or
+  // std::nullopt for unknown tables.
+  std::optional<int64_t> remove_all_files(uint32_t table_id);
+
+  // row-level changes (Trino's UPDATE/MERGE/DELETE): a row is identified by
+  // its data file and its position in the file (copy-on-write)
+  struct DataFile {
+    // path in the bucket (with the table's base path)
+    std::string path;
+    int64_t size = -1;
+    // rows according to the statistics, -1 if unknown
+    int64_t records = -1;
+  };
+
+  // the data files of the snapshot, including the transaction's own changes;
+  // the table counts as read. std::nullopt for unknown tables.
+  std::optional<std::vector<DataFile>> list_data_files(uint32_t table_id);
+
+  // the rows of a data file of the snapshot in file order (the positions of
+  // remove_rows), conformed to the table schema; the table counts as read.
+  // nullptr if the file is not part of the snapshot or cannot be read.
+  std::shared_ptr<arrow::Table> read_snapshot_file(uint32_t table_id,
+                                                   const std::string& path);
+
+  // removes the rows at the given positions of a data file of the snapshot:
+  // the other rows are written to a new data file and the file is removed
+  // (like Spark's DELETE). Returns the number of removed rows, std::nullopt
+  // on errors (unknown table or file, invalid positions, storage errors).
+  std::optional<int64_t> remove_rows(uint32_t table_id, const std::string& path,
+                                     const std::vector<int64_t>& positions);
+
   // number of attempts for reading/listing the Delta log (exponential backoff)
   // lease: a lock that does not change for this long is considered stale
   // (crashed holder); timeout: maximum time to wait for the lock

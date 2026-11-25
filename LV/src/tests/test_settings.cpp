@@ -113,6 +113,7 @@ TEST(LvSettings, ProtocolOptionDefaults) {
   EXPECT_EQ(settings.protocol.marker_lease_ms, 30000u);
   EXPECT_EQ(settings.protocol.marker_grace_ms, 100u);
   EXPECT_EQ(settings.protocol.max_redos, 3u);
+  EXPECT_TRUE(settings.protocol.redo);
   EXPECT_FALSE(settings.protocol.global_log_repair);
   EXPECT_EQ(settings.protocol.global_log_repair_after, 3u);
   EXPECT_FALSE(settings.protocol.global_log_check_at_begin);
@@ -123,7 +124,7 @@ TEST(LvSettings, ProtocolOptionDefaults) {
 TEST(LvSettings, ProtocolOptions) {
   auto path = write_config(
       "ISOLATION=snapshot\nMARKER_LEASE_MS=5000\nMARKER_GRACE_MS=250\n"
-      "MAX_REDOS=7\nGLOBAL_LOG_REPAIR=1\nGLOBAL_LOG_REPAIR_AFTER=2\n"
+      "MAX_REDOS=7\nREDO=0\nGLOBAL_LOG_REPAIR=1\nGLOBAL_LOG_REPAIR_AFTER=2\n"
       "GLOBAL_LOG_CHECK_AT_BEGIN=true\nCHECKPOINTS=0\nCHECKPOINT_INTERVAL=25\n");
   LHConfig::LvSettings settings(path);
   ASSERT_TRUE(settings.parse());
@@ -133,6 +134,7 @@ TEST(LvSettings, ProtocolOptions) {
   EXPECT_EQ(settings.protocol.marker_lease_ms, 5000u);
   EXPECT_EQ(settings.protocol.marker_grace_ms, 250u);
   EXPECT_EQ(settings.protocol.max_redos, 7u);
+  EXPECT_FALSE(settings.protocol.redo);
   EXPECT_TRUE(settings.protocol.global_log_repair);
   EXPECT_EQ(settings.protocol.global_log_repair_after, 2u);
   EXPECT_TRUE(settings.protocol.global_log_check_at_begin);

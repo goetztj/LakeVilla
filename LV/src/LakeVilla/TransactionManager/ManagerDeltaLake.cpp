@@ -1308,7 +1308,16 @@ bool LHTransactions::TransactionManagerDeltaLake::remove_file(
     this->add_substep(files->front().path,
                       LHTransactions::TransactionManager::SubOpType::READ,
                       *table, &key);
-    this->log_delete_substep(*table, files->front().path, prev);
+    if (prev == UINT32_MAX) {
+      // a removal that is not part of an update: the redo removes the rows
+      // found by the search step ("d found"), not the file of the old
+      // snapshot (which may be gone in the newest one)
+      this->add_substep(files->front().path,
+                        LHTransactions::TransactionManager::SubOpType::DELETE,
+                        *table, &key);
+    } else {
+      this->log_delete_substep(*table, files->front().path, prev);
+    }
     return true;
   }
 
@@ -3141,8 +3150,9 @@ uint32_t LHTransactions::TransactionManagerDeltaLake::parseEntry(
   if (val.HasMember("marker") && val["marker"].IsObject()) {
     if (val["marker"].HasMember("running")) {
       // a concurrent transaction placed a marker: defer the operations and
-      // redo them at commit time; this needs the sublogs of level 0
-      if (this->levels[0]) {
+      // redo them at commit time; this needs the sublogs of level 0 (REDO=0:
+      // the operations stay explicit and a conflict aborts the transaction)
+      if (this->levels[0] && this->options.redo) {
         this->explicit_log = false;
       }
 
@@ -4291,6 +4301,145 @@ LHTransactions::TransactionManagerDeltaLake::build_int_col(
   PARQUET_THROW_NOT_OK(builder.Finish(&arrow_array));
 
   return arrow_array;
+}
+
+std::shared_ptr<arrow::Schema>
+LHTransactions::TransactionManagerDeltaLake::get_table_schema(
+    uint32_t table_id, std::string* error) {
+  auto* table = this->get_table(table_id);
+  if (!table) {
+    if (error) {
+      *error = "unknown table id " + std::to_string(table_id);
+    }
+    return nullptr;
+  }
+  auto schema = this->table_schema(*table, error);
+  return schema ? schema->schema : nullptr;
+}
+
+std::optional<int64_t>
+LHTransactions::TransactionManagerDeltaLake::count_key_rows(
+    uint32_t table_id, const std::string& key) {
+  auto* table = this->get_table_for_read(table_id);
+  if (!table) {
+    return std::nullopt;
+  }
+  // read_exact: single-row files of the key are read as well (their rows
+  // are counted by value, not by statistics)
+  auto files = this->find_key_files(*table, key, true);
+  if (!files) {
+    return std::nullopt;
+  }
+  int64_t rows = 0;
+  for (auto& file : *files) {
+    rows += static_cast<int64_t>(file.rows.size());
+  }
+  return rows;
+}
+
+std::optional<int64_t>
+LHTransactions::TransactionManagerDeltaLake::remove_all_files(
+    uint32_t table_id) {
+  auto* table = this->get_table_for_read(table_id);
+  if (!table) {
+    return std::nullopt;
+  }
+  int64_t rows = 0;
+  for (auto& [relative, entry] : table->delta_log->get_entries()) {
+    std::string path = table->base_path + relative;
+    if (!this->remove_file(table_id, path)) {
+      return std::nullopt;
+    }
+    if (rows >= 0) {
+      rows = entry.num_records >= 0 ? rows + entry.num_records : -1;
+    }
+  }
+  return rows;
+}
+
+std::optional<std::vector<LHTransactions::TransactionManagerDeltaLake::DataFile>>
+LHTransactions::TransactionManagerDeltaLake::list_data_files(
+    uint32_t table_id) {
+  auto* table = this->get_table_for_read(table_id);
+  if (!table) {
+    return std::nullopt;
+  }
+  std::vector<DataFile> files;
+  for (auto& [relative, entry] : table->delta_log->get_entries()) {
+    DataFile file;
+    file.path = table->base_path + relative;
+    file.size = table->delta_log->get_size(file.path, true);
+    file.records = entry.num_records;
+    files.push_back(std::move(file));
+  }
+  // a stable order (the snapshot is a hash map)
+  std::sort(files.begin(), files.end(),
+            [](const DataFile& a, const DataFile& b) { return a.path < b.path; });
+  return files;
+}
+
+namespace {
+bool in_snapshot(LHTransactions::TableStats& table, const std::string& path) {
+  for (auto& [relative, entry] : table.delta_log->get_entries()) {
+    if (table.base_path + relative == path) {
+      return true;
+    }
+  }
+  return false;
+}
+}  // namespace
+
+std::shared_ptr<arrow::Table>
+LHTransactions::TransactionManagerDeltaLake::read_snapshot_file(
+    uint32_t table_id, const std::string& path) {
+  auto* table = this->get_table_for_read(table_id);
+  if (!table) {
+    return nullptr;
+  }
+  if (!in_snapshot(*table, path)) {
+    std::cerr << path << " is not a data file of the snapshot of "
+              << table->base_path << std::endl;
+    return nullptr;
+  }
+  return this->read_data_file(*table, path);
+}
+
+std::optional<int64_t> LHTransactions::TransactionManagerDeltaLake::remove_rows(
+    uint32_t table_id, const std::string& path,
+    const std::vector<int64_t>& positions) {
+  auto* table = this->get_table_for_read(table_id);
+  if (!table) {
+    return std::nullopt;
+  }
+  if (!in_snapshot(*table, path)) {
+    std::cerr << path << " is not a data file of the snapshot of "
+              << table->base_path << std::endl;
+    return std::nullopt;
+  }
+  KeyFile file;
+  file.path = path;
+  file.data = this->read_data_file(*table, path);
+  if (!file.data) {
+    return std::nullopt;
+  }
+  file.rows = positions;
+  std::sort(file.rows.begin(), file.rows.end());
+  file.rows.erase(std::unique(file.rows.begin(), file.rows.end()),
+                  file.rows.end());
+  if (file.rows.empty()) {
+    return 0;
+  }
+  if (file.rows.front() < 0 || file.rows.back() >= file.data->num_rows()) {
+    std::cerr << "invalid row positions for " << path << " ("
+              << file.data->num_rows() << " rows)" << std::endl;
+    return std::nullopt;
+  }
+  // the other rows of the file are written to a new file (or the whole file
+  // is removed)
+  if (!this->remove_key_rows(*table, file, UINT32_MAX, true)) {
+    return std::nullopt;
+  }
+  return static_cast<int64_t>(file.rows.size());
 }
 
 bool LHTransactions::TransactionManagerDeltaLake::create_checkpoint(

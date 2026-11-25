@@ -35,7 +35,7 @@ struct LvSettings {
   std::string pathToFreshTable;
   std::string cab_path;
   uint32_t readthreads;
-  // ISOLATION, MARKER_LEASE_MS, MARKER_GRACE_MS, MAX_REDOS,
+  // ISOLATION, MARKER_LEASE_MS, MARKER_GRACE_MS, MAX_REDOS, REDO,
   // GLOBAL_LOG_REPAIR, GLOBAL_LOG_REPAIR_AFTER, GLOBAL_LOG_CHECK_AT_BEGIN,
   // CHECKPOINTS, CHECKPOINT_INTERVAL
   LHTransactions::ProtocolOptions protocol;

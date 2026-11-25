@@ -963,6 +963,148 @@ TEST_F(KeyRows, AnUpdateDoesNotRemoveItsNewRow) {
   EXPECT_EQ(value(all, "c1", "note"), "new");
 }
 
+// a removal by key that is not part of an update (remove_file(key) without
+// prev, e.g. SQL DELETE ... WHERE id = ...): the redo removes the rows of the
+// key in the newest snapshot, also if the file of the old snapshot is gone
+TEST_F(KeyRows, RedoOfARemovalWithoutUpdate) {
+  create();
+  file("f1.parquet", {"c1", "c2", "c3"}, 1, id_stats("c1", "c3", 3));
+
+  auto t1 = manager(10);
+  auto t2 = manager(11);
+  ASSERT_TRUE(t1->begin_transaction_ycsb());
+  ASSERT_TRUE(t2->begin_transaction_ycsb());
+  // t1 rewrites f1 (the rows c2 and c3 move to a new file)
+  ASSERT_TRUE(t1->remove_file(0, std::string("c1")));
+  // t2 saw t1's marker: its removal is logged implicitly and redone
+  ASSERT_TRUE(t2->remove_file(0, std::string("c2")));
+  ASSERT_TRUE(t1->commit(false));
+  ASSERT_TRUE(t2->commit(false));
+  EXPECT_GT(t2->times_redo, 0u);
+
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c3"}));
+}
+
+// REDO=0: the operations stay explicit and a conflict aborts the transaction
+// (for clients whose writes depend on their reads, e.g. SQL engines)
+TEST_F(KeyRows, ConflictAbortsWithoutRedo) {
+  create();
+  file("f1.parquet", {"c1", "c2", "c3"}, 1, id_stats("c1", "c3", 3));
+
+  auto t1 = manager(10);
+  auto t2 = manager(11);
+  LHTransactions::ProtocolOptions options;
+  options.redo = false;
+  t2->set_protocol_options(options);
+  ASSERT_TRUE(t1->begin_transaction_ycsb());
+  ASSERT_TRUE(t2->begin_transaction_ycsb());
+  ASSERT_TRUE(t1->remove_file(0, std::string("c1")));
+  ASSERT_TRUE(t2->remove_file(0, std::string("c2")));
+  ASSERT_TRUE(t1->commit(false));
+  EXPECT_FALSE(t2->commit(false));
+  EXPECT_EQ(t2->times_redo, 0u);
+
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c2", "c3"}));
+}
+
+// row-level changes by position (Trino's UPDATE/MERGE): list the data files,
+// read a file in order, remove rows by their position
+TEST_F(KeyRows, RemoveRowsByPosition) {
+  create();
+  file("f1.parquet", {"c1", "c2", "c3"}, 1, id_stats("c1", "c3", 3));
+
+  auto tm = manager(10);
+  ASSERT_TRUE(tm->begin_transaction_ycsb());
+  auto files = tm->list_data_files(0);
+  ASSERT_TRUE(files.has_value());
+  ASSERT_EQ(files->size(), 1u);
+  EXPECT_EQ(files->front().path, base + "f1.parquet");
+  EXPECT_EQ(files->front().records, 3);
+  EXPECT_GT(files->front().size, 0);
+  auto rows = tm->read_snapshot_file(0, files->front().path);
+  ASSERT_NE(rows, nullptr);
+  auto ordered = rows->GetColumnByName("id");
+  EXPECT_EQ(ordered->GetScalar(1).ValueOrDie()->ToString(), "c2");
+
+  // positions may repeat and be unordered
+  EXPECT_EQ(tm->remove_rows(0, files->front().path, {1, 1}), 1);
+  ASSERT_TRUE(tm->commit(false));
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c1", "c3"}));
+
+  // all rows of a file: the file is removed without a new one
+  auto all = manager(11);
+  ASSERT_TRUE(all->begin_transaction_ycsb());
+  files = all->list_data_files(0);
+  ASSERT_EQ(files->size(), 1u);
+  EXPECT_EQ(all->remove_rows(0, files->front().path, {1, 0}), 2);
+  EXPECT_TRUE(all->list_data_files(0)->empty());
+  ASSERT_TRUE(all->commit(false));
+  EXPECT_TRUE(ids(read_all()).empty());
+}
+
+TEST_F(KeyRows, RemoveRowsOfOwnFile) {
+  create();
+  file("f1.parquet", {"c1"}, 1, id_stats("c1", "c1", 1));
+
+  auto tm = manager(10);
+  ASSERT_TRUE(tm->begin_transaction_ycsb());
+  ASSERT_TRUE(tm->add_file(0,
+                           table({field("id", arrow::utf8())},
+                                 {array(arrow::utf8(), R"(["n1","n2"])")}),
+                           ""));
+  auto files = tm->list_data_files(0);
+  ASSERT_EQ(files->size(), 2u);
+  std::string own;
+  for (auto& f : *files) {
+    if (f.path != base + "f1.parquet") {
+      own = f.path;
+    }
+  }
+  ASSERT_FALSE(own.empty());
+  EXPECT_EQ(tm->read_snapshot_file(0, own)->num_rows(), 2);
+  EXPECT_EQ(tm->remove_rows(0, own, {0}), 1);
+  ASSERT_TRUE(tm->commit(false));
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c1", "n2"}));
+}
+
+TEST_F(KeyRows, RemoveRowsRejectsInvalidInput) {
+  create();
+  file("f1.parquet", {"c1", "c2"}, 1, id_stats("c1", "c2", 2));
+
+  auto tm = manager(10);
+  ASSERT_TRUE(tm->begin_transaction_ycsb());
+  EXPECT_EQ(tm->read_snapshot_file(0, base + "missing.parquet"), nullptr);
+  EXPECT_FALSE(tm->remove_rows(0, base + "missing.parquet", {0}).has_value());
+  EXPECT_FALSE(tm->remove_rows(0, base + "f1.parquet", {2}).has_value());
+  EXPECT_FALSE(tm->remove_rows(0, base + "f1.parquet", {-1}).has_value());
+  EXPECT_EQ(tm->remove_rows(0, base + "f1.parquet", {}), 0);
+  EXPECT_FALSE(tm->list_data_files(7).has_value());
+  tm->commit(true);
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c1", "c2"}));
+}
+
+// two transactions change different rows of the same file: the file is
+// rewritten by both, the second committer aborts (REDO=0)
+TEST_F(KeyRows, ConcurrentRemovalsOfOneFileConflict) {
+  create();
+  file("f1.parquet", {"c1", "c2", "c3"}, 1, id_stats("c1", "c3", 3));
+
+  auto t1 = manager(10);
+  auto t2 = manager(11);
+  LHTransactions::ProtocolOptions options;
+  options.redo = false;
+  t1->set_protocol_options(options);
+  t2->set_protocol_options(options);
+  ASSERT_TRUE(t1->begin_transaction_ycsb());
+  ASSERT_TRUE(t2->begin_transaction_ycsb());
+  EXPECT_EQ(t1->remove_rows(0, base + "f1.parquet", {0}), 1);
+  EXPECT_EQ(t2->remove_rows(0, base + "f1.parquet", {2}), 1);
+  ASSERT_TRUE(t1->commit(false));
+  EXPECT_FALSE(t2->commit(false));
+
+  EXPECT_EQ(ids(read_all()), (std::vector<std::string>{"c2", "c3"}));
+}
+
 TEST_F(KeyRows, RedoOnAFileWithSeveralRows) {
   create();
   file("f1.parquet", {"c1", "c2", "c3"}, 1, id_stats("c1", "c3", 3));

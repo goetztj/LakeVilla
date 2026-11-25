@@ -16,7 +16,7 @@ You will find the following content:
 - `Results`: raw traces from the paper's experiments
 - `YCSB-LH`: submodule of the adapted YCSB benchmark for Spark (fork of [YCSB](https://github.com/brianfrankcooper/YCSB))
 - `benchbase`: submodule of the adapted Benchbase implementation for DuckLake (fork of [Benchbase](https://github.com/cmu-db/benchbase))
-- `trino`: submodule of the proof-of-concept Trino integration (fork of [Trino](https://github.com/trinodb/trino))
+- `trino`: submodule of the Trino integration (fork of [Trino](https://github.com/trinodb/trino)); the connector, its setup and a Docker test environment are in `trino/plugin/trino-lakevilla` (see its `README.md`)
 
 ## What is LakeVilla?
 
@@ -149,6 +149,7 @@ In addition to the keys of `LV/README.md`, `lvconfig.conf` accepts the following
 | `MARKER_LEASE_MS` [`30000`] | Lease of a marker (levels 0/1), measured in object-store time (`Date` header of the store's responses). A holder that cannot commit before the deadline moves to a later version and redoes. |
 | `MARKER_GRACE_MS` [`100`] | Waiters take an expired marker over (conditional on its ETag) only after the deadline plus this time. |
 | `MAX_REDOS` [`3`] | Marker shifts and redo rounds of one commit before the transaction aborts. |
+| `REDO` [`1`] | Level 0: a transaction that sees a concurrent marker logs its operations implicitly and redoes them against the newest snapshot at commit. `0`: the operations stay explicit and a conflict aborts the transaction (first committer wins). A redo only re-executes the logged operations, not values the client read and used otherwise: clients whose writes depend on their reads (SQL engines, e.g. the Trino connector) need `0`. |
 | `GLOBAL_LOG_REPAIR` [`0`] | LV[Read] only: after `GLOBAL_LOG_REPAIR_AFTER` [`3`] failed claims of a version, advance the global log over commits it does not contain (other engines, crashed clients). |
 | `GLOBAL_LOG_CHECK_AT_BEGIN` [`0`] | Level 2: at begin, commits of other engines behind the global log join the snapshot (one HEAD request per table). |
 | `CHECKPOINTS` [`1`] | A commit of a version that is a multiple of the checkpoint interval writes a Delta checkpoint of the table (like Spark), see [Checkpoints](#checkpoints). |
@@ -197,6 +198,10 @@ The schema of a table's snapshot (`metaData.schemaString`, `partitionColumns`, `
 - Candidate files are found through the min/max statistics of the key column (`stats` of the add actions, compared as numbers for integer keys, as dates for date keys and byte-wise for strings; Spark's truncated string statistics are taken into account). Files without statistics for the column are candidates as well. Candidates are read to find the rows; a file whose statistics show a single row with the key (every file LakeVilla writes per key) is used without reading it.
 - `read_file` and `read_file_as_table` return the rows of the key (not the whole file); `remove_file(key)` removes them: a file that only holds rows of the key is removed, the other rows of a file are written to a new file (as Spark's `DELETE`). A file that `add_file(..., key, prev)` wrote for the same update (`prev`) is not removed. With implicit logging (level 0), the redo searches the key again in the newest snapshot and applies the update to its rows.
 - Conflicts are detected per file, as in Delta: two transactions that change different keys of the same file conflict.
+
+#### Rows by position
+
+For row-level changes of SQL engines (the Trino connector's `UPDATE`, `MERGE` and `DELETE`), `list_data_files(table_id)` lists the data files of a transaction's snapshot (with its own changes), `read_snapshot_file(table_id, path)` reads the rows of one of them in file order (conformed to the table schema), and `remove_rows(table_id, path, positions)` removes rows by their position: the other rows of the file are written to a new data file and the file is removed (copy-on-write, conflicts per file as in Delta). With level 0 these operations are explicit only (`REDO=0`): a redo cannot repeat them against a newer snapshot.
 
 #### Known limitations
 
@@ -597,6 +602,29 @@ docker rmi lv-compat-minio lv-compat-spark lv-compat-lv             # remove the
 ```
 
 `compat/README.md` describes the scenarios, `compat-lv` and the findings in detail.
+
+### 6. Trino integration (Updated to use V2 and tested with Claude Code)
+
+The `trino` submodule contains a Trino connector for LakeVilla (`trino/plugin/trino-lakevilla`): SQL access to Delta tables with LakeVilla's multi-statement, multi-table transactions, and a Docker environment (MinIO and Trino) to run it. Its `README.md` describes building, configuring and using the connector, the SQL tests and the Hermitage tests.
+
+Get the submodule and build the environment (Maven and the build of `liblakevilla.so` run in containers; the first build takes 15-30 minutes). Inside this repository, `LAKEVILLA_REPO` has to point to the LakeVilla checkout, i.e. the repository root:
+
+```
+git submodule update --init trino
+cd trino/plugin/trino-lakevilla/docker
+export LAKEVILLA_REPO=$(cd ../../../.. && pwd)
+./build.sh
+```
+
+Start MinIO and Trino and open the Trino CLI with the catalog `lakevilla`. Trino publishes port 8080, which the Spark container of `docker compose up` (section 1) uses as well: set `TRINO_PORT` to run both (also for the tests, which use it to reach Trino):
+
+```
+export TRINO_PORT=8081
+docker compose up -d
+docker compose exec trino trino --catalog lakevilla
+```
+
+The tests run against this environment (`python3 test_lakevilla.py`, `./hermitage.sh`); `docker compose down -v` stops it and deletes its data.
 
 
 

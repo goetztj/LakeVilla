@@ -71,7 +71,11 @@ add_subdirectory(Settings)
 if(LV_BUILD_JNI)
     find_package(JNI)
     if(JNI_FOUND)
-        add_library(lakevilla SHARED LakeVilla/TransactionManager/jni_transaction.cpp)
+        # jni_transaction.cpp: YCSB-LH binding, jni_trino.cpp: Trino connector
+        add_library(lakevilla SHARED
+            LakeVilla/TransactionManager/jni_common.cpp
+            LakeVilla/TransactionManager/jni_transaction.cpp
+            LakeVilla/TransactionManager/jni_trino.cpp)
         target_include_directories(lakevilla PRIVATE ${JNI_INCLUDE_DIRS})
         target_link_libraries(lakevilla PRIVATE lakevilla-s3)
     else()

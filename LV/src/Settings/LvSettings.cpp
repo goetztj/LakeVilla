@@ -158,6 +158,8 @@ bool LHConfig::LvSettings::parse() {
       parse_number(property, value, this->protocol.marker_grace_ms);
     } else if (property == "MAX_REDOS") {
       parse_number(property, value, this->protocol.max_redos);
+    } else if (property == "REDO") {
+      parse_flag(property, value, this->protocol.redo);
     } else if (property == "GLOBAL_LOG_REPAIR") {
       parse_flag(property, value, this->protocol.global_log_repair);
     } else if (property == "GLOBAL_LOG_REPAIR_AFTER") {
